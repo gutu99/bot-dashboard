@@ -11,109 +11,55 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --bg:    #03060e;
-  --s1:    #07101f;
-  --s2:    #0b1628;
-  --b0:    #0f2040;
-  --b1:    #1a3060;
-  --text:  #e2eeff;
-  --dim:   #4a6a9a;
-  --dim2:  #2a4068;
-  --amber: #f59e0b;
-  --cyan:  #06b6d4;
-  --purp:  #a855f7;
-  --green: #22c55e;
-  --glit:  #4ade80;
-  --red:   #ef4444;
-  --rlit:  #f87171;
-  --gold:  #fbbf24;
-  --blue:  #60a5fa;
-  --r:     12px;
-  --r-sm:  8px;
+  --bg:#03060e;--s1:#07101f;--s2:#0b1628;--b0:#0f2040;--b1:#1a3060;
+  --text:#e2eeff;--dim:#4a6a9a;--dim2:#2a4068;
+  --amber:#f59e0b;--cyan:#06b6d4;--purp:#a855f7;
+  --green:#22c55e;--glit:#4ade80;--red:#ef4444;--rlit:#f87171;
+  --gold:#fbbf24;--blue:#60a5fa;
+  --r:12px;--rsm:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{font-size:16px;scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'IBM Plex Sans',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
-  padding-bottom:env(safe-area-inset-bottom,20px);
-}
-/* ─── BG GLOW ─── */
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse 70% 40% at 20% 0%,rgba(245,158,11,.07) 0%,transparent 55%),
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom,20px)}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 40% at 20% 0%,rgba(245,158,11,.07) 0%,transparent 55%),
     radial-gradient(ellipse 60% 50% at 80% 100%,rgba(6,182,212,.07) 0%,transparent 55%),
-    radial-gradient(ellipse 50% 60% at 50% 50%,rgba(168,85,247,.04) 0%,transparent 65%);
-}
+    radial-gradient(ellipse 50% 60% at 50% 50%,rgba(168,85,247,.04) 0%,transparent 65%);}
 .root{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 12px 40px}
 @media(min-width:900px){.root{max-width:1100px}}
 
-/* ─── HEADER ─── */
-.hdr{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 0 12px;
-  border-bottom:1px solid var(--b0);
-  margin-bottom:14px;
-}
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 0 12px;border-bottom:1px solid var(--b0);margin-bottom:14px}
 .hdr-title{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:#fff}
 .hdr-title span{background:linear-gradient(90deg,var(--amber),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hdr-right{display:flex;align-items:center;gap:8px}
-.live-pill{
-  display:flex;align-items:center;gap:5px;
-  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);
-  border-radius:99px;padding:4px 10px;
-  font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--glit);letter-spacing:.08em;
-}
+.live-pill{display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:99px;padding:4px 10px;font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--glit);letter-spacing:.08em}
 .ldot{width:5px;height:5px;border-radius:50%;background:var(--glit);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
-.upd-time{font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:var(--dim)}
+#upd-time{font-family:'IBM Plex Mono',monospace;font-size:.5rem;color:var(--dim)}
 
-/* ─── TIMER ─── */
-.timer{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:6px;margin-bottom:12px;
-}
-.t-box{
-  background:var(--s1);border:1px solid var(--b0);border-radius:var(--r-sm);
-  padding:8px 10px;position:relative;overflow:hidden;
-}
-.t-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--amber),var(--cyan),var(--purp));animation:flow 4s linear infinite;background-size:200%}
+/* TIMER */
+.timer{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}
+.t-box{background:var(--s1);border:1px solid var(--b0);border-radius:var(--rsm);padding:8px 10px;position:relative;overflow:hidden}
+.t-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--cyan),var(--purp));animation:flow 4s linear infinite;background-size:200%}
 @keyframes flow{0%{background-position:0%}100%{background-position:200%}}
-.t-lbl{font-family:'IBM Plex Mono',monospace;font-size:.5rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
-.t-val{font-size:.95rem;font-weight:700;letter-spacing:-.01em;color:#fff}
+.t-lbl{font-family:'IBM Plex Mono',monospace;font-size:.48rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.t-val{font-size:.9rem;font-weight:700;color:#fff}
 .t-val.c{color:var(--cyan)}.t-val.g{color:var(--glit)}.t-val.y{color:var(--amber)}.t-val.r{color:var(--rlit)}
-.timer-prog{
-  background:var(--s1);border:1px solid var(--b0);border-radius:var(--r-sm);
-  padding:8px 12px;margin-bottom:12px;
-}
+.timer-prog{background:var(--s1);border:1px solid var(--b0);border-radius:var(--rsm);padding:8px 12px;margin-bottom:12px}
 .tp-row{display:flex;justify-content:space-between;margin-bottom:5px}
-.tp-lbl{font-family:'IBM Plex Mono',monospace;font-size:.5rem;color:var(--dim)}
-.tp-val{font-family:'IBM Plex Mono',monospace;font-size:.5rem;color:var(--cyan)}
+.tp-lbl{font-family:'IBM Plex Mono',monospace;font-size:.48rem;color:var(--dim)}
+.tp-val{font-family:'IBM Plex Mono',monospace;font-size:.48rem;color:var(--cyan)}
 .tp-bg{background:var(--b0);border-radius:99px;height:3px;overflow:hidden}
 .tp-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--purp));transition:width 1s linear}
 
-/* ─── SECTION LABEL ─── */
-.sec{
-  font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--dim);
-  text-transform:uppercase;letter-spacing:.15em;
-  display:flex;align-items:center;gap:8px;
-  margin:16px 0 10px;
-}
+/* SEC */
+.sec{font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--dim);text-transform:uppercase;letter-spacing:.15em;display:flex;align-items:center;gap:8px;margin:16px 0 10px}
 .sec::after{content:'';flex:1;height:1px;background:var(--b0)}
 
-/* ─── GLOBAL BANNER ─── */
-.banner{
-  background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);
-  position:relative;overflow:hidden;margin-bottom:12px;
-}
-.banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--amber),var(--cyan),var(--purp),var(--amber));
-  background-size:300%;animation:flow 4s linear infinite}
+/* BANNER */
+.banner{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);position:relative;overflow:hidden;margin-bottom:12px}
+.banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--cyan),var(--purp),var(--amber));background-size:300%;animation:flow 4s linear infinite}
 .bn-main{padding:14px 14px 10px}
 .bn-lbl{font-family:'IBM Plex Mono',monospace;font-size:.5rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
 .bn-bal{font-size:2.2rem;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
@@ -123,10 +69,9 @@ body::before{
 .bn-cell{display:flex;flex-direction:column;gap:2px}
 .bn-cl{font-family:'IBM Plex Mono',monospace;font-size:.47rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
 .bn-cv{font-size:.88rem;font-weight:700}
-.bn-cv.pos{color:var(--glit)}.bn-cv.neg{color:var(--rlit)}.bn-cv.neu{color:var(--cyan)}
+.bn-cv.pos{color:var(--glit)}.bn-cv.neg{color:var(--rlit)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:10px 14px;border-top:1px solid var(--b0)}
-@media(min-width:400px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
-.sg{background:var(--s2);border-radius:var(--r-sm);padding:7px 6px;text-align:center;border:1px solid var(--b0)}
+.sg{background:var(--s2);border-radius:var(--rsm);padding:7px 6px;text-align:center;border:1px solid var(--b0)}
 .sg-l{font-family:'IBM Plex Mono',monospace;font-size:.44rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
 .sg-v{font-size:.85rem;font-weight:700;color:var(--text)}
 .sg-v.g{color:var(--glit)}.sg-v.r{color:var(--rlit)}.sg-v.y{color:var(--gold)}.sg-v.c{color:var(--cyan)}
@@ -135,15 +80,12 @@ body::before{
 .wr-lbl{font-family:'IBM Plex Mono',monospace;font-size:.5rem;color:var(--dim)}
 .wr-pct{font-family:'IBM Plex Mono',monospace;font-size:.5rem;font-weight:600}
 .wr-bg{background:var(--b0);border-radius:99px;height:4px;overflow:hidden}
-.wr-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--glit));transition:width .8s cubic-bezier(.4,0,.2,1)}
+.wr-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--glit));transition:width .8s}
 
-/* ─── BOT CARDS ─── */
+/* BOT CARDS */
 .bots{display:flex;flex-direction:column;gap:8px}
 @media(min-width:900px){.bots{flex-direction:row}}
-.bc{
-  background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);
-  position:relative;overflow:hidden;flex:1;
-}
+.bc{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);position:relative;overflow:hidden;flex:1}
 .bc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
 .bc.test::before{background:var(--amber)}.bc.test1::before{background:var(--cyan)}.bc.test99::before{background:var(--purp)}
 .bc.test{background:linear-gradient(160deg,var(--s1),#150e00)}
@@ -171,14 +113,10 @@ body::before{
 .bc.test1 .bc-wrfill{background:linear-gradient(90deg,var(--cyan),#a5f3fc)}
 .bc.test99 .bc-wrfill{background:linear-gradient(90deg,var(--purp),#d8b4fe)}
 
-/* ─── RECENT PILLS ─── */
+/* RECENT */
 .pills{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-@media(min-width:400px){.pills{grid-template-columns:repeat(5,1fr)}}
 @media(min-width:600px){.pills{grid-template-columns:repeat(10,1fr)}}
-.pill{
-  border:1px solid var(--b0);border-radius:9px;padding:7px 4px;text-align:center;
-  transition:transform .15s;cursor:default;
-}
+.pill{border:1px solid var(--b0);border-radius:9px;padding:7px 4px;text-align:center;transition:transform .15s;cursor:default}
 .pill:active{transform:scale(.96)}
 .pill.w{border-color:rgba(74,222,128,.22);background:linear-gradient(160deg,var(--s1),#011a06)}
 .pill.l{border-color:rgba(239,68,68,.22);background:linear-gradient(160deg,var(--s1),#1a0102)}
@@ -187,22 +125,18 @@ body::before{
 .pill.w .p-res{color:var(--glit)}.pill.l .p-res{color:var(--rlit)}
 .p-pnl{font-size:.54rem;font-weight:600;margin-top:1px}
 .pill.w .p-pnl{color:#86efac}.pill.l .p-pnl{color:#fca5a5}
-.p-time{font-family:'IBM Plex Mono',monospace;font-size:.46rem;color:var(--dim);margin-top:2px;padding-top:2px;border-top:1px solid var(--b0)}
-.p-zone{font-family:'IBM Plex Mono',monospace;font-size:.42rem;margin-top:1px;font-weight:600}
+.p-time{font-family:'IBM Plex Mono',monospace;font-size:.44rem;color:var(--dim);margin-top:2px;padding-top:2px;border-top:1px solid var(--b0)}
+.p-zone{font-family:'IBM Plex Mono',monospace;font-size:.41rem;margin-top:1px;font-weight:600}
 
-/* ─── CHARTS ─── */
+/* CHARTS */
 .chart-card{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);padding:12px 12px 10px;margin-bottom:8px}
 .ch-lbl{font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:var(--dim2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-.ch-wrap{position:relative;width:100%}
-.ch-wrap canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
+.chart-card canvas{display:block;width:100%!important}
 .charts-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .charts-2 .chart-card{margin-bottom:0}
 
-/* ─── DETAIL CARD ─── */
-.dc{
-  background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);
-  overflow:hidden;margin-bottom:8px;
-}
+/* DETAIL */
+.dc{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);overflow:hidden;margin-bottom:8px}
 .dc.test{background:linear-gradient(160deg,var(--s1),#120d00)}
 .dc.test1{background:linear-gradient(160deg,var(--s1),#001218)}
 .dc.test99{background:linear-gradient(160deg,var(--s1),#0e0013)}
@@ -214,345 +148,403 @@ body::before{
 @keyframes shimmer{0%{background-position:-200%}100%{background-position:200%}}
 .dc-hdr-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .dc-name{font-size:.95rem;font-weight:700;color:#fff}
-.dc-sub{font-family:'IBM Plex Mono',monospace;font-size:.45rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.dc-sub{font-family:'IBM Plex Mono',monospace;font-size:.44rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
 .dc-bal-block{text-align:right}
-.dc-bal-l{font-family:'IBM Plex Mono',monospace;font-size:.44rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px}
+.dc-bal-l{font-family:'IBM Plex Mono',monospace;font-size:.43rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px}
 .dc-bal-v{font-size:1.4rem;font-weight:700;color:#fff;letter-spacing:-.03em;line-height:1}
-.dc-pnl{font-size:.72rem;font-weight:700;margin-top:2px}
+.dc-pnl{font-size:.7rem;font-weight:700;margin-top:2px}
 .dc-pnl.pos{color:var(--glit)}.dc-pnl.neg{color:var(--rlit)}
-.dc-24h{font-family:'IBM Plex Mono',monospace;font-size:.55rem;font-weight:600;margin-top:1px}
+.dc-24h{font-family:'IBM Plex Mono',monospace;font-size:.54rem;font-weight:600;margin-top:1px}
 .dc-24h.pos{color:var(--glit)}.dc-24h.neg{color:var(--rlit)}
-
-/* KPI GRID */
 .kpi-g{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px 10px;border-bottom:1px solid var(--b0)}
 .kpi{background:rgba(0,0,0,.2);border-radius:6px;padding:6px;text-align:center;border:1px solid var(--b0)}
-.kpi-l{font-family:'IBM Plex Mono',monospace;font-size:.42rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-.kpi-v{font-size:.8rem;font-weight:700;color:var(--text)}
-.kv-g{color:var(--glit)}.kv-r{color:var(--rlit)}.kv-y{color:var(--gold)}
-.kv-c{color:var(--cyan)}.kv-p{color:var(--purp)}.kv-a{color:var(--amber)}.kv-b{color:var(--blue)}
-
-/* PRICE SECTION */
+.kpi-l{font-family:'IBM Plex Mono',monospace;font-size:.41rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.kpi-v{font-size:.79rem;font-weight:700;color:var(--text)}
+.kvg{color:var(--glit)}.kvr{color:var(--rlit)}.kvy{color:var(--gold)}.kvc{color:var(--cyan)}.kvp{color:var(--purp)}.kva{color:var(--amber)}.kvb{color:var(--blue)}
 .price-sec{padding:8px 10px;border-bottom:1px solid var(--b0)}
-.price-sec-lbl{font-family:'IBM Plex Mono',monospace;font-size:.47rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.price-sec-lbl{font-family:'IBM Plex Mono',monospace;font-size:.46rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .price-sec-lbl::after{content:'';flex:1;height:1px;background:var(--b0)}
 .price-g{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.price-box{background:rgba(0,0,0,.2);border:1px solid var(--b0);border-radius:6px;padding:6px 8px}
-.pb-l{font-family:'IBM Plex Mono',monospace;font-size:.42rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.pb{background:rgba(0,0,0,.2);border:1px solid var(--b0);border-radius:6px;padding:6px 8px}
+.pb-l{font-family:'IBM Plex Mono',monospace;font-size:.41rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
 .pb-v{font-size:.78rem;font-weight:700}
-
-/* ZONES */
 .zone-sec{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px 10px;border-bottom:1px solid var(--b0)}
 .zp{border-radius:8px;padding:8px 5px;text-align:center;border:1px solid}
 .zp.spike{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.22)}
 .zp.goldz{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.22)}
 .zp.early{background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.22)}
-.zp.lockz{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.22)}
-.z-name{font-family:'IBM Plex Mono',monospace;font-size:.52rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.zp.spike .z-name{color:var(--amber)}.zp.goldz .z-name{color:#facc15}.zp.early .z-name{color:var(--blue)}.zp.lockz .z-name{color:#10b981}
+.z-name{font-family:'IBM Plex Mono',monospace;font-size:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.zp.spike .z-name{color:var(--amber)}.zp.goldz .z-name{color:#facc15}.zp.early .z-name{color:var(--blue)}
 .z-stats{display:flex;flex-direction:column;gap:2px}
 .z-row{display:flex;justify-content:space-between;align-items:center}
-.z-key{font-family:'IBM Plex Mono',monospace;font-size:.4rem;color:var(--dim);text-transform:uppercase}
-.z-val{font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:700;color:var(--text)}
-
-/* EXIT PILLS */
-.exit-sec{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;padding:8px 10px;border-bottom:1px solid var(--b0)}
-@media(min-width:360px){.exit-sec{grid-template-columns:repeat(4,1fr)}}
+.z-key{font-family:'IBM Plex Mono',monospace;font-size:.39rem;color:var(--dim);text-transform:uppercase}
+.z-val{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;color:var(--text)}
+.exit-sec{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 10px;border-bottom:1px solid var(--b0)}
 .ep{background:rgba(0,0,0,.2);border:1px solid var(--b0);border-radius:7px;padding:7px 4px;text-align:center}
-.ep-icon{font-size:.82rem;margin-bottom:2px}
-.ep-lbl{font-family:'IBM Plex Mono',monospace;font-size:.4rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+.ep-icon{font-size:.8rem;margin-bottom:2px}
+.ep-lbl{font-family:'IBM Plex Mono',monospace;font-size:.39rem;color:var(--dim);text-transform:uppercase;letter-spacing:.03em}
 .ep-val{font-size:.9rem;font-weight:700;margin-top:1px}
 .ep-val.g{color:var(--glit)}.ep-val.r{color:var(--rlit)}.ep-val.y{color:var(--gold)}.ep-val.c{color:var(--cyan)}
-
-/* MINI CHARTS */
 .mini-ch{padding:8px 10px;border-bottom:1px solid var(--b0)}
-.mini-ch-l{font-family:'IBM Plex Mono',monospace;font-size:.46rem;color:var(--dim2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
-.mini-ch-inner{position:relative;width:100%;height:72px}
-.mini-ch-inner canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
-
-/* TABLE */
+.mini-ch-l{font-family:'IBM Plex Mono',monospace;font-size:.45rem;color:var(--dim2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.mini-ch canvas{display:block;max-height:70px;width:100%!important}
 .tbl-hdr{padding:8px 12px;border-bottom:1px solid var(--b0);display:flex;align-items:center;justify-content:space-between}
-.tbl-ttl{font-size:.75rem;font-weight:600;color:var(--text)}
-.tbl-bdg{font-family:'IBM Plex Mono',monospace;font-size:.46rem;color:var(--dim);background:var(--b0);padding:2px 8px;border-radius:99px}
-.tbl-wrap{overflow-x:auto;height:220px;overflow-y:auto}
-.tbl-wrap::-webkit-scrollbar{height:3px;width:3px}
-.tbl-wrap::-webkit-scrollbar-track{background:var(--bg)}
-.tbl-wrap::-webkit-scrollbar-thumb{background:var(--b1);border-radius:2px}
+.tbl-ttl{font-size:.74rem;font-weight:600;color:var(--text)}
+.tbl-bdg{font-family:'IBM Plex Mono',monospace;font-size:.45rem;color:var(--dim);background:var(--b0);padding:2px 8px;border-radius:99px}
+.tbl-wrap{overflow-x:auto;max-height:220px;overflow-y:auto}
 table{width:100%;border-collapse:collapse;min-width:580px}
 thead tr{background:var(--bg);position:sticky;top:0;z-index:2}
-th{font-family:'IBM Plex Mono',monospace;font-size:6px;letter-spacing:.08em;text-transform:uppercase;
-   color:var(--dim);padding:5px 5px;border-bottom:1px solid var(--b0);text-align:center;white-space:nowrap;font-weight:400}
-td{font-family:'IBM Plex Mono',monospace;font-size:7px;text-align:center;
-   color:#3d5a85;padding:4px 5px;border-bottom:1px solid rgba(15,32,64,.5);white-space:nowrap}
+th{font-family:'IBM Plex Mono',monospace;font-size:6px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:5px;border-bottom:1px solid var(--b0);text-align:center;white-space:nowrap;font-weight:400}
+td{font-family:'IBM Plex Mono',monospace;font-size:7px;text-align:center;color:#3d5a85;padding:4px 5px;border-bottom:1px solid rgba(15,32,64,.5);white-space:nowrap}
 tbody tr:hover td{background:rgba(255,255,255,.012)}
-tr.rw td{background:rgba(34,197,94,.04)}
-tr.rl td{background:rgba(239,68,68,.04)}
+tr.rw td{background:rgba(34,197,94,.04)}tr.rl td{background:rgba(239,68,68,.04)}
 td.tw{color:var(--green);font-weight:600}td.tl{color:var(--red);font-weight:600}
 td.tp{color:var(--glit);font-weight:600}td.tn{color:var(--rlit);font-weight:600}
 td.tsp{color:var(--amber);font-weight:600}td.tgo{color:#facc15;font-weight:600}
-td.tlo{color:#10b981;font-weight:600}td.tea{color:var(--blue);font-weight:600}
-td.tss{color:#f97316;font-weight:600}
+td.tea{color:var(--blue);font-weight:600}td.tss{color:#f97316;font-weight:600}
 td.ttg{color:var(--glit);font-weight:600}td.ttr{color:#a3e635;font-weight:600}
-td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:600}
-td.ten{color:var(--dim)}
-
-/* EMPTY */
-.empty{font-family:'IBM Plex Mono',monospace;color:var(--dim);text-align:center;padding:24px 12px;font-size:.65rem}
-
-/* SCROLL GLOBAL */
-::-webkit-scrollbar{width:3px;height:3px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--b1);border-radius:2px}
-
-/* FADE */
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.bc,.banner,.dc{animation:fadeUp .4s ease both}
+td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:600}td.ten{color:var(--dim)}
+.empty{font-family:'IBM Plex Mono',monospace;color:var(--dim);text-align:center;padding:24px 12px;font-size:.62rem}
+::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--b1);border-radius:2px}
 </style>
 </head>
 <body>
 <div class="root">
-
-  <!-- HEADER -->
   <div class="hdr">
     <div class="hdr-title">⚗️ <span>Bot Lab</span></div>
     <div class="hdr-right">
       <div class="live-pill"><div class="ldot"></div>LIVE</div>
-      <div class="upd-time" id="upd-time">—</div>
+      <div id="upd-time">—</div>
     </div>
   </div>
 
-  <!-- TIMER -->
   <div class="timer" id="timer"></div>
   <div class="timer-prog">
     <div class="tp-row"><div class="tp-lbl">Progres rundă 5min</div><div class="tp-val" id="tp-pct">0%</div></div>
     <div class="tp-bg"><div class="tp-fill" id="tp-fill" style="width:0%"></div></div>
   </div>
 
-  <!-- BANNER -->
   <div class="sec">📊 Global</div>
   <div id="banner"></div>
 
-  <!-- BOT CARDS -->
   <div class="sec">🤖 Boturi</div>
   <div class="bots" id="bots"></div>
 
-  <!-- RECENT -->
   <div class="sec">⚡ Activitate Recentă</div>
   <div class="pills" id="recent"></div>
 
-  <!-- CHARTS -->
   <div class="sec">📈 Grafice</div>
-  <div class="chart-card">
-    <div class="ch-lbl">Balance Curves</div>
-    <div class="ch-wrap" style="height:160px"><canvas id="c_bal"></canvas></div>
-  </div>
-  <div class="chart-card">
-    <div class="ch-lbl">Cumulative P&L</div>
-    <div class="ch-wrap" style="height:120px"><canvas id="c_cpnl"></canvas></div>
-  </div>
+  <div class="chart-card"><div class="ch-lbl">Balance Curves</div><canvas id="c_bal" height="160"></canvas></div>
+  <div class="chart-card"><div class="ch-lbl">Cumulative P&L</div><canvas id="c_cpnl" height="120"></canvas></div>
   <div class="charts-2">
-    <div class="chart-card">
-      <div class="ch-lbl">Profit vs Loss</div>
-      <div class="ch-wrap" style="height:130px"><canvas id="c_pnl"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="ch-lbl">Win Rate %</div>
-      <div class="ch-wrap" style="height:130px"><canvas id="c_wr"></canvas></div>
-    </div>
+    <div class="chart-card"><div class="ch-lbl">Profit vs Loss</div><canvas id="c_pnl" height="130"></canvas></div>
+    <div class="chart-card"><div class="ch-lbl">Win Rate %</div><canvas id="c_wr" height="130"></canvas></div>
   </div>
-  <div class="chart-card">
-    <div class="ch-lbl">P&L Distribution</div>
-    <div class="ch-wrap" style="height:110px"><canvas id="c_dist"></canvas></div>
-  </div>
+  <div class="chart-card"><div class="ch-lbl">P&L Distribution</div><canvas id="c_dist" height="110"></canvas></div>
 
-  <!-- DETAILS -->
   <div class="sec">🔬 Analiză per Bot</div>
   <div id="details"></div>
+</div>
 
-</div><!-- /root -->
 <script>
-/* ═══════════════════════════════════════════════════════
+/* ─────────────────────────────────────────────
    CONFIG
-═══════════════════════════════════════════════════════ */
-const FILES  = {
-  Test:   "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv",
-  Test1:  "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test1.csv",
-  Test99: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test99.csv"
+───────────────────────────────────────────── */
+const FILES = {
+  Test:  "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv",
+  Test1: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test1.csv",
+  Test99:"https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test99.csv"
 };
-const COL = { Test:"#f59e0b", Test1:"#06b6d4", Test99:"#a855f7" };
-const ICO = { Test:"🔬", Test1:"⚗️", Test99:"🧬" };
-const SEED   = 100;
-let CH       = {};   // chart instances
+const COL={Test:"#f59e0b",Test1:"#06b6d4",Test99:"#a855f7"};
+const ICO={Test:"🔬",Test1:"⚗️",Test99:"🧬"};
+const SEED=100;
 
-/* ═══════════════════════════════════════════════════════
-   CSV PARSER — handles 20-col and 21-col rows
-═══════════════════════════════════════════════════════ */
-function parseCSV(txt) {
-  const lines = txt.trim().split("\n");
-  if (lines.length < 2) return [];
-  const hdr = lines[0].split(",").map(h => h.trim().replace(/\r/g,""));
-  return lines.slice(1).map(line => {
-    const v = line.split(",");
-    const o = {};
-    hdr.forEach((h, i) => {
-      const raw = (v[i] || "").trim().replace(/\r/g,"");
-      o[h] = raw !== "" && !isNaN(raw) ? parseFloat(raw) : raw;
-    });
-    // normalize pnl → always pnl_net
-    o.pnl = typeof o.pnl_net === "number" ? o.pnl_net : (o.pnl || 0);
-    // end_price = start_price + dist (only when start_price is a real BTC price >1000)
-    if (typeof o.start_price === "number" && o.start_price > 1000 && typeof o.dist === "number")
-      o.end_price = Math.round((o.start_price + o.dist) * 100) / 100;
+/* ─────────────────────────────────────────────
+   STATE — charts & dom built ONCE, updated after
+───────────────────────────────────────────── */
+let CHARTS={};       // chart.js instances
+let BUILT=false;     // DOM built flag
+let lastDfs={};      // last fetched data cache
+
+/* ─────────────────────────────────────────────
+   CSV
+───────────────────────────────────────────── */
+function parseCSV(txt){
+  const lines=txt.trim().split("\n");
+  if(lines.length<2)return[];
+  const hdr=lines[0].split(",").map(h=>h.trim().replace(/\r/g,""));
+  return lines.slice(1).map(line=>{
+    const v=line.split(",");
+    const o={};
+    hdr.forEach((h,i)=>{const raw=(v[i]||"").trim().replace(/\r/g,"");o[h]=raw!==""&&!isNaN(raw)?parseFloat(raw):raw;});
+    o.pnl=typeof o.pnl_net==="number"?o.pnl_net:(o.pnl||0);
+    if(typeof o.start_price==="number"&&o.start_price>1000&&typeof o.dist==="number")
+      o.end_price=Math.round((o.start_price+o.dist)*100)/100;
     return o;
-  }).filter(r => r.date).reverse(); // newest first
+  }).filter(r=>r.date).reverse();
 }
 
-/* ═══════════════════════════════════════════════════════
+/* ─────────────────────────────────────────────
    UTILS
-═══════════════════════════════════════════════════════ */
-const ps  = v => v >= 0 ? "+" : "";
-const pc  = v => v >= 0 ? "pos" : "neg";
-const f2  = v => (isNaN(v) ? "—" : parseFloat(v).toFixed(2));
-const f3  = v => (isNaN(v) ? "—" : parseFloat(v).toFixed(3));
-const pct = (w,t) => t ? (w/t*100).toFixed(1) : "0.0";
+───────────────────────────────────────────── */
+const ps=v=>v>=0?"+":"";
+const pc=v=>v>=0?"pos":"neg";
+const pct=(w,t)=>t?(w/t*100).toFixed(1):"0.0";
+function parseDT(r){if(r.date&&r.time){const d=new Date(`${r.date}T${r.time}`);if(!isNaN(d))return d;}return null;}
+function p24(rows){const cut=Date.now()-86400000;return Math.round(rows.filter(r=>{const d=parseDT(r);return d&&d.getTime()>=cut;}).reduce((s,r)=>s+(r.pnl||0),0)*100)/100;}
+function avgCol(df,key){if(!df.length||df[0][key]===undefined)return null;return df.reduce((s,r)=>s+(parseFloat(r[key])||0),0)/df.length;}
+function zoneStats(df,zones){
+  const col=["zone","bet_zone"].find(c=>df.length&&df[0][c]!==undefined);
+  if(!col)return{t:0,w:0,pnl:0,wr:"0.0"};
+  const sub=df.filter(r=>zones.includes(String(r[col]||"").toUpperCase()));
+  const w=sub.filter(r=>r.result==="WIN").length;
+  return{t:sub.length,w,pnl:Math.round(sub.reduce((s,r)=>s+(r.pnl||0),0)*100)/100,wr:pct(w,sub.length)};
+}
+function exCount(df,s){const col=["exit_type","exit"].find(c=>df.length&&df[0][c]!==undefined);return col?df.filter(r=>String(r[col]||"").toUpperCase().includes(s.toUpperCase())).length:0;}
 
-function parseDT(r) {
-  if (r.date && r.time) { const d = new Date(`${r.date}T${r.time}`); if (!isNaN(d)) return d; }
-  return null;
+/* ─────────────────────────────────────────────
+   TIMER (runs every second, never causes flash)
+───────────────────────────────────────────── */
+function updateTimer(){
+  const now=new Date(),ts=Math.floor(now.getTime()/1000),tl=300-(ts%300);
+  const pct_=((300-tl)/300*100).toFixed(1),col=tl>60?"g":tl>20?"y":"r";
+  const mm=Math.floor(tl/60),ss=String(tl%60).padStart(2,"0");
+  setText("t-ora",now.toTimeString().slice(0,8));
+  setClass("t-runda-val","t-val "+col);
+  setText("t-runda-val",mm+":"+ss);
+  setText("t-data",now.toLocaleDateString("ro-RO"));
+  setText("tp-pct",pct_+"%");
+  document.getElementById("tp-fill").style.width=pct_+"%";
 }
-function p24(rows) {
-  const cut = Date.now() - 86400000;
-  return Math.round(rows.filter(r => { const d=parseDT(r); return d&&d.getTime()>=cut; })
-    .reduce((s,r)=>s+(r.pnl||0),0)*100)/100;
-}
-function avgCol(df, key) {
-  if (!df.length || df[0][key] === undefined) return null;
-  return df.reduce((s,r)=>s+(parseFloat(r[key])||0),0)/df.length;
-}
-function zoneStats(df, zones) {
-  const col = ["zone","bet_zone"].find(c => df.length && df[0][c] !== undefined);
-  if (!col) return {t:0,w:0,pnl:0};
-  const sub = df.filter(r => zones.includes(String(r[col]||"").toUpperCase()));
-  const w   = sub.filter(r => r.result==="WIN").length;
-  return { t:sub.length, w, pnl:Math.round(sub.reduce((s,r)=>s+(r.pnl||0),0)*100)/100,
-           wr: pct(w, sub.length) };
-}
-function exCount(df, s) {
-  const col = ["exit_type","exit"].find(c=>df.length&&df[0][c]!==undefined);
-  return col ? df.filter(r=>String(r[col]||"").toUpperCase().includes(s.toUpperCase())).length : 0;
-}
+function setText(id,v){const el=document.getElementById(id);if(el&&el.textContent!==v)el.textContent=v;}
+function setClass(id,c){const el=document.getElementById(id);if(el&&el.className!==c)el.className=c;}
 
-/* ═══════════════════════════════════════════════════════
-   CHART FACTORY
-═══════════════════════════════════════════════════════ */
-const CPL = {
-  responsive:true, maintainAspectRatio:false,
-  plugins:{ legend:{ labels:{ color:"#2a4068", font:{family:"IBM Plex Mono",size:8} } } },
-  scales:{
-    x:{ grid:{color:"rgba(15,32,64,.8)"}, ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}} },
-    y:{ grid:{color:"rgba(15,32,64,.8)"}, ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}} }
-  }
-};
-function mk(id, cfg) {
-  if (CH[id]) CH[id].destroy();
-  const el = document.getElementById(id);
-  if (el) CH[id] = new Chart(el, cfg);
-}
+/* ─────────────────────────────────────────────
+   BUILD STATIC SKELETON (called once)
+───────────────────────────────────────────── */
+function buildSkeleton(){
+  // Timer boxes — static HTML, only values update
+  document.getElementById("timer").innerHTML=`
+    <div class="t-box"><div class="t-lbl">Ora</div><div class="t-val c" id="t-ora">—</div></div>
+    <div class="t-box"><div class="t-lbl">Rundă</div><div id="t-runda-val" class="t-val g">—</div></div>
+    <div class="t-box"><div class="t-lbl">Data</div><div class="t-val" id="t-data" style="font-size:.78rem">—</div></div>`;
 
-/* ═══════════════════════════════════════════════════════
-   TIMER
-═══════════════════════════════════════════════════════ */
-function updateTimer() {
-  const now = new Date();
-  const ts  = Math.floor(now.getTime()/1000);
-  const tl  = 300 - (ts % 300);
-  const pct_= ((300-tl)/300*100).toFixed(1);
-  const col = tl>60?"g":tl>20?"y":"r";
-  const mm  = Math.floor(tl/60), ss=String(tl%60).padStart(2,"0");
-  document.getElementById("timer").innerHTML = `
-    <div class="t-box"><div class="t-lbl">Ora</div><div class="t-val c">${now.toTimeString().slice(0,8)}</div></div>
-    <div class="t-box"><div class="t-lbl">Rundă</div><div class="t-val ${col}">${mm}:${ss}</div></div>
-    <div class="t-box"><div class="t-lbl">Data</div><div class="t-val" style="font-size:.8rem">${now.toLocaleDateString("ro-RO")}</div></div>`;
-  document.getElementById("tp-pct").textContent = pct_+"%";
-  document.getElementById("tp-fill").style.width = pct_+"%";
-}
-
-/* ═══════════════════════════════════════════════════════
-   BANNER
-═══════════════════════════════════════════════════════ */
-function renderBanner(dfs) {
-  const frames = Object.values(dfs).filter(d=>d.length>0);
-  const el = document.getElementById("banner");
-  if (!frames.length) { el.innerHTML=`<div class="banner"><div class="empty">Nicio dată</div></div>`; return; }
-  const all  = frames.flat();
-  const bal  = frames.reduce((s,d)=>s+(d[0]?.balance||0),0);
-  const pnl_ = Math.round((bal-SEED*frames.length)*100)/100;
-  const nn   = all.length;
-  const w    = all.filter(r=>r.result==="WIN").length;
-  const l    = all.filter(r=>r.result==="LOSS").length;
-  const wr_  = pct(w,nn);
-  const prof = Math.round(all.filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)*100)/100;
-  const losv = Math.round(all.filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)*100)/100;
-  const fee_ = Math.round(all.reduce((s,r)=>s+(r.fee||0),0)*100)/100;
-  const p24_ = Math.round(frames.reduce((s,d)=>s+p24(d),0)*100)/100;
-  const roi_ = ((bal-SEED*frames.length)/(SEED*frames.length)*100).toFixed(1);
-  const avgW = w ? (all.filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)/w).toFixed(3) : "0";
-  const avgL = l ? (all.filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)/l).toFixed(3) : "0";
-  const best = Math.max(...all.map(r=>r.pnl||0)).toFixed(3);
-  const worst= Math.min(...all.map(r=>r.pnl||0)).toFixed(3);
-  const wrCol= parseFloat(wr_)>=60?"var(--glit)":parseFloat(wr_)>=50?"var(--gold)":"var(--rlit)";
-  el.innerHTML = `
+  // Banner shell
+  document.getElementById("banner").innerHTML=`
   <div class="banner">
     <div class="bn-main">
-      <div class="bn-lbl">🧪 Total Balance — ${frames.length} boturi</div>
-      <div class="bn-bal">$${bal.toFixed(2)}</div>
-      <div class="bn-sub ${pc(pnl_)}">${ps(pnl_)}${pnl_}$ all-time &nbsp;·&nbsp; ROI ${ps(roi_)}${roi_}%</div>
+      <div class="bn-lbl" id="bn-bots-lbl">🧪 Total Balance</div>
+      <div class="bn-bal" id="bn-bal">—</div>
+      <div class="bn-sub" id="bn-pnl">—</div>
     </div>
     <div class="bn-row">
-      <div class="bn-cell">
-        <div class="bn-cl">📅 24h P&L</div>
-        <div class="bn-cv ${pc(p24_)}">${ps(p24_)}${p24_}$</div>
-      </div>
-      <div class="bn-cell">
-        <div class="bn-cl">💸 Fees totale</div>
-        <div class="bn-cv" style="color:var(--gold)">$${fee_}</div>
-      </div>
+      <div class="bn-cell"><div class="bn-cl">📅 24h P&L</div><div class="bn-cv" id="bn-24h">—</div></div>
+      <div class="bn-cell"><div class="bn-cl">💸 Fees</div><div class="bn-cv" style="color:var(--gold)" id="bn-fee">—</div></div>
     </div>
     <div class="stats-grid">
-      <div class="sg"><div class="sg-l">Trades</div><div class="sg-v">${nn}</div></div>
-      <div class="sg"><div class="sg-l">Win%</div><div class="sg-v" style="color:${wrCol}">${wr_}%</div></div>
-      <div class="sg"><div class="sg-l">Wins</div><div class="sg-v g">${w}</div></div>
-      <div class="sg"><div class="sg-l">Losses</div><div class="sg-v r">${l}</div></div>
-      <div class="sg"><div class="sg-l">Profit</div><div class="sg-v g">+$${prof}</div></div>
-      <div class="sg"><div class="sg-l">Loss</div><div class="sg-v r">$${losv}</div></div>
-      <div class="sg"><div class="sg-l">Avg Win</div><div class="sg-v g">+$${avgW}</div></div>
-      <div class="sg"><div class="sg-l">Avg Loss</div><div class="sg-v r">$${avgL}</div></div>
-      <div class="sg"><div class="sg-l">Best</div><div class="sg-v g">+$${best}</div></div>
-      <div class="sg"><div class="sg-l">Worst</div><div class="sg-v r">$${worst}</div></div>
-      <div class="sg"><div class="sg-l">Net PnL</div><div class="sg-v ${pc(pnl_)}">${ps(pnl_)}${pnl_}$</div></div>
-      <div class="sg"><div class="sg-l">ROI</div><div class="sg-v ${pc(roi_)}">${ps(roi_)}${roi_}%</div></div>
+      <div class="sg"><div class="sg-l">Trades</div><div class="sg-v" id="sg-nn">—</div></div>
+      <div class="sg"><div class="sg-l">Win%</div><div class="sg-v" id="sg-wr">—</div></div>
+      <div class="sg"><div class="sg-l">Wins</div><div class="sg-v g" id="sg-w">—</div></div>
+      <div class="sg"><div class="sg-l">Losses</div><div class="sg-v r" id="sg-l">—</div></div>
+      <div class="sg"><div class="sg-l">Profit</div><div class="sg-v g" id="sg-prof">—</div></div>
+      <div class="sg"><div class="sg-l">Loss</div><div class="sg-v r" id="sg-los">—</div></div>
+      <div class="sg"><div class="sg-l">Avg Win</div><div class="sg-v g" id="sg-aw">—</div></div>
+      <div class="sg"><div class="sg-l">Avg Loss</div><div class="sg-v r" id="sg-al">—</div></div>
+      <div class="sg"><div class="sg-l">Best</div><div class="sg-v g" id="sg-best">—</div></div>
+      <div class="sg"><div class="sg-l">Worst</div><div class="sg-v r" id="sg-worst">—</div></div>
+      <div class="sg"><div class="sg-l">Net PnL</div><div class="sg-v" id="sg-net">—</div></div>
+      <div class="sg"><div class="sg-l">ROI</div><div class="sg-v" id="sg-roi">—</div></div>
     </div>
     <div class="wr-bar-wrap">
-      <div class="wr-row">
-        <div class="wr-lbl">Win Rate Global</div>
-        <div class="wr-pct" style="color:${wrCol}">${wr_}%</div>
-      </div>
-      <div class="wr-bg"><div class="wr-fill" style="width:${wr_}%"></div></div>
+      <div class="wr-row"><div class="wr-lbl">Win Rate Global</div><div class="wr-pct" id="wr-pct-lbl">—</div></div>
+      <div class="wr-bg"><div class="wr-fill" id="wr-fill" style="width:0%"></div></div>
     </div>
   </div>`;
+
+  // Bot cards
+  const botsEl=document.getElementById("bots"); botsEl.innerHTML="";
+  for(const[name,_] of Object.entries(FILES)){
+    const cls=name.toLowerCase(),color=COL[name],icon=ICO[name];
+    botsEl.innerHTML+=`
+    <div class="bc ${cls}" id="bc-${cls}">
+      <div class="bc-head">
+        <div class="bc-name" style="color:${color}">${icon} ${name}</div>
+        <div class="bc-tag" style="color:${color};border-color:${color}44">LIVE</div>
+      </div>
+      <div class="bc-bal" id="bc-bal-${cls}">—</div>
+      <div class="bc-pnl" id="bc-pnl-${cls}">—</div>
+      <div class="bc-24h">
+        <div class="bc-24h-l">📅 24h Profit</div>
+        <div class="bc-24h-v" id="bc-24h-${cls}">—</div>
+      </div>
+      <div class="bc-stats">
+        <div class="bs"><div class="bs-l">Trades</div><div class="bs-v" id="bc-nn-${cls}">—</div></div>
+        <div class="bs"><div class="bs-l">Win%</div><div class="bs-v" id="bc-wr-${cls}">—</div></div>
+        <div class="bs"><div class="bs-l">W/L</div><div class="bs-v" id="bc-wl-${cls}">—</div></div>
+      </div>
+      <div class="bc-stats2">
+        <div class="bs"><div class="bs-l">Profit</div><div class="bs-v g" id="bc-prof-${cls}">—</div></div>
+        <div class="bs"><div class="bs-l">Loss</div><div class="bs-v r" id="bc-los-${cls}">—</div></div>
+        <div class="bs"><div class="bs-l">Fees</div><div class="bs-v y" id="bc-fee-${cls}">—</div></div>
+        <div class="bs"><div class="bs-l">Net</div><div class="bs-v" id="bc-net-${cls}">—</div></div>
+      </div>
+      <div class="bc-wrbar"><div class="bc-wrfill" id="bc-wrf-${cls}" style="width:0%"></div></div>
+    </div>`;
+  }
+
+  // Recent — placeholder
+  document.getElementById("recent").innerHTML=`<div class="empty" style="grid-column:span 5">Loading...</div>`;
+
+  // Detail cards
+  const detEl=document.getElementById("details"); detEl.innerHTML="";
+  for(const[name,_] of Object.entries(FILES)){
+    const cls=name.toLowerCase(),color=COL[name],icon=ICO[name];
+    detEl.innerHTML+=`
+    <div class="dc ${cls}" id="dc-${cls}">
+      <div class="dc-hdr">
+        <div class="dc-hdr-row">
+          <div>
+            <div class="dc-name" style="color:${color}">${icon} ${name}</div>
+            <div class="dc-sub" id="dc-sub-${cls}">Loading...</div>
+          </div>
+          <div class="dc-bal-block">
+            <div class="dc-bal-l">Balance</div>
+            <div class="dc-bal-v" id="dc-bal-${cls}">—</div>
+            <div class="dc-pnl" id="dc-pnl-${cls}">—</div>
+            <div class="dc-24h" id="dc-24h-${cls}">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-g" id="kpi-g-${cls}">
+        ${kpiGrid(cls)}
+      </div>
+      <div class="price-sec" id="price-${cls}">
+        <div class="price-sec-lbl">📍 Prețuri BTC</div>
+        <div class="price-g">
+          <div class="pb"><div class="pb-l">Start Price (ultim)</div><div class="pb-v" style="color:var(--cyan)" id="sp-last-${cls}">—</div></div>
+          <div class="pb"><div class="pb-l">End Price (ultim)</div><div class="pb-v" style="color:var(--purp)" id="ep-last-${cls}">—</div></div>
+          <div class="pb"><div class="pb-l">Start Price (avg)</div><div class="pb-v" style="color:var(--cyan)" id="sp-avg-${cls}">—</div></div>
+          <div class="pb"><div class="pb-l">End Price (avg)</div><div class="pb-v" style="color:var(--purp)" id="ep-avg-${cls}">—</div></div>
+          <div class="pb"><div class="pb-l">Dist avg</div><div class="pb-v" style="color:var(--amber)" id="dist-avg-${cls}">—</div></div>
+          <div class="pb"><div class="pb-l">Time Left avg</div><div class="pb-v" style="color:var(--gold)" id="tl-avg-${cls}">—</div></div>
+        </div>
+      </div>
+      <div class="zone-sec">
+        <div class="zp spike"><div class="z-name">⚡ SPIKE</div><div class="z-stats">
+          <div class="z-row"><div class="z-key">T</div><div class="z-val" id="z-spike-t-${cls}">—</div></div>
+          <div class="z-row"><div class="z-key">W%</div><div class="z-val" id="z-spike-w-${cls}">—</div></div>
+          <div class="z-row"><div class="z-key">PnL</div><div class="z-val" id="z-spike-p-${cls}">—</div></div>
+        </div></div>
+        <div class="zp goldz"><div class="z-name">🥇 GOLD</div><div class="z-stats">
+          <div class="z-row"><div class="z-key">T</div><div class="z-val" id="z-gold-t-${cls}">—</div></div>
+          <div class="z-row"><div class="z-key">W%</div><div class="z-val" id="z-gold-w-${cls}">—</div></div>
+          <div class="z-row"><div class="z-key">PnL</div><div class="z-val" id="z-gold-p-${cls}">—</div></div>
+        </div></div>
+        <div class="zp early"><div class="z-name">🔵 EARLY</div><div class="z-stats">
+          <div class="z-row"><div class="z-key">T</div><div class="z-val" id="z-early-t-${cls}">—</div></div>
+          <div class="z-row"><div class="z-key">W%</div><div class="z-val" id="z-early-w-${cls}">—</div></div>
+          <div class="z-row"><div class="z-key">PnL</div><div class="z-val" id="z-early-p-${cls}">—</div></div>
+        </div></div>
+      </div>
+      <div class="exit-sec">
+        <div class="ep"><div class="ep-icon">✅</div><div class="ep-lbl">TARGET</div><div class="ep-val g" id="ex-tgt-${cls}">—</div></div>
+        <div class="ep"><div class="ep-icon">🛑</div><div class="ep-lbl">STOPLOSS</div><div class="ep-val r" id="ex-stp-${cls}">—</div></div>
+        <div class="ep"><div class="ep-icon">⚠️</div><div class="ep-lbl">REVERSAL</div><div class="ep-val y" id="ex-rev-${cls}">—</div></div>
+        <div class="ep"><div class="ep-icon">🔚</div><div class="ep-lbl">ENDROUND</div><div class="ep-val c" id="ex-end-${cls}">—</div></div>
+      </div>
+      <div class="mini-ch"><div class="mini-ch-l">${name} · Balance</div><canvas id="mb-${cls}" height="70"></canvas></div>
+      <div class="mini-ch"><div class="mini-ch-l">${name} · P&L per Trade</div><canvas id="mp-${cls}" height="70"></canvas></div>
+      <div class="tbl-hdr">
+        <div class="tbl-ttl">📋 ${name} — Trades</div>
+        <div class="tbl-bdg" id="tbl-bdg-${cls}">0 rows</div>
+      </div>
+      <div class="tbl-wrap"><div id="tbl-${cls}"><div class="empty">Loading...</div></div></div>
+    </div>`;
+  }
+  BUILT=true;
 }
 
-/* ═══════════════════════════════════════════════════════
-   BOT CARDS
-═══════════════════════════════════════════════════════ */
-function renderBotCards(dfs) {
-  const el = document.getElementById("bots"); el.innerHTML = "";
-  for (const [name, df] of Object.entries(dfs)) {
-    const cls=name.toLowerCase(), color=COL[name], icon=ICO[name];
-    if (!df.length) {
-      el.innerHTML += `<div class="bc ${cls}"><div class="bc-head"><div class="bc-name" style="color:${color}">${icon} ${name}</div></div><div class="empty">Nicio dată</div></div>`; continue;
-    }
-    const bal=df[0].balance||0, pnl_=Math.round((bal-SEED)*100)/100;
-    const nn=df.length, w=df.filter(r=>r.result==="WIN").length, l=df.filter(r=>r.result==="LOSS").length;
+function kpiGrid(cls){
+  const ids=["nn","wr","wl","aw","al","best","worst","prof","los","fee","roi","p24","ep","xp","bp","mom","vel","vlt"];
+  const lbls=["Trades","Win%","W/L","Avg Win","Avg Loss","Best","Worst","Profit","Loss","Fee","ROI","24h PnL","Entry P","Exit P","Best P","Momentum","Velocity","Volatility"];
+  return ids.map((id,i)=>`<div class="kpi"><div class="kpi-l">${lbls[i]}</div><div class="kpi-v" id="kv-${id}-${cls}">—</div></div>`).join("");
+}
+
+/* ─────────────────────────────────────────────
+   CHART PALETTE
+───────────────────────────────────────────── */
+const CPL={
+  responsive:true,maintainAspectRatio:false,animation:{duration:0},
+  plugins:{legend:{labels:{color:"#2a4068",font:{family:"IBM Plex Mono",size:9}}}},
+  scales:{
+    x:{grid:{color:"rgba(15,32,64,.8)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}},
+    y:{grid:{color:"rgba(15,32,64,.8)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}}
+  }
+};
+
+/* Create or UPDATE a chart's data without destroying it */
+function upsertChart(id, type, data, options){
+  const el=document.getElementById(id);
+  if(!el)return;
+  if(CHARTS[id]){
+    // smooth data update — no destroy/recreate = no flash
+    CHARTS[id].data=data;
+    Object.assign(CHARTS[id].options,options||{});
+    CHARTS[id].update("none"); // "none" = no animation
+    return;
+  }
+  CHARTS[id]=new Chart(el,{type,data,options:{...CPL,...(options||{}),animation:{duration:0}}});
+}
+
+/* ─────────────────────────────────────────────
+   UPDATE ONLY TEXT VALUES (no innerHTML swap)
+───────────────────────────────────────────── */
+function sv(id,val){const el=document.getElementById(id);if(el&&String(el.textContent)!==String(val))el.textContent=val;}
+function sc(id,cls){const el=document.getElementById(id);if(el&&el.className!==cls)el.className=cls;}
+function ss(id,prop,val){const el=document.getElementById(id);if(el)el.style[prop]=val;}
+
+/* ─────────────────────────────────────────────
+   DATA → DOM (patch only changed values)
+───────────────────────────────────────────── */
+function patchBanner(dfs){
+  const frames=Object.values(dfs).filter(d=>d.length>0);
+  if(!frames.length)return;
+  const all=frames.flat();
+  const bal=frames.reduce((s,d)=>s+(d[0]?.balance||0),0);
+  const pnl_=Math.round((bal-SEED*frames.length)*100)/100;
+  const nn=all.length,w=all.filter(r=>r.result==="WIN").length,l=all.filter(r=>r.result==="LOSS").length;
+  const wr_=pct(w,nn);
+  const prof=Math.round(all.filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)*100)/100;
+  const losv=Math.round(all.filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)*100)/100;
+  const fee_=Math.round(all.reduce((s,r)=>s+(r.fee||0),0)*100)/100;
+  const p24_=Math.round(frames.reduce((s,d)=>s+p24(d),0)*100)/100;
+  const roi_=((bal-SEED*frames.length)/(SEED*frames.length)*100).toFixed(1);
+  const avgW=w?(all.filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)/w).toFixed(3):"0";
+  const avgL=l?(all.filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)/l).toFixed(3):"0";
+  const best=Math.max(...all.map(r=>r.pnl||0)).toFixed(3);
+  const worst=Math.min(...all.map(r=>r.pnl||0)).toFixed(3);
+  const wrCol=parseFloat(wr_)>=60?"var(--glit)":parseFloat(wr_)>=50?"var(--gold)":"var(--rlit)";
+  sv("bn-bal","$"+bal.toFixed(2));
+  const pnlEl=document.getElementById("bn-pnl");
+  if(pnlEl){pnlEl.textContent=`${ps(pnl_)}${pnl_}$ all-time · ROI ${ps(roi_)}${roi_}%`;pnlEl.className="bn-sub "+pc(pnl_);}
+  const p24El=document.getElementById("bn-24h");
+  if(p24El){p24El.textContent=`${ps(p24_)}${p24_}$`;p24El.className="bn-cv "+pc(p24_);}
+  sv("bn-fee","$"+fee_);
+  sv("sg-nn",nn);sv("sg-wr",wr_+"%");sv("sg-w",w);sv("sg-l",l);
+  sv("sg-prof","+$"+prof);sv("sg-los","$"+losv);sv("sg-aw","+$"+avgW);sv("sg-al","$"+avgL);
+  sv("sg-best","+$"+best);sv("sg-worst","$"+worst);
+  const netEl=document.getElementById("sg-net");if(netEl){netEl.textContent=`${ps(pnl_)}${pnl_}$`;netEl.className="sg-v "+(pnl_>=0?"g":"r");}
+  const roiEl=document.getElementById("sg-roi");if(roiEl){roiEl.textContent=`${ps(roi_)}${roi_}%`;roiEl.className="sg-v "+(parseFloat(roi_)>=0?"g":"r");}
+  const wrPctEl=document.getElementById("wr-pct-lbl");if(wrPctEl){wrPctEl.textContent=wr_+"%";wrPctEl.style.color=wrCol;}
+  ss("wr-fill","width",wr_+"%");
+}
+
+function patchBotCards(dfs){
+  for(const[name,df] of Object.entries(dfs)){
+    const cls=name.toLowerCase();
+    if(!df.length)return;
+    const bal=df[0].balance||0,pnl_=Math.round((bal-SEED)*100)/100,nn=df.length;
+    const w=df.filter(r=>r.result==="WIN").length,l=df.filter(r=>r.result==="LOSS").length;
     const wr_=pct(w,nn);
     const prof=Math.round(df.filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)*100)/100;
     const losv=Math.round(df.filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)*100)/100;
@@ -560,140 +552,115 @@ function renderBotCards(dfs) {
     const roi_=((bal-SEED)/SEED*100).toFixed(1);
     const p24_=p24(df).toFixed(2);
     const wrC=parseFloat(wr_)>=60?"g":parseFloat(wr_)>=50?"y":"r";
-    el.innerHTML += `
-    <div class="bc ${cls}">
-      <div class="bc-head">
-        <div class="bc-name" style="color:${color}">${icon} ${name}</div>
-        <div class="bc-tag" style="color:${color};border-color:${color}44">LIVE</div>
-      </div>
-      <div class="bc-bal">$${bal.toFixed(2)}</div>
-      <div class="bc-pnl ${pc(pnl_)}">${ps(pnl_)}${pnl_}$ &nbsp;·&nbsp; ROI ${ps(roi_)}${roi_}%</div>
-      <div class="bc-24h">
-        <div class="bc-24h-l">📅 24h Profit</div>
-        <div class="bc-24h-v ${pc(p24_)}">${ps(p24_)}${p24_}$</div>
-      </div>
-      <div class="bc-stats">
-        <div class="bs"><div class="bs-l">Trades</div><div class="bs-v">${nn}</div></div>
-        <div class="bs"><div class="bs-l">Win%</div><div class="bs-v ${wrC}">${wr_}%</div></div>
-        <div class="bs"><div class="bs-l">W/L</div><div class="bs-v">${w}/${l}</div></div>
-      </div>
-      <div class="bc-stats2">
-        <div class="bs"><div class="bs-l">Profit</div><div class="bs-v g">+$${prof}</div></div>
-        <div class="bs"><div class="bs-l">Loss</div><div class="bs-v r">$${losv}</div></div>
-        <div class="bs"><div class="bs-l">Fees</div><div class="bs-v y">$${fee_}</div></div>
-        <div class="bs"><div class="bs-l">Net</div><div class="bs-v ${pnl_>=0?"g":"r"}">${ps(pnl_)}${pnl_}$</div></div>
-      </div>
-      <div class="bc-wrbar"><div class="bc-wrfill" style="width:${wr_}%"></div></div>
-    </div>`;
+    sv(`bc-bal-${cls}`,"$"+bal.toFixed(2));
+    const pnlEl=document.getElementById(`bc-pnl-${cls}`);
+    if(pnlEl){pnlEl.textContent=`${ps(pnl_)}${pnl_}$ · ROI ${ps(roi_)}${roi_}%`;pnlEl.className="bc-pnl "+pc(pnl_);}
+    const p24El=document.getElementById(`bc-24h-${cls}`);
+    if(p24El){p24El.textContent=`${ps(p24_)}${p24_}$`;p24El.className="bc-24h-v "+pc(p24_);}
+    sv(`bc-nn-${cls}`,nn);
+    const wrEl=document.getElementById(`bc-wr-${cls}`);if(wrEl){wrEl.textContent=wr_+"%";wrEl.className="bs-v "+wrC;}
+    sv(`bc-wl-${cls}`,`${w}/${l}`);
+    sv(`bc-prof-${cls}`,"+$"+prof);sv(`bc-los-${cls}`,"$"+losv);
+    sv(`bc-fee-${cls}`,"$"+fee_);
+    const netEl=document.getElementById(`bc-net-${cls}`);if(netEl){netEl.textContent=`${ps(pnl_)}${pnl_}$`;netEl.className="bs-v "+(pnl_>=0?"g":"r");}
+    ss(`bc-wrf-${cls}`,"width",wr_+"%");
   }
 }
 
-/* ═══════════════════════════════════════════════════════
-   RECENT
-═══════════════════════════════════════════════════════ */
-function renderRecent(dfs) {
-  const all = [];
-  for (const [nm, df] of Object.entries(dfs)) df.forEach(r=>all.push({...r,_bot:nm,_dt:parseDT(r)}));
-  all.sort((a,b)=>{ if(!a._dt&&!b._dt)return 0; if(!a._dt)return 1; if(!b._dt)return -1; return b._dt-a._dt; });
-  const top = all.slice(0,10);
-  const el  = document.getElementById("recent");
-  if (!top.length) { el.innerHTML=`<div class="empty">Nicio activitate</div>`; return; }
-  const zColor = z=>{ const u=String(z||"").toUpperCase(); return u.includes("SPIKE")?"var(--amber)":u==="GOLD"?"#facc15":u==="EARLY"?"var(--blue)":u==="LOCK"?"#10b981":"var(--dim)"; };
-  el.innerHTML = top.map(r=>{
-    const res=String(r.result||"?").toUpperCase(), pv=r.pnl||0;
-    const ts=r._dt?r._dt.toTimeString().slice(0,5):"—";
-    const zone=r.zone||r.bet_zone||"";
+function patchRecent(dfs){
+  const all=[];
+  for(const[nm,df] of Object.entries(dfs)) df.forEach(r=>all.push({...r,_bot:nm,_dt:parseDT(r)}));
+  all.sort((a,b)=>{if(!a._dt&&!b._dt)return 0;if(!a._dt)return 1;if(!b._dt)return-1;return b._dt-a._dt;});
+  const top=all.slice(0,10);
+  const el=document.getElementById("recent");
+  if(!top.length){el.innerHTML=`<div class="empty" style="grid-column:span 5">Nicio activitate</div>`;return;}
+  const zColor=z=>{const u=String(z||"").toUpperCase();return u.includes("SPIKE")?"var(--amber)":u==="GOLD"?"#facc15":u==="EARLY"?"var(--blue)":"var(--dim)";};
+  // Build new HTML and compare to avoid unnecessary repaint
+  const newHtml=top.map(r=>{
+    const res=String(r.result||"?").toUpperCase(),pv=r.pnl||0;
+    const ts=r._dt?r._dt.toTimeString().slice(0,5):"—",zone=r.zone||r.bet_zone||"";
     return `<div class="pill ${res==="WIN"?"w":"l"}">
       <div class="p-bot" style="color:${COL[r._bot]}">${ICO[r._bot]} ${r._bot.replace("Test","T")}</div>
       <div class="p-res">${res}</div>
       <div class="p-pnl">${ps(pv)}${pv.toFixed(2)}$</div>
       <div class="p-time">${ts}</div>
-      ${zone?`<div class="p-zone" style="color:${zColor(zone)}">${zone.slice(0,6)}</div>`:""}
+      ${zone?`<div class="p-zone" style="color:${zColor(zone)}">${zone.slice(0,8)}</div>`:""}
     </div>`;
   }).join("");
+  if(el.innerHTML!==newHtml) el.innerHTML=newHtml;
 }
 
-/* ═══════════════════════════════════════════════════════
-   GLOBAL CHARTS
-═══════════════════════════════════════════════════════ */
-function renderGlobalCharts(dfs) {
-  const names = Object.keys(dfs).filter(n=>dfs[n].length>0);
+/* ─────────────────────────────────────────────
+   CHARTS (upsert = no flash)
+───────────────────────────────────────────── */
+function patchCharts(dfs){
+  const names=Object.keys(dfs).filter(n=>dfs[n].length>0);
 
   // Balance curves
-  mk("c_bal",{ type:"line", data:{ datasets: names.map(n=>{
+  const balDS=names.map(n=>{
     const asc=[...dfs[n]].reverse();
-    return { label:n, data:asc.map((r,i)=>({x:i+1,y:r.balance})),
-      borderColor:COL[n], backgroundColor:COL[n]+"18",
-      fill:true, tension:.35, pointRadius:0, borderWidth:2 };
-  })}, options:{...CPL, parsing:false, maintainAspectRatio:false} });
+    return{label:n,data:asc.map((r,i)=>({x:i+1,y:r.balance})),
+      borderColor:COL[n],backgroundColor:COL[n]+"18",fill:true,tension:.35,pointRadius:0,borderWidth:2};
+  });
+  upsertChart("c_bal","line",{datasets:balDS},{parsing:false});
 
   // Cumulative PnL
-  mk("c_cpnl",{ type:"line", data:{ datasets: names.map(n=>{
-    const asc=[...dfs[n]].reverse(); let cum=0;
-    return { label:n, data:asc.map((r,i)=>{cum+=(r.pnl||0);return{x:i+1,y:Math.round(cum*100)/100};}),
-      borderColor:COL[n], backgroundColor:"transparent",
-      fill:false, tension:.35, pointRadius:0, borderWidth:2 };
-  })}, options:{...CPL, parsing:false, maintainAspectRatio:false} });
+  const cpDS=names.map(n=>{
+    const asc=[...dfs[n]].reverse();let cum=0;
+    return{label:n,data:asc.map((r,i)=>{cum+=(r.pnl||0);return{x:i+1,y:Math.round(cum*100)/100};}),
+      borderColor:COL[n],backgroundColor:"transparent",fill:false,tension:.35,pointRadius:0,borderWidth:2};
+  });
+  upsertChart("c_cpnl","line",{datasets:cpDS},{parsing:false});
 
   // Profit vs Loss
-  mk("c_pnl",{ type:"bar", data:{ labels:names, datasets:[
-    { label:"Profit", data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)*100)/100),
-      backgroundColor:"#22c55e88", borderColor:"#4ade80", borderWidth:1, borderRadius:4 },
-    { label:"Loss",   data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)*100)/100),
-      backgroundColor:"#ef444488", borderColor:"#f87171", borderWidth:1, borderRadius:4 }
-  ]}, options:{...CPL, maintainAspectRatio:false} });
+  upsertChart("c_pnl","bar",{labels:names,datasets:[
+    {label:"Profit",data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)*100)/100),
+      backgroundColor:"#22c55e88",borderColor:"#4ade80",borderWidth:1,borderRadius:4},
+    {label:"Loss",data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)*100)/100),
+      backgroundColor:"#ef444488",borderColor:"#f87171",borderWidth:1,borderRadius:4}
+  ]},{});
 
   // Win Rate
-  mk("c_wr",{ type:"bar", data:{ labels:names, datasets:[{
+  upsertChart("c_wr","bar",{labels:names,datasets:[{
     label:"Win%",
-    data:names.map(n=>{ const d=dfs[n]; return d.length?parseFloat(pct(d.filter(r=>r.result==="WIN").length,d.length)):0; }),
-    backgroundColor:names.map(n=>COL[n]+"bb"), borderColor:names.map(n=>COL[n]), borderWidth:1, borderRadius:4
-  }]}, options:{...CPL, maintainAspectRatio:false,
-    scales:{...CPL.scales, y:{...CPL.scales.y,min:0,max:100}}} });
+    data:names.map(n=>{const d=dfs[n];return d.length?parseFloat(pct(d.filter(r=>r.result==="WIN").length,d.length)):0;}),
+    backgroundColor:names.map(n=>COL[n]+"bb"),borderColor:names.map(n=>COL[n]),borderWidth:1,borderRadius:4
+  }]},{scales:{...CPL.scales,y:{...CPL.scales.y,min:0,max:100}}});
 
-  // P&L distribution
-  const allPnl = Object.values(dfs).flat().map(r=>r.pnl||0).filter(v=>v!==0);
-  if (allPnl.length) {
-    const mn=Math.floor(Math.min(...allPnl)*5)/5, mx=Math.ceil(Math.max(...allPnl)*5)/5;
-    const step=0.2, bins=[];
-    for(let b=mn; b<=mx+.001; b=Math.round((b+step)*100)/100) bins.push(b);
-    mk("c_dist",{ type:"bar", data:{ labels:bins.map(b=>b.toFixed(1)),
-      datasets:[{ label:"Trades",
-        data:bins.map(b=>allPnl.filter(v=>v>=b&&v<b+step).length),
-        backgroundColor:bins.map(b=>b>=0?"#22c55e77":"#ef444477"), borderWidth:0, borderRadius:3
-      }]}, options:{...CPL, maintainAspectRatio:false} });
+  // Distribution
+  const allPnl=Object.values(dfs).flat().map(r=>r.pnl||0).filter(v=>v!==0);
+  if(allPnl.length){
+    const mn=Math.floor(Math.min(...allPnl)*5)/5,mx=Math.ceil(Math.max(...allPnl)*5)/5;
+    const step=0.2,bins=[];
+    for(let b=mn;b<=mx+.001;b=Math.round((b+step)*100)/100)bins.push(b);
+    upsertChart("c_dist","bar",{
+      labels:bins.map(b=>b.toFixed(1)),
+      datasets:[{label:"Trades",data:bins.map(b=>allPnl.filter(v=>v>=b&&v<b+step).length),
+        backgroundColor:bins.map(b=>b>=0?"#22c55e77":"#ef444477"),borderWidth:0,borderRadius:3}]
+    },{});
   }
 }
 
-/* ═══════════════════════════════════════════════════════
-   DETAIL CARDS
-═══════════════════════════════════════════════════════ */
-function tdCls(col, val) {
-  const v = typeof val==="number"?val:0;
-  if(col==="result") return String(val).toUpperCase()==="WIN"?"tw":"tl";
-  if(["pnl_net","pnl_gross","pnl"].includes(col)) return v>0?"tp":v<0?"tn":"";
-  if(["zone","bet_zone"].includes(col)){
-    const u=String(val||"").toUpperCase();
-    return u.includes("SPIKE_S")?"tss":u==="SPIKE"?"tsp":u==="GOLD"?"tgo":u==="EARLY"?"tea":u==="LOCK"?"tlo":"";
-  }
-  if(["exit_type","exit"].includes(col)){
-    const u=String(val||"").toUpperCase();
-    return u.includes("TARGET")||u.includes("TAKE")?"ttg":u.includes("TRAIL")?"ttr":u.includes("STOP")?"tst":u.includes("REVERS")?"trv":u.includes("END")?"ten":"";
-  }
+/* ─────────────────────────────────────────────
+   DETAIL CARDS PATCH
+───────────────────────────────────────────── */
+function tdCls(col,val){
+  const v=typeof val==="number"?val:0;
+  if(col==="result")return String(val).toUpperCase()==="WIN"?"tw":"tl";
+  if(["pnl_net","pnl_gross","pnl"].includes(col))return v>0?"tp":v<0?"tn":"";
+  if(["zone","bet_zone"].includes(col)){const u=String(val||"").toUpperCase();return u.includes("SPIKE_S")?"tss":u==="SPIKE"?"tsp":u==="GOLD"?"tgo":u==="EARLY"?"tea":"";}
+  if(["exit_type","exit"].includes(col)){const u=String(val||"").toUpperCase();return u.includes("TARGET")||u.includes("TAKE")?"ttg":u.includes("TRAIL")?"ttr":u.includes("STOP")?"tst":u.includes("REVERS")?"trv":u.includes("END")?"ten":"";}
   return "";
 }
 
-function renderDetails(dfs) {
-  const el = document.getElementById("details"); el.innerHTML = "";
-  for (const [name, df] of Object.entries(dfs)) {
-    const cls=name.toLowerCase(), color=COL[name], icon=ICO[name];
-    if (!df.length) {
-      el.innerHTML+=`<div class="dc ${cls}"><div class="dc-hdr"><div class="dc-hdr-row"><div><div class="dc-name" style="color:${color}">${icon} ${name}</div><div class="dc-sub">Așteptând date...</div></div></div></div></div>`; continue;
-    }
-    const bal=df[0].balance||0, pnl_=Math.round((bal-SEED)*100)/100, nn=df.length;
-    const w=df.filter(r=>r.result==="WIN").length, l=df.filter(r=>r.result==="LOSS").length;
+function patchDetails(dfs){
+  for(const[name,df] of Object.entries(dfs)){
+    const cls=name.toLowerCase(),color=COL[name];
+    if(!df.length)continue;
+    const bal=df[0].balance||0,pnl_=Math.round((bal-SEED)*100)/100,nn=df.length;
+    const w=df.filter(r=>r.result==="WIN").length,l=df.filter(r=>r.result==="LOSS").length;
     const wr_=pct(w,nn);
-    const wins=df.filter(r=>r.pnl>0), losses=df.filter(r=>r.pnl<0);
+    const wins=df.filter(r=>r.pnl>0),losses=df.filter(r=>r.pnl<0);
     const profSum=Math.round(wins.reduce((s,r)=>s+r.pnl,0)*100)/100;
     const lossSum=Math.round(losses.reduce((s,r)=>s+r.pnl,0)*100)/100;
     const aw=wins.length?(wins.reduce((s,r)=>s+r.pnl,0)/wins.length).toFixed(3):"0";
@@ -703,196 +670,119 @@ function renderDetails(dfs) {
     const fee_=df.reduce((s,r)=>s+(r.fee||0),0).toFixed(3);
     const roi_=((bal-SEED)/SEED*100).toFixed(1);
     const p24_=p24(df).toFixed(2);
-    const ep=avgCol(df,"entry_prob"), xp=avgCol(df,"exit_prob"), bp=avgCol(df,"best_prob");
-    const mom=avgCol(df,"momentum"), vel=avgCol(df,"avg_velocity"), vlt=avgCol(df,"volatility");
-    const wrC=parseFloat(wr_)>=60?"kv-g":parseFloat(wr_)>=50?"kv-y":"kv-r";
-    const acC=cls==="test"?"kv-a":cls==="test1"?"kv-c":"kv-p";
+    const ep=avgCol(df,"entry_prob"),xp=avgCol(df,"exit_prob"),bp=avgCol(df,"best_prob");
+    const mom=avgCol(df,"momentum"),vel=avgCol(df,"avg_velocity"),vlt=avgCol(df,"volatility");
 
-    // prices — only where start_price is a real BTC price
+    // Header
+    sv(`dc-sub-${cls}`,`${nn} trades · SPIKE · GOLD · EARLY`);
+    sv(`dc-bal-${cls}`,"$"+bal.toFixed(2));
+    const dcpEl=document.getElementById(`dc-pnl-${cls}`);
+    if(dcpEl){dcpEl.textContent=`${ps(pnl_)}${pnl_}$ · ROI ${ps(roi_)}${roi_}%`;dcpEl.className="dc-pnl "+pc(pnl_);}
+    const dc24El=document.getElementById(`dc-24h-${cls}`);
+    if(dc24El){dc24El.textContent=`24h ${ps(p24_)}${p24_}$`;dc24El.className="dc-24h "+pc(p24_);}
+
+    // KPI values
+    const kpiData={
+      nn:{v:nn,c:""},wr:{v:wr_+"%",c:parseFloat(wr_)>=60?"kvg":parseFloat(wr_)>=50?"kvy":"kvr"},
+      wl:{v:`${w}/${l}`,c:""},aw:{v:`+$${aw}`,c:"kvg"},al:{v:`$${al}`,c:"kvr"},
+      best:{v:`+$${best}`,c:"kvg"},worst:{v:`$${worst}`,c:"kvr"},
+      prof:{v:`+$${profSum}`,c:"kvg"},los:{v:`$${lossSum}`,c:"kvr"},
+      fee:{v:`$${fee_}`,c:"kvy"},roi:{v:`${ps(roi_)}${roi_}%`,c:parseFloat(roi_)>=0?"kvg":"kvr"},
+      p24:{v:`${ps(p24_)}${p24_}$`,c:parseFloat(p24_)>=0?"kvg":"kvr"},
+      ep:{v:ep!==null?ep.toFixed(3):"—",c:"kvy"},xp:{v:xp!==null?xp.toFixed(3):"—",c:""},
+      bp:{v:bp!==null?bp.toFixed(3):"—",c:"kvg"},mom:{v:mom!==null?mom.toFixed(2):"—",c:"kvb"},
+      vel:{v:vel!==null?vel.toFixed(2):"—",c:"kvy"},vlt:{v:vlt!==null?vlt.toFixed(2):"—",c:""}
+    };
+    for(const[id,{v,c}] of Object.entries(kpiData)){
+      const el=document.getElementById(`kv-${id}-${cls}`);
+      if(el){if(el.textContent!==String(v))el.textContent=v;if(c&&el.className!==`kpi-v ${c}`)el.className=`kpi-v ${c}`;}
+    }
+
+    // Prices
     const spRows=df.filter(r=>r.start_price>1000);
-    const sp_last=spRows.length?"$"+spRows[0].start_price.toFixed(2):"—";
-    const ep_last=spRows.length&&spRows[0].end_price?"$"+spRows[0].end_price.toFixed(2):"—";
-    const sp_avg=spRows.length?"$"+(spRows.reduce((s,r)=>s+r.start_price,0)/spRows.length).toFixed(2):"—";
-    const ep_avg=spRows.filter(r=>r.end_price).length?"$"+(spRows.filter(r=>r.end_price).reduce((s,r)=>s+r.end_price,0)/spRows.filter(r=>r.end_price).length).toFixed(2):"—";
-    const dist_avg=df[0].dist!==undefined?(df.reduce((s,r)=>s+(r.dist||0),0)/nn).toFixed(2)+"$":"—";
-    const tl_avg=df[0].time_left!==undefined?(df.reduce((s,r)=>s+(r.time_left||0),0)/nn).toFixed(0)+"s":"—";
+    sv(`sp-last-${cls}`,spRows.length?"$"+spRows[0].start_price.toFixed(2):"—");
+    sv(`ep-last-${cls}`,spRows.length&&spRows[0].end_price?"$"+spRows[0].end_price.toFixed(2):"—");
+    sv(`sp-avg-${cls}`,spRows.length?"$"+(spRows.reduce((s,r)=>s+r.start_price,0)/spRows.length).toFixed(2):"—");
+    sv(`ep-avg-${cls}`,spRows.filter(r=>r.end_price).length?"$"+(spRows.filter(r=>r.end_price).reduce((s,r)=>s+r.end_price,0)/spRows.filter(r=>r.end_price).length).toFixed(2):"—");
+    sv(`dist-avg-${cls}`,df[0].dist!==undefined?(df.reduce((s,r)=>s+(r.dist||0),0)/nn).toFixed(2)+"$":"—");
+    sv(`tl-avg-${cls}`,df[0].time_left!==undefined?(df.reduce((s,r)=>s+(r.time_left||0),0)/nn).toFixed(0)+"s":"—");
 
-    // zones — include SPIKE_STRONG with SPIKE
+    // Zones
     const spike=zoneStats(df,["SPIKE","SPIKE_STRONG"]);
-    const gold =zoneStats(df,["GOLD"]);
+    const gold=zoneStats(df,["GOLD"]);
     const early=zoneStats(df,["EARLY"]);
-    const lock =zoneStats(df,["LOCK"]);
+    for(const[zn,zd] of [["spike",spike],["gold",gold],["early",early]]){
+      sv(`z-${zn}-t-${cls}`,zd.t);sv(`z-${zn}-w-${cls}`,zd.wr+"%");
+      const zpEl=document.getElementById(`z-${zn}-p-${cls}`);
+      if(zpEl){zpEl.textContent=`${ps(zd.pnl)}${zd.pnl}$`;zpEl.style.color=zd.pnl>=0?"var(--glit)":"var(--rlit)";}
+    }
 
-    // exits
-    const e_tgt=exCount(df,"TARGET")+exCount(df,"TAKE");
-    const e_stp=exCount(df,"STOP");
-    const e_rev=exCount(df,"REVERS");
-    const e_end=exCount(df,"END");
+    // Exits
+    sv(`ex-tgt-${cls}`,exCount(df,"TARGET")+exCount(df,"TAKE"));
+    sv(`ex-stp-${cls}`,exCount(df,"STOP"));
+    sv(`ex-rev-${cls}`,exCount(df,"REVERS"));
+    sv(`ex-end-${cls}`,exCount(df,"END"));
 
-    // table cols
-    const HIDE=new Set(["_bot","_dt","pnl"]);
-    const cols=Object.keys(df[0]).filter(c=>!HIDE.has(c)&&!c.startsWith("_"));
-    let rows="";
-    df.slice(0,60).forEach(r=>{
-      const res=String(r.result||"").toUpperCase();
-      const rc=res==="WIN"?"rw":res==="LOSS"?"rl":"";
-      rows+=`<tr class="${rc}">${cols.map(c=>`<td class="${tdCls(c,r[c])}">${r[c]!==undefined?r[c]:"—"}</td>`).join("")}</tr>`;
-    });
-
-    // mini chart IDs
-    const bId=`mb_${cls}`, pId=`mp_${cls}`;
+    // Mini charts
     const asc=[...df].reverse();
-    const r16=parseInt(color.slice(1,3),16), g16=parseInt(color.slice(3,5),16), b16=parseInt(color.slice(5,7),16);
+    const r16=parseInt(color.slice(1,3),16),g16=parseInt(color.slice(3,5),16),b16=parseInt(color.slice(5,7),16);
+    const miniOpts={responsive:true,maintainAspectRatio:false,animation:{duration:0},plugins:{legend:{display:false}},
+      scales:{x:{display:false},y:{grid:{color:"rgba(15,32,64,.7)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}}}};
+    upsertChart(`mb-${cls}`,"line",{labels:asc.map((_,i)=>i+1),datasets:[{
+      data:asc.map(r=>r.balance),borderColor:color,backgroundColor:`rgba(${r16},${g16},${b16},.1)`,
+      fill:true,tension:.35,pointRadius:0,borderWidth:2}]},miniOpts);
+    upsertChart(`mp-${cls}`,"bar",{labels:asc.map((_,i)=>i+1),datasets:[{
+      data:asc.map(r=>r.pnl||0),
+      backgroundColor:asc.map(r=>(r.pnl||0)>=0?"#22c55e77":"#ef444477"),borderWidth:0,borderRadius:2}]},miniOpts);
 
-    el.innerHTML += `
-    <div class="dc ${cls}">
-      <div class="dc-hdr">
-        <div class="dc-hdr-row">
-          <div>
-            <div class="dc-name" style="color:${color}">${icon} ${name}</div>
-            <div class="dc-sub">${nn} trades &nbsp;·&nbsp; SPIKE · GOLD · EARLY · LOCK</div>
-          </div>
-          <div class="dc-bal-block">
-            <div class="dc-bal-l">Balance</div>
-            <div class="dc-bal-v">$${bal.toFixed(2)}</div>
-            <div class="dc-pnl ${pc(pnl_)}">${ps(pnl_)}${pnl_}$ · ROI ${ps(roi_)}${roi_}%</div>
-            <div class="dc-24h ${pc(p24_)}">24h ${ps(p24_)}${p24_}$</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="kpi-g">
-        <div class="kpi"><div class="kpi-l">Trades</div><div class="kpi-v ${acC}">${nn}</div></div>
-        <div class="kpi"><div class="kpi-l">Win%</div><div class="kpi-v ${wrC}">${wr_}%</div></div>
-        <div class="kpi"><div class="kpi-l">W/L</div><div class="kpi-v">${w}/${l}</div></div>
-        <div class="kpi"><div class="kpi-l">Avg Win</div><div class="kpi-v kv-g">+$${aw}</div></div>
-        <div class="kpi"><div class="kpi-l">Avg Loss</div><div class="kpi-v kv-r">$${al}</div></div>
-        <div class="kpi"><div class="kpi-l">Best</div><div class="kpi-v kv-g">+$${best}</div></div>
-        <div class="kpi"><div class="kpi-l">Worst</div><div class="kpi-v kv-r">$${worst}</div></div>
-        <div class="kpi"><div class="kpi-l">Profit</div><div class="kpi-v kv-g">+$${profSum}</div></div>
-        <div class="kpi"><div class="kpi-l">Loss</div><div class="kpi-v kv-r">$${lossSum}</div></div>
-        <div class="kpi"><div class="kpi-l">Fee</div><div class="kpi-v kv-y">$${fee_}</div></div>
-        <div class="kpi"><div class="kpi-l">ROI</div><div class="kpi-v ${parseFloat(roi_)>=0?"kv-g":"kv-r"}">${ps(roi_)}${roi_}%</div></div>
-        <div class="kpi"><div class="kpi-l">24h PnL</div><div class="kpi-v ${parseFloat(p24_)>=0?"kv-g":"kv-r"}">${ps(p24_)}${p24_}$</div></div>
-        <div class="kpi"><div class="kpi-l">Entry P</div><div class="kpi-v kv-y">${ep!==null?ep.toFixed(3):"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Exit P</div><div class="kpi-v">${xp!==null?xp.toFixed(3):"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Best P</div><div class="kpi-v kv-g">${bp!==null?bp.toFixed(3):"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Momentum</div><div class="kpi-v kv-b">${mom!==null?mom.toFixed(2):"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Velocity</div><div class="kpi-v kv-y">${vel!==null?vel.toFixed(2):"—"}</div></div>
-        <div class="kpi"><div class="kpi-l">Volatility</div><div class="kpi-v">${vlt!==null?vlt.toFixed(2):"—"}</div></div>
-      </div>
-
-      <div class="price-sec">
-        <div class="price-sec-lbl">📍 Prețuri BTC</div>
-        <div class="price-g">
-          <div class="price-box"><div class="pb-l">Start Price (ultim)</div><div class="pb-v" style="color:var(--cyan)">${sp_last}</div></div>
-          <div class="price-box"><div class="pb-l">End Price (ultim)</div><div class="pb-v" style="color:var(--purp)">${ep_last}</div></div>
-          <div class="price-box"><div class="pb-l">Start Price (avg)</div><div class="pb-v" style="color:var(--cyan)">${sp_avg}</div></div>
-          <div class="price-box"><div class="pb-l">End Price (avg)</div><div class="pb-v" style="color:var(--purp)">${ep_avg}</div></div>
-          <div class="price-box"><div class="pb-l">Dist avg</div><div class="pb-v" style="color:var(--amber)">${dist_avg}</div></div>
-          <div class="price-box"><div class="pb-l">Time Left avg</div><div class="pb-v" style="color:var(--gold)">${tl_avg}</div></div>
-        </div>
-      </div>
-
-      <div class="zone-sec">
-        <div class="zp spike">
-          <div class="z-name">⚡ SPIKE</div>
-          <div class="z-stats">
-            <div class="z-row"><div class="z-key">T</div><div class="z-val">${spike.t}</div></div>
-            <div class="z-row"><div class="z-key">W%</div><div class="z-val">${spike.wr}%</div></div>
-            <div class="z-row"><div class="z-key">PnL</div><div class="z-val" style="color:${spike.pnl>=0?"var(--glit)":"var(--rlit)"}">${ps(spike.pnl)}${spike.pnl}$</div></div>
-          </div>
-        </div>
-        <div class="zp goldz">
-          <div class="z-name">🥇 GOLD</div>
-          <div class="z-stats">
-            <div class="z-row"><div class="z-key">T</div><div class="z-val">${gold.t}</div></div>
-            <div class="z-row"><div class="z-key">W%</div><div class="z-val">${gold.wr}%</div></div>
-            <div class="z-row"><div class="z-key">PnL</div><div class="z-val" style="color:${gold.pnl>=0?"var(--glit)":"var(--rlit)"}">${ps(gold.pnl)}${gold.pnl}$</div></div>
-          </div>
-        </div>
-        <div class="zp early">
-          <div class="z-name">🔵 EARLY</div>
-          <div class="z-stats">
-            <div class="z-row"><div class="z-key">T</div><div class="z-val">${early.t}</div></div>
-            <div class="z-row"><div class="z-key">W%</div><div class="z-val">${early.wr}%</div></div>
-            <div class="z-row"><div class="z-key">PnL</div><div class="z-val" style="color:${early.pnl>=0?"var(--glit)":"var(--rlit)"}">${ps(early.pnl)}${early.pnl}$</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="exit-sec">
-        <div class="ep"><div class="ep-icon">✅</div><div class="ep-lbl">TARGET</div><div class="ep-val g">${e_tgt}</div></div>
-        <div class="ep"><div class="ep-icon">🛑</div><div class="ep-lbl">STOPLOSS</div><div class="ep-val r">${e_stp}</div></div>
-        <div class="ep"><div class="ep-icon">⚠️</div><div class="ep-lbl">REVERSAL</div><div class="ep-val y">${e_rev}</div></div>
-        <div class="ep"><div class="ep-icon">🔚</div><div class="ep-lbl">ENDROUND</div><div class="ep-val c">${e_end}</div></div>
-      </div>
-
-      <div class="mini-ch">
-        <div class="mini-ch-l">${name} · Balance</div>
-        <div class="mini-ch-inner"><canvas id="${bId}"></canvas></div>
-      </div>
-      <div class="mini-ch">
-        <div class="mini-ch-l">${name} · P&L per Trade</div>
-        <div class="mini-ch-inner"><canvas id="${pId}"></canvas></div>
-      </div>
-      </div>
-
-      <div class="tbl-hdr">
-        <div class="tbl-ttl">📋 ${name} — Trades</div>
-        <div class="tbl-bdg">${nn} rows</div>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr>${cols.map(c=>`<th>${c.toUpperCase().replace("_"," ")}</th>`).join("")}</tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-    </div>`;
-
-    // draw mini charts
-    setTimeout(()=>{
-      const mini={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-        scales:{x:{display:false},y:{grid:{color:"rgba(15,32,64,.7)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}}}};
-      const bEl=document.getElementById(bId),pEl=document.getElementById(pId);
-      if(bEl){if(CH[bId])CH[bId].destroy();
-        CH[bId]=new Chart(bEl,{type:"line",data:{labels:asc.map((_,i)=>i+1),datasets:[{
-          data:asc.map(r=>r.balance),borderColor:color,
-          backgroundColor:`rgba(${r16},${g16},${b16},.1)`,
-          fill:true,tension:.35,pointRadius:0,borderWidth:2
-        }]},options:mini});}
-      if(pEl){if(CH[pId])CH[pId].destroy();
-        CH[pId]=new Chart(pEl,{type:"bar",data:{labels:asc.map((_,i)=>i+1),datasets:[{
-          data:asc.map(r=>r.pnl||0),
-          backgroundColor:asc.map(r=>(r.pnl||0)>=0?"#22c55e77":"#ef444477"),
-          borderWidth:0,borderRadius:2
-        }]},options:mini});}
-    },80);
+    // Table — only rebuild if row count changed (avoids scroll reset)
+    const tblEl=document.getElementById(`tbl-${cls}`);
+    const bdgEl=document.getElementById(`tbl-bdg-${cls}`);
+    if(bdgEl) bdgEl.textContent=nn+" rows";
+    if(tblEl){
+      const HIDE=new Set(["_bot","_dt","pnl"]);
+      const cols=Object.keys(df[0]).filter(c=>!HIDE.has(c)&&!c.startsWith("_"));
+      const currentCount=tblEl.querySelectorAll("tbody tr").length;
+      if(currentCount!==Math.min(nn,60)){
+        let rows="";
+        df.slice(0,60).forEach(r=>{
+          const res=String(r.result||"").toUpperCase(),rc=res==="WIN"?"rw":res==="LOSS"?"rl":"";
+          rows+=`<tr class="${rc}">${cols.map(c=>`<td class="${tdCls(c,r[c])}">${r[c]!==undefined?r[c]:"—"}</td>`).join("")}</tr>`;
+        });
+        tblEl.innerHTML=`<table><thead><tr>${cols.map(c=>`<th>${c.toUpperCase().replace(/_/g," ")}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table>`;
+      }
+    }
   }
 }
 
-/* ═══════════════════════════════════════════════════════
-   MAIN LOOP
-═══════════════════════════════════════════════════════ */
-async function update() {
-  const dfs = {};
-  for (const [name, url] of Object.entries(FILES)) {
-    try {
-      const r = await fetch(url+"?t="+Date.now());
-      dfs[name] = r.ok ? parseCSV(await r.text()) : [];
-    } catch { dfs[name]=[]; }
+/* ─────────────────────────────────────────────
+   MAIN FETCH LOOP
+───────────────────────────────────────────── */
+async function fetchAndPatch(){
+  const dfs={};
+  for(const[name,url] of Object.entries(FILES)){
+    try{
+      const r=await fetch(url+"?t="+Date.now());
+      dfs[name]=r.ok?parseCSV(await r.text()):[];
+    }catch{dfs[name]=[];}
   }
-  document.getElementById("upd-time").textContent = new Date().toTimeString().slice(0,8);
-  renderBanner(dfs);
-  renderBotCards(dfs);
-  renderRecent(dfs);
-  renderGlobalCharts(dfs);
-  renderDetails(dfs);
+  lastDfs=dfs;
+  document.getElementById("upd-time").textContent=new Date().toTimeString().slice(0,8);
+  patchBanner(dfs);
+  patchBotCards(dfs);
+  patchRecent(dfs);
+  patchCharts(dfs);
+  patchDetails(dfs);
 }
 
-setInterval(updateTimer, 1000); updateTimer();
-update();
-setInterval(update, 3000);
+/* ─────────────────────────────────────────────
+   INIT
+───────────────────────────────────────────── */
+buildSkeleton();                      // build DOM once
+setInterval(updateTimer,1000);        // timer ticks silently
+updateTimer();
+fetchAndPatch();                      // first load
+setInterval(fetchAndPatch,5000);      // patch every 5s — invisible
 </script>
 </body>
 </html>
