@@ -193,7 +193,8 @@ body::before{
 /* ─── CHARTS ─── */
 .chart-card{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);padding:12px 12px 10px;margin-bottom:8px}
 .ch-lbl{font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:var(--dim2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-.chart-card canvas{display:block;width:100%!important}
+.ch-wrap{position:relative;width:100%}
+.ch-wrap canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
 .charts-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .charts-2 .chart-card{margin-bottom:0}
 
@@ -265,13 +266,14 @@ body::before{
 /* MINI CHARTS */
 .mini-ch{padding:8px 10px;border-bottom:1px solid var(--b0)}
 .mini-ch-l{font-family:'IBM Plex Mono',monospace;font-size:.46rem;color:var(--dim2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
-.mini-ch canvas{display:block;max-height:72px;width:100%!important}
+.mini-ch-inner{position:relative;width:100%;height:72px}
+.mini-ch-inner canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
 
 /* TABLE */
 .tbl-hdr{padding:8px 12px;border-bottom:1px solid var(--b0);display:flex;align-items:center;justify-content:space-between}
 .tbl-ttl{font-size:.75rem;font-weight:600;color:var(--text)}
 .tbl-bdg{font-family:'IBM Plex Mono',monospace;font-size:.46rem;color:var(--dim);background:var(--b0);padding:2px 8px;border-radius:99px}
-.tbl-wrap{overflow-x:auto;max-height:220px;overflow-y:auto}
+.tbl-wrap{overflow-x:auto;height:220px;overflow-y:auto}
 .tbl-wrap::-webkit-scrollbar{height:3px;width:3px}
 .tbl-wrap::-webkit-scrollbar-track{background:var(--bg)}
 .tbl-wrap::-webkit-scrollbar-thumb{background:var(--b1);border-radius:2px}
@@ -341,25 +343,25 @@ td.ten{color:var(--dim)}
   <div class="sec">📈 Grafice</div>
   <div class="chart-card">
     <div class="ch-lbl">Balance Curves</div>
-    <canvas id="c_bal" height="160"></canvas>
+    <div class="ch-wrap" style="height:160px"><canvas id="c_bal"></canvas></div>
   </div>
   <div class="chart-card">
     <div class="ch-lbl">Cumulative P&L</div>
-    <canvas id="c_cpnl" height="120"></canvas>
+    <div class="ch-wrap" style="height:120px"><canvas id="c_cpnl"></canvas></div>
   </div>
   <div class="charts-2">
     <div class="chart-card">
       <div class="ch-lbl">Profit vs Loss</div>
-      <canvas id="c_pnl" height="130"></canvas>
+      <div class="ch-wrap" style="height:130px"><canvas id="c_pnl"></canvas></div>
     </div>
     <div class="chart-card">
       <div class="ch-lbl">Win Rate %</div>
-      <canvas id="c_wr" height="130"></canvas>
+      <div class="ch-wrap" style="height:130px"><canvas id="c_wr"></canvas></div>
     </div>
   </div>
   <div class="chart-card">
     <div class="ch-lbl">P&L Distribution</div>
-    <canvas id="c_dist" height="110"></canvas>
+    <div class="ch-wrap" style="height:110px"><canvas id="c_dist"></canvas></div>
   </div>
 
   <!-- DETAILS -->
@@ -828,11 +830,12 @@ function renderDetails(dfs) {
 
       <div class="mini-ch">
         <div class="mini-ch-l">${name} · Balance</div>
-        <canvas id="${bId}" height="72"></canvas>
+        <div class="mini-ch-inner"><canvas id="${bId}"></canvas></div>
       </div>
       <div class="mini-ch">
         <div class="mini-ch-l">${name} · P&L per Trade</div>
-        <canvas id="${pId}" height="72"></canvas>
+        <div class="mini-ch-inner"><canvas id="${pId}"></canvas></div>
+      </div>
       </div>
 
       <div class="tbl-hdr">
