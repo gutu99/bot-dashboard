@@ -1,82 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bot Dashboard</title>
-
-<style>
-body {
-    background: #060a12;
-    color: #e2e8f0;
-    font-family: Arial;
-    padding: 20px;
-}
-.card {
-    background: #0c1220;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 10px;
-}
-.value {
-    font-size: 24px;
-    font-weight: bold;
-}
-.green { color: #4ade80; }
-.red { color: #f87171; }
-</style>
-</head>
-
-<body>
-
-<h2>📊 Bot Dashboard</h2>
-
-<div class="card">
-    <div>Balance</div>
-    <div id="balance" class="value">...</div>
-</div>
-
-<div class="card">
-    <div>PnL</div>
-    <div id="pnl" class="value">...</div>
-</div>
-
-<div class="card">
-    <div>Win Rate</div>
-    <div id="wr" class="value">...</div>
-</div>
-
 <script>
-const URL = "https://raw.githubusercontent.com/USER/REPO/main/trades.csv";
+const FILES = {
+    Test: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv",
+    Test1: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test1.csv",
+    Test99: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test99.csv"
+};
 
 async function loadData() {
-    const res = await fetch(URL);
-    const text = await res.text();
+    let totalBalance = 0;
+    let totalTrades = 0;
+    let totalWins = 0;
 
-    const rows = text.trim().split("\n");
-    const headers = rows[0].split(",");
-    const last = rows[rows.length - 1].split(",");
+    for (let key in FILES) {
+        const res = await fetch(FILES[key] + "?t=" + Date.now());
+        const text = await res.text();
 
-    const data = {};
-    headers.forEach((h, i) => data[h] = last[i]);
+        const rows = text.trim().split("\n");
+        if (rows.length < 2) continue;
 
-    // Balance
-    document.getElementById("balance").innerText = "$" + data.balance;
+        const headers = rows[0].split(",");
+        const last = rows[rows.length - 1].split(",");
 
-    // PnL
-    let pnl = (parseFloat(data.balance) - 100).toFixed(2);
+        const data = {};
+        headers.forEach((h, i) => data[h] = last[i]);
+
+        totalBalance += parseFloat(data.balance || 0);
+
+        totalTrades += rows.length - 1;
+        totalWins += rows.filter(r => r.includes("WIN")).length;
+    }
+
+    let pnl = (totalBalance - 300).toFixed(2);
+    let wr = (totalWins / totalTrades * 100).toFixed(1);
+
+    document.getElementById("balance").innerText = "$" + totalBalance.toFixed(2);
+
     let pnlEl = document.getElementById("pnl");
     pnlEl.innerText = pnl;
     pnlEl.className = "value " + (pnl >= 0 ? "green" : "red");
 
-    // Win rate (simplu demo)
-    let wins = rows.filter(r => r.includes("WIN")).length;
-    let wr = (wins / (rows.length - 1) * 100).toFixed(1);
     document.getElementById("wr").innerText = wr + "%";
 }
 
-setInterval(loadData, 2000);
+setInterval(loadData, 3000);
 loadData();
 </script>
-
-</body>
-</html>
