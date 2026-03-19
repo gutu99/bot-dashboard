@@ -1,4 +1,6 @@
 <script>
+window.onload = function() {
+
 const FILES = {
     Test: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv",
     Test1: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test1.csv",
@@ -6,41 +8,50 @@ const FILES = {
 };
 
 async function loadData() {
-    let totalBalance = 0;
-    let totalTrades = 0;
-    let totalWins = 0;
+    try {
+        let totalBalance = 0;
+        let totalTrades = 0;
+        let totalWins = 0;
 
-    for (let key in FILES) {
-        const res = await fetch(FILES[key] + "?t=" + Date.now());
-        const text = await res.text();
+        for (let key in FILES) {
+            const res = await fetch(FILES[key] + "?t=" + Date.now());
+            if (!res.ok) continue;
 
-        const rows = text.trim().split("\n");
-        if (rows.length < 2) continue;
+            const text = await res.text();
+            const rows = text.trim().split("\n");
+            if (rows.length < 2) continue;
 
-        const headers = rows[0].split(",");
-        const last = rows[rows.length - 1].split(",");
+            const headers = rows[0].split(",");
+            const last = rows[rows.length - 1].split(",");
 
-        const data = {};
-        headers.forEach((h, i) => data[h] = last[i]);
+            const data = {};
+            headers.forEach((h, i) => data[h] = last[i]);
 
-        totalBalance += parseFloat(data.balance || 0);
+            totalBalance += parseFloat(data.balance || 0);
+            totalTrades += rows.length - 1;
+            totalWins += rows.filter(r => r.includes("WIN")).length;
+        }
 
-        totalTrades += rows.length - 1;
-        totalWins += rows.filter(r => r.includes("WIN")).length;
+        if (totalTrades === 0) return;
+
+        let pnl = (totalBalance - 300).toFixed(2);
+        let wr = (totalWins / totalTrades * 100).toFixed(1);
+
+        document.getElementById("balance").innerText = "$" + totalBalance.toFixed(2);
+
+        let pnlEl = document.getElementById("pnl");
+        pnlEl.innerText = pnl;
+        pnlEl.className = "value " + (pnl >= 0 ? "green" : "red");
+
+        document.getElementById("wr").innerText = wr + "%";
+
+    } catch (e) {
+        console.log("ERROR:", e);
     }
-
-    let pnl = (totalBalance - 300).toFixed(2);
-    let wr = (totalWins / totalTrades * 100).toFixed(1);
-
-    document.getElementById("balance").innerText = "$" + totalBalance.toFixed(2);
-
-    let pnlEl = document.getElementById("pnl");
-    pnlEl.innerText = pnl;
-    pnlEl.className = "value " + (pnl >= 0 ? "green" : "red");
-
-    document.getElementById("wr").innerText = wr + "%";
 }
 
 setInterval(loadData, 3000);
 loadData();
+
+};
 </script>
