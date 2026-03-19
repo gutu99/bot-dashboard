@@ -17,7 +17,7 @@
   --amber:#f59e0b;--cyan:#06b6d4;--purp:#a855f7;
   --green:#22c55e;--glit:#4ade80;
   --red:#ef4444;--rlit:#f87171;
-  --gold:#fbbf24;--blue:#60a5fa;
+  --gold:#fbbf24;--blue:#60a5fa;--emer:#10b981;
   --r:12px;--rsm:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -137,14 +137,10 @@ body::before{
 .p-time{font-family:'IBM Plex Mono',monospace;font-size:.43rem;color:var(--dim);margin-top:2px;padding-top:2px;border-top:1px solid var(--b0)}
 .p-zone{font-family:'IBM Plex Mono',monospace;font-size:.4rem;margin-top:1px;font-weight:600}
 
-/* ── CHARTS ──
-   KEY: wrap div has explicit height, canvas fills it.
-   This guarantees Chart.js gets a real pixel height on init.
-*/
+/* CHARTS */
 .ch-card{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);padding:12px 12px 10px;margin-bottom:8px}
 .ch-lbl{font-family:'IBM Plex Mono',monospace;font-size:.5rem;color:var(--dim2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
 .ch-wrap{position:relative;width:100%}
-/* explicit heights per chart */
 .ch-wrap.h160{height:160px}
 .ch-wrap.h120{height:120px}
 .ch-wrap.h130{height:130px}
@@ -180,23 +176,23 @@ body::before{
 .kpi{background:rgba(0,0,0,.2);border-radius:6px;padding:5px 6px;text-align:center;border:1px solid var(--b0)}
 .kpi .kl{font-family:'IBM Plex Mono',monospace;font-size:.4rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
 .kpi .kv{font-size:.78rem;font-weight:700;color:var(--text)}
-.kg{color:var(--glit)}.kr{color:var(--rlit)}.ky{color:var(--gold)}.kc{color:var(--cyan)}.kp{color:var(--purp)}.ka{color:var(--amber)}.kb{color:var(--blue)}
+.kg{color:var(--glit)}.kr{color:var(--rlit)}.ky{color:var(--gold)}.kc{color:var(--cyan)}.kp{color:var(--purp)}.ka{color:var(--amber)}.kb{color:var(--blue)}.ke{color:var(--emer)}
 /* prices */
 .pr-sec{padding:8px 10px;border-bottom:1px solid var(--b0)}
 .pr-lbl{font-family:'IBM Plex Mono',monospace;font-size:.45rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .pr-lbl::after{content:'';flex:1;height:1px;background:var(--b0)}
-.pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.pb{background:rgba(0,0,0,.2);border:1px solid var(--b0);border-radius:6px;padding:6px 8px}
-.pb .pl{font-family:'IBM Plex Mono',monospace;font-size:.4rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.pr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.pb{background:rgba(0,0,0,.2);border:1px solid var(--b0);border-radius:6px;padding:6px 8px;text-align:center}
+.pb .pl{font-family:'IBM Plex Mono',monospace;font-size:.38rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
 .pb .pv{font-size:.76rem;font-weight:700}
 /* zones */
 .zone-row{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px 10px;border-bottom:1px solid var(--b0)}
 .zp{border-radius:8px;padding:7px 5px;text-align:center;border:1px solid}
 .zp.spike{background:rgba(245,158,11,.05);border-color:rgba(245,158,11,.2)}
 .zp.goldz{background:rgba(250,204,21,.05);border-color:rgba(250,204,21,.2)}
-.zp.early{background:rgba(96,165,250,.05);border-color:rgba(96,165,250,.2)}
+.zp.lockz{background:rgba(16,185,129,.05);border-color:rgba(16,185,129,.2)}
 .z-name{font-family:'IBM Plex Mono',monospace;font-size:.48rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.zp.spike .z-name{color:var(--amber)}.zp.goldz .z-name{color:#facc15}.zp.early .z-name{color:var(--blue)}
+.zp.spike .z-name{color:var(--amber)}.zp.goldz .z-name{color:#facc15}.zp.lockz .z-name{color:var(--emer)}
 .z-stats{display:flex;flex-direction:column;gap:2px}
 .z-row2{display:flex;justify-content:space-between}
 .zk{font-family:'IBM Plex Mono',monospace;font-size:.38rem;color:var(--dim);text-transform:uppercase}
@@ -207,7 +203,7 @@ body::before{
 .ep .ei{font-size:.78rem;margin-bottom:2px}
 .ep .el{font-family:'IBM Plex Mono',monospace;font-size:.38rem;color:var(--dim);text-transform:uppercase}
 .ep .ev{font-size:.88rem;font-weight:700;margin-top:1px}
-.ev.g{color:var(--glit)}.ev.r{color:var(--rlit)}.ev.y{color:var(--gold)}.ev.c{color:var(--cyan)}
+.ev.g{color:var(--glit)}.ev.r{color:var(--rlit)}.ev.y{color:var(--gold)}.ev.c{color:var(--cyan)}.ev.trl{color:#a3e635}
 /* table */
 .tbl-hdr{padding:8px 12px;border-bottom:1px solid var(--b0);display:flex;align-items:center;justify-content:space-between}
 .tbl-ttl{font-size:.72rem;font-weight:600;color:var(--text)}
@@ -222,9 +218,9 @@ tr.rw td{background:rgba(34,197,94,.04)}tr.rl td{background:rgba(239,68,68,.04)}
 td.tw{color:var(--green);font-weight:600}td.tl{color:var(--red);font-weight:600}
 td.tp{color:var(--glit);font-weight:600}td.tn{color:var(--rlit);font-weight:600}
 td.tsp{color:var(--amber);font-weight:600}td.tgo{color:#facc15;font-weight:600}
-td.tea{color:var(--blue);font-weight:600}td.tss{color:#f97316;font-weight:600}
+td.tlk{color:var(--emer);font-weight:600}
 td.ttg{color:var(--glit);font-weight:600}td.ttr{color:#a3e635;font-weight:600}
-td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:600}td.ten{color:var(--dim)}
+td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:600}td.ten{color:var(--dim)}td.tsf{color:var(--blue);font-weight:600}
 .empty{font-family:'IBM Plex Mono',monospace;color:var(--dim);text-align:center;padding:20px;font-size:.6rem}
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -241,11 +237,11 @@ td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:60
     </div>
   </div>
 
-  <!-- TIMER — static HTML, only inner text swapped -->
+  <!-- TIMER -->
   <div class="timer-row">
-    <div class="t-box"><div class="t-lbl">Ora</div><div class="t-v c" id="t-ora">—</div></div>
-    <div class="t-box"><div class="t-lbl">Rundă</div><div class="t-v g" id="t-rnd">—</div></div>
-    <div class="t-box"><div class="t-lbl">Data</div><div class="t-v" id="t-dat" style="font-size:.75rem">—</div></div>
+    <div class="t-box"><div class="t-lbl">🕐 Ora</div><div class="t-v c" id="t-ora">—</div></div>
+    <div class="t-box"><div class="t-lbl">⏱ Rundă</div><div class="t-v g" id="t-rnd">—</div></div>
+    <div class="t-box"><div class="t-lbl">📅 Data</div><div class="t-v" id="t-dat" style="font-size:.75rem">—</div></div>
   </div>
   <div class="prog-box">
     <div class="prog-row"><div class="prog-lbl">Progres rundă 5min</div><div class="prog-pct" id="tp-v">0%</div></div>
@@ -261,7 +257,7 @@ td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:60
       <div class="bn-sub" id="b-pnl">—</div>
     </div>
     <div class="bn-2col">
-      <div class="bn-cell"><div class="cl">📅 24h P&L</div><div class="cv" id="b-24h">—</div></div>
+      <div class="bn-cell"><div class="cl">📅 24h P&amp;L</div><div class="cv" id="b-24h">—</div></div>
       <div class="bn-cell"><div class="cl">💸 Fees</div><div class="cv" id="b-fee" style="color:var(--gold)">—</div></div>
     </div>
     <div class="sg12">
@@ -344,14 +340,14 @@ td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:60
   <div class="sec">⚡ Activitate Recentă</div>
   <div class="pills" id="recent"><div class="empty" style="grid-column:span 5">Loading...</div></div>
 
-  <!-- CHARTS — canvas inside position:relative wrapper with explicit height -->
+  <!-- CHARTS -->
   <div class="sec">📈 Grafice</div>
   <div class="ch-card">
     <div class="ch-lbl">Balance Curves</div>
     <div class="ch-wrap h160"><canvas id="c_bal"></canvas></div>
   </div>
   <div class="ch-card">
-    <div class="ch-lbl">Cumulative P&L</div>
+    <div class="ch-lbl">Cumulative P&amp;L</div>
     <div class="ch-wrap h120"><canvas id="c_cpnl"></canvas></div>
   </div>
   <div class="ch2">
@@ -365,11 +361,11 @@ td.tst{color:var(--rlit);font-weight:600}td.trv{color:var(--gold);font-weight:60
     </div>
   </div>
   <div class="ch-card">
-    <div class="ch-lbl">P&L Distribution</div>
+    <div class="ch-lbl">P&amp;L Distribution</div>
     <div class="ch-wrap h110"><canvas id="c_dist"></canvas></div>
   </div>
 
-  <!-- DETAILS — static HTML, data patched -->
+  <!-- DETAILS -->
   <div class="sec">🔬 Analiză per Bot</div>
   <div id="details"></div>
 </div>
@@ -383,47 +379,82 @@ const FILES={
 };
 const COL={Test:"#f59e0b",Test1:"#06b6d4",Test99:"#a855f7"};
 const ICO={Test:"🔬",Test1:"⚗️",Test99:"🧬"};
-const SEED=100;
+const SEED=100; // starting balance per bot
 
 /* ═══ STATE ═══ */
-let CH={};          // Chart instances
+let CH={};
 let detailsBuilt=false;
 
-/* ═══ CSV ═══ */
+/* ═══ CSV PARSER ═══ */
 function csv(txt){
   const lines=txt.trim().split("\n");
   if(lines.length<2)return[];
   const h=lines[0].split(",").map(s=>s.trim().replace(/\r/g,""));
   return lines.slice(1).map(line=>{
     const v=line.split(","),o={};
-    h.forEach((k,i)=>{const r=(v[i]||"").trim().replace(/\r/g,"");o[k]=r!==""&&!isNaN(r)?+r:r;});
+    h.forEach((k,i)=>{
+      const raw=(v[i]||"").trim().replace(/\r/g,"");
+      o[k]=raw!==""&&!isNaN(raw)?+raw:raw;
+    });
+    // normalise pnl: prefer pnl_net
     o.pnl=typeof o.pnl_net==="number"?o.pnl_net:(o.pnl||0);
+    // derive end_price from start_price + dist (matches dashboard.py logic)
     if(typeof o.start_price==="number"&&o.start_price>1000&&typeof o.dist==="number")
       o.end_price=Math.round((o.start_price+o.dist)*100)/100;
     return o;
-  }).filter(r=>r.date).reverse(); // newest first
+  }).filter(r=>r.date).reverse(); // newest first, same as dashboard.py
 }
 
-/* ═══ UTILS ═══ */
+/* ═══ UTILITIES ═══ */
 const ps=v=>v>=0?"+":"";
 const pc=v=>v>=0?"pos":"neg";
 const pct=(w,t)=>t?(w/t*100).toFixed(1):"0.0";
-function dt(r){if(r.date&&r.time){const d=new Date(`${r.date}T${r.time}`);if(!isNaN(d))return d;}return null;}
-function p24(rows){const c=Date.now()-864e5;return Math.round(rows.filter(r=>{const d=dt(r);return d&&d.getTime()>=c;}).reduce((s,r)=>s+(r.pnl||0),0)*100)/100;}
-function avg(df,k){if(!df.length||df[0][k]===undefined)return null;return df.reduce((s,r)=>s+(+r[k]||0),0)/df.length;}
-function zs(df,zones){
+
+function dt(r){
+  if(r.date&&r.time){
+    const d=new Date(`${r.date}T${r.time}`);
+    if(!isNaN(d))return d;
+  }
+  return null;
+}
+
+function p24(rows){
+  const cut=Date.now()-864e5;
+  return Math.round(rows.filter(r=>{
+    const d=dt(r);return d&&d.getTime()>=cut;
+  }).reduce((s,r)=>s+(r.pnl||0),0)*100)/100;
+}
+
+function avg(df,k){
+  if(!df.length||df[0][k]===undefined)return null;
+  const vals=df.map(r=>+r[k]||0).filter(v=>!isNaN(v));
+  return vals.length?vals.reduce((s,v)=>s+v,0)/vals.length:null;
+}
+
+// zone stats — mirrors dashboard.py zs() function
+function zoneStats(df,zones){
   const col=["zone","bet_zone"].find(c=>df.length&&df[0][c]!==undefined);
   if(!col)return{t:0,wr:"0.0",pnl:0};
   const sub=df.filter(r=>zones.includes(String(r[col]||"").toUpperCase()));
   const w=sub.filter(r=>r.result==="WIN").length;
-  return{t:sub.length,wr:pct(w,sub.length),pnl:Math.round(sub.reduce((s,r)=>s+(r.pnl||0),0)*100)/100};
+  return{
+    t:sub.length,
+    wr:pct(w,sub.length),
+    pnl:Math.round(sub.reduce((s,r)=>s+(r.pnl||0),0)*100)/100
+  };
 }
-function ex(df,s){const c=["exit_type","exit"].find(k=>df.length&&df[0][k]!==undefined);return c?df.filter(r=>String(r[c]||"").toUpperCase().includes(s.toUpperCase())).length:0;}
 
-/* ═══ TIMER — only textContent, no DOM change ═══ */
+// exit count — mirrors dashboard.py ex() function
+function exitCount(df,s){
+  const c=["exit_type","exit"].find(k=>df.length&&df[0][k]!==undefined);
+  return c?df.filter(r=>String(r[c]||"").toUpperCase().includes(s.toUpperCase())).length:0;
+}
+
+/* ═══ TIMER ═══ */
 function tickTimer(){
   const now=new Date(),ts=Math.floor(now.getTime()/1000),tl=300-(ts%300);
-  const pp=((300-tl)/300*100).toFixed(1),col=tl>60?"g":tl>20?"y":"r";
+  const pp=((300-tl)/300*100).toFixed(1);
+  const col=tl>60?"g":tl>20?"y":"r";
   const mm=Math.floor(tl/60),ss=String(tl%60).padStart(2,"0");
   set("t-ora",now.toTimeString().slice(0,8),"");
   const rEl=document.getElementById("t-rnd");
@@ -433,7 +464,7 @@ function tickTimer(){
   document.getElementById("tp-bar").style.width=pp+"%";
 }
 
-/* ═══ DOM HELPERS — no flash ═══ */
+/* ═══ DOM HELPERS ═══ */
 function set(id,val,cls){
   const el=document.getElementById(id);if(!el)return;
   if(el.textContent!==String(val))el.textContent=val;
@@ -441,20 +472,11 @@ function set(id,val,cls){
 }
 function setStyle(id,prop,val){const el=document.getElementById(id);if(el)el.style[prop]=val;}
 
-/* ═══ CHART UPSERT
-   Creates chart on first call.
-   Updates data in-place on subsequent calls — NO destroy, NO flash.
-   Critically: parsing:false is set in chart.options.parsing directly.
-═══ */
-function upsert(id, type, datasets, labels, extraOpts){
-  const el=document.getElementById(id);
-  if(!el)return;
-
+/* ═══ CHART UPSERT — no destroy/flash ═══ */
+function upsert(id,type,datasets,labels,extraOpts){
+  const el=document.getElementById(id);if(!el)return;
   const base={
-    responsive:true,
-    maintainAspectRatio:false,
-    animation:{duration:0},
-    parsing:false,        // ← top-level, works for {x,y} data
+    responsive:true,maintainAspectRatio:false,animation:{duration:0},parsing:false,
     plugins:{legend:{labels:{color:"#2a4068",font:{family:"IBM Plex Mono",size:9}}}},
     scales:{
       x:{grid:{color:"rgba(15,32,64,.8)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}},
@@ -462,30 +484,16 @@ function upsert(id, type, datasets, labels, extraOpts){
     },
     ...(extraOpts||{})
   };
-
-  if(!CH[id]){
-    CH[id]=new Chart(el,{
-      type,
-      data:labels?{labels,datasets}:{datasets},
-      options:base
-    });
-    return;
-  }
-  // In-place update — no destroy
+  if(!CH[id]){CH[id]=new Chart(el,{type,data:labels?{labels,datasets}:{datasets},options:base});return;}
   const chart=CH[id];
   chart.data.datasets=datasets;
   if(labels)chart.data.labels=labels;
-  // update scale overrides if provided
-  if(extraOpts&&extraOpts.scales){
-    if(extraOpts.scales.y)Object.assign(chart.options.scales.y,extraOpts.scales.y);
-  }
-  chart.update("none"); // no animation
+  if(extraOpts&&extraOpts.scales&&extraOpts.scales.y)Object.assign(chart.options.scales.y,extraOpts.scales.y);
+  chart.update("none");
 }
 
-/* For categorical charts that use labels (not {x,y}) we set parsing to true */
 function upsertCat(id,type,datasets,labels,extraOpts){
-  const el=document.getElementById(id);
-  if(!el)return;
+  const el=document.getElementById(id);if(!el)return;
   const base={
     responsive:true,maintainAspectRatio:false,animation:{duration:0},
     plugins:{legend:{labels:{color:"#2a4068",font:{family:"IBM Plex Mono",size:9}}}},
@@ -502,7 +510,7 @@ function upsertCat(id,type,datasets,labels,extraOpts){
   chart.update("none");
 }
 
-/* ═══ PATCH BANNER ═══ */
+/* ═══ PATCH GLOBAL BANNER — mirrors dashboard.py banner logic ═══ */
 function patchBanner(dfs){
   const frames=Object.values(dfs).filter(d=>d.length>0);
   if(!frames.length)return;
@@ -520,7 +528,6 @@ function patchBanner(dfs){
   const al=l?(all.filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)/l).toFixed(3):"0";
   const best=Math.max(...all.map(r=>r.pnl||0)).toFixed(3);
   const worst=Math.min(...all.map(r=>r.pnl||0)).toFixed(3);
-  const wrCol=+wr_>=60?"var(--glit)":+wr_>=50?"var(--gold)":"var(--rlit)";
   set("b-bal","$"+bal.toFixed(2));
   set("b-pnl",`${ps(pnl_)}${pnl_}$ all-time · ROI ${ps(roi_)}${roi_}%`,"bn-sub "+pc(pnl_));
   set("b-24h",`${ps(p24_)}${p24_}$`,"cv "+pc(p24_));
@@ -530,11 +537,12 @@ function patchBanner(dfs){
   set("b-aw","+$"+aw);set("b-al","$"+al);set("b-best","+$"+best);set("b-worst","$"+worst);
   set("b-net",`${ps(pnl_)}${pnl_}$`,"sv "+(pnl_>=0?"g":"r"));
   set("b-roi",`${ps(roi_)}${roi_}%`,"sv "+(+roi_>=0?"g":"r"));
-  set("b-wrv",wr_+"%"); document.getElementById("b-wrv").style.color=wrCol;
+  const wrCol=+wr_>=60?"var(--glit)":+wr_>=50?"var(--gold)":"var(--rlit)";
+  set("b-wrv",wr_+"%");document.getElementById("b-wrv").style.color=wrCol;
   setStyle("b-wrf","width",wr_+"%");
 }
 
-/* ═══ PATCH BOT CARDS ═══ */
+/* ═══ PATCH BOT CARDS — mirrors dashboard.py cards logic ═══ */
 function patchBots(dfs){
   for(const[name,df] of Object.entries(dfs)){
     const c=name.toLowerCase();
@@ -560,18 +568,29 @@ function patchBots(dfs){
   }
 }
 
-/* ═══ PATCH RECENT ═══ */
+/* ═══ PATCH RECENT PILLS — mirrors dashboard.py recent logic ═══ */
 function patchRecent(dfs){
   const all=[];
-  for(const[nm,df] of Object.entries(dfs)) df.forEach(r=>all.push({...r,_b:nm,_d:dt(r)}));
+  for(const[nm,df] of Object.entries(dfs))
+    df.forEach(r=>all.push({...r,_b:nm,_d:dt(r)}));
   all.sort((a,b)=>{if(!a._d&&!b._d)return 0;if(!a._d)return 1;if(!b._d)return-1;return b._d-a._d;});
   const top=all.slice(0,10),el=document.getElementById("recent");
   if(!top.length){if(el.innerHTML.includes("Loading"))el.innerHTML=`<div class="empty" style="grid-column:span 5">—</div>`;return;}
-  const zc=z=>{const u=String(z||"").toUpperCase();return u.includes("SPIKE")?"var(--amber)":u==="GOLD"?"#facc15":u==="EARLY"?"var(--blue)":"var(--dim)";};
+  const zc=z=>{
+    const u=String(z||"").toUpperCase();
+    return u.includes("SPIKE")?"var(--amber)":u==="GOLD"?"#facc15":u==="LOCK"?"var(--emer)":u==="EARLY"?"var(--blue)":"var(--dim)";
+  };
   const html=top.map(r=>{
     const res=String(r.result||"?").toUpperCase(),pv=r.pnl||0;
-    const ts=r._d?r._d.toTimeString().slice(0,5):"—",zone=r.zone||r.bet_zone||"";
-    return`<div class="pill ${res==="WIN"?"w":"l"}"><div class="p-bot" style="color:${COL[r._b]}">${ICO[r._b]} ${r._b.replace("Test","T")}</div><div class="p-res">${res}</div><div class="p-pnl">${ps(pv)}${pv.toFixed(2)}$</div><div class="p-time">${ts}</div>${zone?`<div class="p-zone" style="color:${zc(zone)}">${zone.slice(0,8)}</div>`:""}</div>`;
+    const ts=r._d?r._d.toTimeString().slice(0,5):"—";
+    const zone=r.zone||r.bet_zone||"";
+    return`<div class="pill ${res==="WIN"?"w":"l"}">
+      <div class="p-bot" style="color:${COL[r._b]}">${ICO[r._b]} ${r._b.replace("Test","T")}</div>
+      <div class="p-res">${res}</div>
+      <div class="p-pnl">${ps(pv)}${pv.toFixed(2)}$</div>
+      <div class="p-time">${ts}</div>
+      ${zone?`<div class="p-zone" style="color:${zc(zone)}">${zone.slice(0,8)}</div>`:""}
+    </div>`;
   }).join("");
   if(el.innerHTML!==html)el.innerHTML=html;
 }
@@ -581,7 +600,7 @@ function patchCharts(dfs){
   const names=Object.keys(dfs).filter(n=>dfs[n].length>0);
   if(!names.length)return;
 
-  /* Balance curves — {x,y} format, parsing:false */
+  // Balance curves
   upsert("c_bal","line",
     names.map(n=>{
       const asc=[...dfs[n]].reverse();
@@ -591,7 +610,7 @@ function patchCharts(dfs){
     })
   );
 
-  /* Cumulative P&L — {x,y} format, parsing:false */
+  // Cumulative P&L
   upsert("c_cpnl","line",
     names.map(n=>{
       const asc=[...dfs[n]].reverse();let cum=0;
@@ -601,21 +620,27 @@ function patchCharts(dfs){
     })
   );
 
-  /* Profit vs Loss — categorical, no parsing:false */
+  // Profit vs Loss
   upsertCat("c_pnl","bar",
-    [{label:"Profit",data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)*100)/100),backgroundColor:"#22c55e88",borderColor:"#4ade80",borderWidth:1,borderRadius:4},
-     {label:"Loss",  data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)*100)/100),backgroundColor:"#ef444488",borderColor:"#f87171",borderWidth:1,borderRadius:4}],
+    [{label:"Profit",data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl>0).reduce((s,r)=>s+r.pnl,0)*100)/100),
+      backgroundColor:"#22c55e88",borderColor:"#4ade80",borderWidth:1,borderRadius:4},
+     {label:"Loss",  data:names.map(n=>Math.round(dfs[n].filter(r=>r.pnl<0).reduce((s,r)=>s+r.pnl,0)*100)/100),
+      backgroundColor:"#ef444488",borderColor:"#f87171",borderWidth:1,borderRadius:4}],
     names
   );
 
-  /* Win Rate — categorical */
+  // Win Rate
   upsertCat("c_wr","bar",
     [{label:"Win%",data:names.map(n=>{const d=dfs[n];return d.length?+(pct(d.filter(r=>r.result==="WIN").length,d.length)):0;}),
       backgroundColor:names.map(n=>COL[n]+"bb"),borderColor:names.map(n=>COL[n]),borderWidth:1,borderRadius:4}],
-    names,{scales:{x:{grid:{color:"rgba(15,32,64,.8)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}},y:{min:0,max:100,grid:{color:"rgba(15,32,64,.8)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}}}}
+    names,
+    {scales:{
+      x:{grid:{color:"rgba(15,32,64,.8)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}},
+      y:{min:0,max:100,grid:{color:"rgba(15,32,64,.8)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}}
+    }}
   );
 
-  /* P&L Distribution — categorical */
+  // P&L Distribution
   const allPnl=Object.values(dfs).flat().map(r=>r.pnl||0).filter(v=>v!==0);
   if(allPnl.length){
     const mn=Math.floor(Math.min(...allPnl)*5)/5,mx=Math.ceil(Math.max(...allPnl)*5)/5;
@@ -629,25 +654,38 @@ function patchCharts(dfs){
   }
 }
 
-/* ═══ DETAIL CARDS — built once per bot, then patched ═══ */
+/* ═══ TABLE COLOR CLASSES — mirrors dashboard.py tcond() ═══ */
 function tdC(col,val){
   const v=typeof val==="number"?val:0;
   if(col==="result")return String(val).toUpperCase()==="WIN"?"tw":"tl";
   if(["pnl_net","pnl_gross","pnl"].includes(col))return v>0?"tp":v<0?"tn":"";
-  if(["zone","bet_zone"].includes(col)){const u=String(val||"").toUpperCase();return u.includes("SPIKE_S")?"tss":u==="SPIKE"?"tsp":u==="GOLD"?"tgo":u==="EARLY"?"tea":"";}
-  if(["exit_type","exit"].includes(col)){const u=String(val||"").toUpperCase();return u.includes("TARGET")||u.includes("TAKE")?"ttg":u.includes("TRAIL")?"ttr":u.includes("STOP")?"tst":u.includes("REVERS")?"trv":u.includes("END")?"ten":"";}
+  if(["zone","bet_zone"].includes(col)){
+    const u=String(val||"").toUpperCase();
+    return u.includes("SPIKE_S")?"tss":u==="SPIKE"?"tsp":u==="GOLD"?"tgo":u==="LOCK"?"tlk":u==="EARLY"?"tea":"";
+  }
+  if(["exit_type","exit"].includes(col)){
+    const u=String(val||"").toUpperCase();
+    return u.includes("TARGET")||u.includes("TAKE")?"ttg":
+           u.includes("TRAIL")?"ttr":
+           u.includes("STOP")?"tst":
+           u.includes("REVERS")?"trv":
+           u.includes("END")?"ten":
+           u.includes("SAFETY")?"tsf":"";
+  }
   return"";
 }
 
+/* ═══ BUILD DETAIL CARD HTML ═══ */
 function buildDetailCard(name,df){
   const cls=name.toLowerCase(),color=COL[name],icon=ICO[name];
-  const HIDE=new Set(["_b","_d","pnl"]);
-  const cols=Object.keys(df[0]).filter(c=>!HIDE.has(c)&&!c.startsWith("_"));
   return`
   <div class="dc ${cls}" id="dc-${cls}">
     <div class="dc-hdr">
       <div class="dc-hdr-row">
-        <div><div class="dc-name" style="color:${color}">${icon} ${name}</div><div class="dc-sub" id="ds-${cls}">—</div></div>
+        <div>
+          <div class="dc-name" style="color:${color}">${icon} ${name}</div>
+          <div class="dc-sub" id="ds-${cls}">—</div>
+        </div>
         <div class="dc-rhs">
           <div class="dc-bl">Balance</div>
           <div class="dc-bv" id="db-${cls}">—</div>
@@ -656,20 +694,43 @@ function buildDetailCard(name,df){
         </div>
       </div>
     </div>
+    <!-- KPI grid — matches dashboard.py kpi-grid layout -->
     <div class="kpi-g">
-      ${["nn","wr","wl","aw","al","best","worst","prof","los","fee","roi","p24","ep","xp","bp","mom","vel","vlt"].map((id,i)=>`<div class="kpi"><div class="kl">${["Trades","Win%","W/L","Avg Win","Avg Loss","Best","Worst","Profit","Loss","Fee","ROI","24h PnL","Entry P","Exit P","Best P","Momentum","Velocity","Volatility"][i]}</div><div class="kv" id="kv-${id}-${cls}">—</div></div>`).join("")}
+      <div class="kpi"><div class="kl">Trades</div><div class="kv" id="kv-nn-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Win%</div><div class="kv" id="kv-wr-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">W/L</div><div class="kv" id="kv-wl-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Avg Win</div><div class="kv" id="kv-aw-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Avg Loss</div><div class="kv" id="kv-al-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Best</div><div class="kv" id="kv-best-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Worst</div><div class="kv" id="kv-worst-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Profit</div><div class="kv" id="kv-prof-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Loss</div><div class="kv" id="kv-los-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Fee</div><div class="kv" id="kv-fee-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">ROI</div><div class="kv" id="kv-roi-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">24h PnL</div><div class="kv" id="kv-p24-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Entry P</div><div class="kv" id="kv-ep-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Exit P</div><div class="kv" id="kv-xp-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Best P</div><div class="kv" id="kv-bp-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Momentum</div><div class="kv" id="kv-mom-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Velocity</div><div class="kv" id="kv-vel-${cls}">—</div></div>
+      <div class="kpi"><div class="kl">Volatility</div><div class="kv" id="kv-vlt-${cls}">—</div></div>
     </div>
+    <!-- Prices & Probs — 9 cells matching dashboard.py pr-grid (3 cols) -->
     <div class="pr-sec">
-      <div class="pr-lbl">📍 Prețuri BTC</div>
+      <div class="pr-lbl">📍 Prețuri &amp; Probabilități</div>
       <div class="pr-grid">
-        <div class="pb"><div class="pl">Start (ultim)</div><div class="pv" style="color:var(--cyan)" id="spl-${cls}">—</div></div>
-        <div class="pb"><div class="pl">End (ultim)</div><div class="pv" style="color:var(--purp)" id="epl-${cls}">—</div></div>
-        <div class="pb"><div class="pl">Start (avg)</div><div class="pv" style="color:var(--cyan)" id="spa-${cls}">—</div></div>
-        <div class="pb"><div class="pl">End (avg)</div><div class="pv" style="color:var(--purp)" id="epa-${cls}">—</div></div>
-        <div class="pb"><div class="pl">Dist avg</div><div class="pv" style="color:var(--amber)" id="da-${cls}">—</div></div>
-        <div class="pb"><div class="pl">Time Left avg</div><div class="pv" style="color:var(--gold)" id="tla-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Start Price (ultim)</div><div class="pv" style="color:var(--cyan)" id="spl-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Pret Intrare avg</div><div class="pv" style="color:var(--purp)" id="epa-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Dist avg intrare</div><div class="pv" id="da-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Entry Prob avg</div><div class="pv" style="color:var(--glit)" id="kv2-ep-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Exit Prob avg</div><div class="pv" style="color:var(--text)" id="kv2-xp-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Best Prob avg</div><div class="pv" style="color:var(--glit)" id="kv2-bp-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Time Left avg (s)</div><div class="pv" style="color:var(--gold)" id="tla-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Pret Intrare (ultim)</div><div class="pv" style="color:var(--purp)" id="epl-${cls}">—</div></div>
+        <div class="pb"><div class="pl">Dist (ultim trade)</div><div class="pv" id="dl-${cls}">—</div></div>
       </div>
     </div>
+    <!-- Zones: SPIKE · GOLD · LOCK (matches dashboard.py) -->
     <div class="zone-row">
       <div class="zp spike"><div class="z-name">⚡ SPIKE</div><div class="z-stats">
         <div class="z-row2"><div class="zk">T</div><div class="zv" id="zt-spike-${cls}">—</div></div>
@@ -681,24 +742,26 @@ function buildDetailCard(name,df){
         <div class="z-row2"><div class="zk">W%</div><div class="zv" id="zw-gold-${cls}">—</div></div>
         <div class="z-row2"><div class="zk">PnL</div><div class="zv" id="zp-gold-${cls}">—</div></div>
       </div></div>
-      <div class="zp early"><div class="z-name">🔵 EARLY</div><div class="z-stats">
-        <div class="z-row2"><div class="zk">T</div><div class="zv" id="zt-early-${cls}">—</div></div>
-        <div class="z-row2"><div class="zk">W%</div><div class="zv" id="zw-early-${cls}">—</div></div>
-        <div class="z-row2"><div class="zk">PnL</div><div class="zv" id="zp-early-${cls}">—</div></div>
+      <div class="zp lockz"><div class="z-name">🔒 LOCK</div><div class="z-stats">
+        <div class="z-row2"><div class="zk">T</div><div class="zv" id="zt-lock-${cls}">—</div></div>
+        <div class="z-row2"><div class="zk">W%</div><div class="zv" id="zw-lock-${cls}">—</div></div>
+        <div class="z-row2"><div class="zk">PnL</div><div class="zv" id="zp-lock-${cls}">—</div></div>
       </div></div>
     </div>
+    <!-- Exits: TARGET/TP · TRAIL · STOPLOSS · REVERSAL (matches dashboard.py) -->
     <div class="exit-row">
-      <div class="ep"><div class="ei">✅</div><div class="el">TARGET</div><div class="ev g" id="xt-${cls}">—</div></div>
+      <div class="ep"><div class="ei">✅</div><div class="el">TARGET/TP</div><div class="ev g" id="xt-${cls}">—</div></div>
+      <div class="ep"><div class="ei">🔄</div><div class="el">TRAIL</div><div class="ev trl" id="xtr-${cls}">—</div></div>
       <div class="ep"><div class="ei">🛑</div><div class="el">STOPLOSS</div><div class="ev r" id="xs-${cls}">—</div></div>
       <div class="ep"><div class="ei">⚠️</div><div class="el">REVERSAL</div><div class="ev y" id="xr-${cls}">—</div></div>
-      <div class="ep"><div class="ei">🔚</div><div class="el">ENDROUND</div><div class="ev c" id="xe-${cls}">—</div></div>
     </div>
+    <!-- Mini charts -->
     <div class="ch-card" style="margin:0;border-radius:0;border:none;border-top:1px solid var(--b0);border-bottom:1px solid var(--b0)">
       <div class="ch-lbl">${name} · Balance</div>
       <div class="ch-wrap h70"><canvas id="mb-${cls}"></canvas></div>
     </div>
     <div class="ch-card" style="margin:0;border-radius:0;border:none;border-bottom:1px solid var(--b0)">
-      <div class="ch-lbl">${name} · P&L / Trade</div>
+      <div class="ch-lbl">${name} · P&amp;L / Trade</div>
       <div class="ch-wrap h70"><canvas id="mp-${cls}"></canvas></div>
     </div>
     <div class="tbl-hdr"><div class="tbl-ttl">📋 ${name}</div><div class="tbl-bdg" id="tb-${cls}">0 rows</div></div>
@@ -706,6 +769,7 @@ function buildDetailCard(name,df){
   </div>`;
 }
 
+/* ═══ PATCH DETAIL DATA — mirrors dashboard.py patchDetailData ═══ */
 function patchDetailData(name,df){
   const cls=name.toLowerCase(),color=COL[name];
   const bal=df[0].balance||0,pnl_=Math.round((bal-SEED)*100)/100,nn=df.length;
@@ -726,48 +790,82 @@ function patchDetailData(name,df){
   const wrC=+wr_>=60?"kg":+wr_>=50?"ky":"kr";
   const acC=cls==="test"?"ka":cls==="test1"?"kc":"kp";
 
-  set(`ds-${cls}`,`${nn} trades · SPIKE · GOLD · EARLY`);
+  set(`ds-${cls}`,`${nn} trades · SPIKE · GOLD · LOCK`);
   set(`db-${cls}`,"$"+bal.toFixed(2));
   set(`dp-${cls}`,`${ps(pnl_)}${pnl_}$ · ROI ${ps(roi_)}${roi_}%`,"dc-bpnl "+pc(pnl_));
   set(`d24-${cls}`,`24h ${ps(p24_)}${p24_}$`,"dc-b24 "+pc(p24_));
 
-  const kd={nn:{v:nn,c:acC},wr:{v:wr_+"%",c:wrC},wl:{v:`${w}/${l}`,c:""},aw:{v:`+$${aw}`,c:"kg"},al:{v:`$${al}`,c:"kr"},
-    best:{v:`+$${best}`,c:"kg"},worst:{v:`$${worst}`,c:"kr"},prof:{v:`+$${profSum}`,c:"kg"},los:{v:`$${lossSum}`,c:"kr"},
-    fee:{v:`$${fee_}`,c:"ky"},roi:{v:`${ps(roi_)}${roi_}%`,c:+roi_>=0?"kg":"kr"},p24:{v:`${ps(p24_)}${p24_}$`,c:+p24_>=0?"kg":"kr"},
-    ep:{v:ep!==null?ep.toFixed(3):"—",c:"ky"},xp:{v:xp!==null?xp.toFixed(3):"—",c:""},bp:{v:bp!==null?bp.toFixed(3):"—",c:"kg"},
-    mom:{v:mom!==null?mom.toFixed(2):"—",c:"kb"},vel:{v:vel!==null?vel.toFixed(2):"—",c:"ky"},vlt:{v:vlt!==null?vlt.toFixed(2):"—",c:""}};
-  for(const[id,{v,c}] of Object.entries(kd)){set(`kv-${id}-${cls}`,v,c?`kv ${c}`:"kv");}
+  // KPI values with colour classes matching dashboard.py
+  const kv=(id,val,c)=>{
+    const el=document.getElementById(`kv-${id}-${cls}`);
+    if(el){el.textContent=val;el.className=c?`kv ${c}`:"kv";}
+  };
+  kv("nn",nn,acC);kv("wr",wr_+"%",wrC);kv("wl",`${w}/${l}`,"");
+  kv("aw",`+$${aw}`,"kg");kv("al",`$${al}`,"kr");kv("best",`+$${best}`,"kg");kv("worst",`$${worst}`,"kr");
+  kv("prof",`+$${profSum}`,"kg");kv("los",`$${lossSum}`,"kr");kv("fee",`$${fee_}`,"ky");
+  kv("roi",`${ps(roi_)}${roi_}%`,+roi_>=0?"kg":"kr");
+  kv("p24",`${ps(p24_)}${p24_}$`,+p24_>=0?"kg":"kr");
+  kv("ep",ep!==null?ep.toFixed(3):"—","ky");
+  kv("xp",xp!==null?xp.toFixed(3):"—","");
+  kv("bp",bp!==null?bp.toFixed(3):"—","kg");
+  kv("mom",mom!==null?mom.toFixed(2):"—","kb");
+  kv("vel",vel!==null?vel.toFixed(2):"—","ky");
+  kv("vlt",vlt!==null?vlt.toFixed(2):"—","");
 
-  // Prices
+  // Prices — 9 cells matching dashboard.py (start_price, ep_avg=start+dist, dist_avg, entry_prob, exit_prob, best_prob, time_left, ep_last, dist_last)
   const spR=df.filter(r=>r.start_price>1000);
-  set(`spl-${cls}`,spR.length?"$"+spR[0].start_price.toFixed(2):"—");
-  set(`epl-${cls}`,spR.length&&spR[0].end_price?"$"+spR[0].end_price.toFixed(2):"—");
-  set(`spa-${cls}`,spR.length?"$"+(spR.reduce((s,r)=>s+r.start_price,0)/spR.length).toFixed(2):"—");
-  const epR=spR.filter(r=>r.end_price);
-  set(`epa-${cls}`,epR.length?"$"+(epR.reduce((s,r)=>s+r.end_price,0)/epR.length).toFixed(2):"—");
-  set(`da-${cls}`,df[0].dist!==undefined?(df.reduce((s,r)=>s+(r.dist||0),0)/nn).toFixed(2)+"$":"—");
-  set(`tla-${cls}`,df[0].time_left!==undefined?(df.reduce((s,r)=>s+(r.time_left||0),0)/nn).toFixed(0)+"s":"—");
+  const sp_latest=spR.length?"$"+spR[0].start_price.toFixed(2):"—";
+  const sp_avg=spR.length?"$"+(spR.reduce((s,r)=>s+r.start_price,0)/spR.length).toFixed(2):"—";
+  // ep = start_price + dist (matching dashboard.py: df["_ep"] = df["start_price"] + df["dist"])
+  const epR=spR.filter(r=>r.dist!==undefined&&!isNaN(r.dist));
+  const ep_last=epR.length?"$"+(epR[0].start_price+epR[0].dist).toFixed(2):"—";
+  const ep_avg2=epR.length?"$"+(epR.reduce((s,r)=>s+r.start_price+r.dist,0)/epR.length).toFixed(2):"—";
+  const dist_last=epR.length?epR[0].dist:(df[0].dist!==undefined?df[0].dist:"—");
+  const dist_avg2=df[0].dist!==undefined?(df.reduce((s,r)=>s+(r.dist||0),0)/nn).toFixed(2):"—";
+  const tl_avg=df[0].time_left!==undefined?(df.reduce((s,r)=>s+(r.time_left||0),0)/nn).toFixed(0)+"s":"—";
 
-  // Zones
-  for(const[zn,zones] of [["spike",["SPIKE","SPIKE_STRONG"]],["gold",["GOLD"]],["early",["EARLY"]]]){
-    const z=zs(df,zones);
+  set(`spl-${cls}`,sp_latest);
+  set(`epa-${cls}`,ep_avg2);
+  const daEl=document.getElementById(`da-${cls}`);
+  if(daEl){daEl.textContent=typeof dist_avg2==="string"&&!isNaN(+dist_avg2)?`${+dist_avg2>=0?"+":""}${dist_avg2}$`:dist_avg2;daEl.style.color=parseFloat(dist_avg2)>=0?"var(--amber)":"var(--rlit)";}
+  set(`kv2-ep-${cls}`,ep!==null?ep.toFixed(3):"—");
+  set(`kv2-xp-${cls}`,xp!==null?xp.toFixed(3):"—");
+  set(`kv2-bp-${cls}`,bp!==null?bp.toFixed(3):"—");
+  set(`tla-${cls}`,tl_avg);
+  set(`epl-${cls}`,ep_last);
+  const dlEl=document.getElementById(`dl-${cls}`);
+  if(dlEl){const dv=typeof dist_last==="number"?dist_last:parseFloat(dist_last);dlEl.textContent=isNaN(dv)?"—":`${dv>=0?"+":""}${dv.toFixed(2)}$`;dlEl.style.color=isNaN(dv)||dv>=0?"var(--amber)":"var(--rlit)";}
+
+  // Zones: SPIKE · GOLD · LOCK  (matches dashboard.py spike/gold/lock)
+  const zoneData=[
+    ["spike",["SPIKE","SPIKE_STRONG"]],
+    ["gold",["GOLD"]],
+    ["lock",["LOCK"]]
+  ];
+  for(const[zn,zones] of zoneData){
+    const z=zoneStats(df,zones);
     set(`zt-${zn}-${cls}`,z.t);set(`zw-${zn}-${cls}`,z.wr+"%");
     const el=document.getElementById(`zp-${zn}-${cls}`);
     if(el){el.textContent=`${ps(z.pnl)}${z.pnl}$`;el.style.color=z.pnl>=0?"var(--glit)":"var(--rlit)";}
   }
 
-  // Exits
-  set(`xt-${cls}`,ex(df,"TARGET")+ex(df,"TAKE"));
-  set(`xs-${cls}`,ex(df,"STOP"));
-  set(`xr-${cls}`,ex(df,"REVERS"));
-  set(`xe-${cls}`,ex(df,"END"));
+  // Exits: TARGET/TP · TRAIL · STOPLOSS · REVERSAL  (matches dashboard.py)
+  set(`xt-${cls}`,exitCount(df,"TARGET")+exitCount(df,"TAKE"));
+  set(`xtr-${cls}`,exitCount(df,"TRAIL"));
+  set(`xs-${cls}`,exitCount(df,"STOP"));
+  set(`xr-${cls}`,exitCount(df,"REVERS"));
 
-  // Mini charts — upsert (no flash)
+  // Mini charts
   const asc=[...df].reverse();
   const r16=parseInt(color.slice(1,3),16),g16=parseInt(color.slice(3,5),16),b16=parseInt(color.slice(5,7),16);
-  const miniOpts={responsive:true,maintainAspectRatio:false,animation:{duration:0},parsing:false,
+  const miniOpts={
+    responsive:true,maintainAspectRatio:false,animation:{duration:0},parsing:false,
     plugins:{legend:{display:false}},
-    scales:{x:{display:false},y:{grid:{color:"rgba(15,32,64,.7)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}}}};
+    scales:{
+      x:{display:false},
+      y:{grid:{color:"rgba(15,32,64,.7)"},ticks:{color:"#2a4068",font:{family:"IBM Plex Mono",size:7}}}
+    }
+  };
   upsert(`mb-${cls}`,"line",[{data:asc.map((r,i)=>({x:i+1,y:r.balance})),borderColor:color,
     backgroundColor:`rgba(${r16},${g16},${b16},.1)`,fill:true,tension:.35,pointRadius:0,borderWidth:2}],null,miniOpts);
   upsert(`mp-${cls}`,"bar",[{data:asc.map((r,i)=>({x:i+1,y:r.pnl||0})),
@@ -777,7 +875,7 @@ function patchDetailData(name,df){
   const tw=document.getElementById(`tw-${cls}`);
   set(`tb-${cls}`,nn+" rows");
   if(tw){
-    const HIDE=new Set(["_b","_d","pnl"]);
+    const HIDE=new Set(["_b","_d","pnl","datetime","_date_fmt","_time_fmt","_bot","_dt"]);
     const cols=Object.keys(df[0]).filter(c=>!HIDE.has(c)&&!c.startsWith("_"));
     const cur=tw.querySelectorAll("tbody tr").length;
     if(cur!==Math.min(nn,60)){
@@ -793,27 +891,30 @@ function patchDetailData(name,df){
 
 function patchDetails(dfs){
   const detEl=document.getElementById("details");
-  // Build card HTML once per bot (if not yet built)
   if(!detailsBuilt){
     detEl.innerHTML="";
     for(const[name,df] of Object.entries(dfs)){
-      if(df.length>0){detEl.innerHTML+=buildDetailCard(name,df);} 
-      else {detEl.innerHTML+=`<div class="dc ${name.toLowerCase()}"><div class="dc-hdr"><div class="dc-name" style="color:${COL[name]}">${ICO[name]} ${name}</div></div><div class="empty">No data</div></div>`;}
+      if(df.length>0){
+        detEl.innerHTML+=buildDetailCard(name,df);
+      } else {
+        detEl.innerHTML+=`<div class="dc ${name.toLowerCase()}"><div class="dc-hdr"><div class="dc-name" style="color:${COL[name]}">${ICO[name]} ${name}</div></div><div class="empty">No data</div></div>`;
+      }
     }
     detailsBuilt=true;
   }
-  // Now patch all values
   for(const[name,df] of Object.entries(dfs)){
-    if(df.length>0) patchDetailData(name,df);
+    if(df.length>0)patchDetailData(name,df);
   }
 }
 
-/* ═══ FETCH ═══ */
+/* ═══ FETCH — reads CSV files from GitHub ═══ */
 async function fetchAll(){
   const dfs={};
   for(const[name,url] of Object.entries(FILES)){
-    try{const r=await fetch(url+"?t="+Date.now());dfs[name]=r.ok?csv(await r.text()):[];}
-    catch{dfs[name]=[];}
+    try{
+      const r=await fetch(url+"?t="+Date.now());
+      dfs[name]=r.ok?csv(await r.text()):[];
+    } catch{dfs[name]=[];}
   }
   set("upd",new Date().toTimeString().slice(0,8));
   patchBanner(dfs);
@@ -827,7 +928,7 @@ async function fetchAll(){
 setInterval(tickTimer,1000);
 tickTimer();
 fetchAll();
-setInterval(fetchAll,5000);
+setInterval(fetchAll,5000); // refresh every 5s like dashboard.py (interval=2000ms but close)
 </script>
 </body>
 </html>
