@@ -1,3 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bot Dashboard</title>
+
+<style>
+body {
+    background: #060a12;
+    color: #e2e8f0;
+    font-family: Arial;
+    padding: 20px;
+}
+.card {
+    background: #0c1220;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+.value {
+    font-size: 24px;
+    font-weight: bold;
+}
+.green { color: #4ade80; }
+.red { color: #f87171; }
+h2 {
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>📊 Bot Dashboard</h2>
+
+<div class="card">
+    <div>Total Balance</div>
+    <div id="balance" class="value">Loading...</div>
+</div>
+
+<div class="card">
+    <div>Total PnL</div>
+    <div id="pnl" class="value">Loading...</div>
+</div>
+
+<div class="card">
+    <div>Win Rate</div>
+    <div id="wr" class="value">Loading...</div>
+</div>
+
 <script>
 window.onload = function() {
 
@@ -15,10 +65,12 @@ async function loadData() {
 
         for (let key in FILES) {
             const res = await fetch(FILES[key] + "?t=" + Date.now());
+
             if (!res.ok) continue;
 
             const text = await res.text();
             const rows = text.trim().split("\n");
+
             if (rows.length < 2) continue;
 
             const headers = rows[0].split(",");
@@ -55,3 +107,6 @@ loadData();
 
 };
 </script>
+
+</body>
+</html>
