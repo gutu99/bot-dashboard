@@ -321,7 +321,18 @@ const pct=(w,t)=>t?(w/t*100).toFixed(1):"0.0";
 const r2=v=>Math.round(v*100)/100;
 const r3=v=>Math.round(v*1000)/1000;
 function parseDt(r){if(r.date&&r.time){const d=new Date(`${r.date}T${r.time}`);if(!isNaN(d))return d;}return null;}
-function p24(rows){const cut=Date.now()-864e5;return r2(rows.filter(r=>{const d=parseDt(r);return d&&d.getTime()>=cut;}).reduce((s,r)=>s+(r.pnl||0),0));}
+function p24(rows){
+  const cutoff = Date.now() - 24*60*60*1000;
+
+  return r2(
+    rows
+      .filter(r => {
+        const d = parseDt(r);
+        return d && d.getTime() >= cutoff;
+      })
+      .reduce((s, r) => s + (r.pnl || 0), 0)
+  );
+}
 function avgCol(df,k){const v=df.map(r=>r[k]).filter(v=>typeof v==="number");return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}
 function zoneStats(df,zones){
   const col=["zone","bet_zone"].find(c=>df.length&&df[0][c]!==undefined);
