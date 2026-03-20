@@ -322,14 +322,13 @@ const r2=v=>Math.round(v*100)/100;
 const r3=v=>Math.round(v*1000)/1000;
 function parseDt(r){if(r.date&&r.time){const d=new Date(`${r.date}T${r.time}`);if(!isNaN(d))return d;}return null;}
 function p24(rows){
-  const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+  const cutoff = Date.now() - 24*60*60*1000;
 
   return r2(
     rows
       .filter(r => {
         const d = parseDt(r);
-        return d && d >= start;
+        return d && d.getTime() >= cutoff;
       })
       .reduce((s, r) => s + (r.pnl || 0), 0)
   );
