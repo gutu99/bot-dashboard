@@ -323,20 +323,21 @@ const r2=v=>Math.round(v*100)/100;
 const r3=v=>Math.round(v*1000)/1000;
 function parseDt(r){
   if(r.date && r.time){
-    return new Date(`${r.date}T${r.time}`);
+    // Moldova = UTC+2 iarna / UTC+3 vara
+    // folosim offset fix +02:00 (suficient pentru dashboard)
+    return new Date(`${r.date}T${r.time}+02:00`);
   }
   return null;
 }
 function p24(rows){
-  const cutoff = Date.now() - 24*60*60*1000;
+  const now = new Date();
+  const cutoff = new Date(now.getTime() - 86400000);
 
   return r2(
-    rows
-      .filter(r => {
-        const d = parseDt(r);
-        return d && d.getTime() >= cutoff;
-      })
-      .reduce((s, r) => s + (r.pnl || 0), 0)
+    rows.reduce((s,r)=>{
+      const d=parseDt(r);
+      return (d && d>=cutoff) ? s+(r.pnl||0) : s;
+    },0)
   );
 }
 function avgCol(df,k){const v=df.map(r=>r[k]).filter(v=>typeof v==="number");return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}
