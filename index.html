@@ -280,15 +280,13 @@ function parseCSV(text) {
         // PnL normalization
         o.pnl = typeof o.pnl_net === "number" ? o.pnl_net : (typeof o.pnl_gross === "number" ? o.pnl_gross : (o.pnl || 0));
         
-        // Date handling - using "Z" to force UTC if bot logs in UTC.
         if (o.date && o.time) {
-            o._dt = new Date(`${o.date}T${o.time}Z`);
-            if (isNaN(o._dt)) o._dt = new Date(`${o.date}T${o.time}`); // fallback fallback
-            o._date_fmt = o.date.split("-").reverse().join("/");
-            o._time_fmt = o.time.slice(0, 5);
-        } else {
-            o._dt = new Date(0);
-        }
+    o._dt = new Date(`${o.date}T${o.time}`);
+    o._date_fmt = o.date.split("-").reverse().join("/");
+    o._time_fmt = o.time.slice(0, 5);
+} else {
+    o._dt = new Date(0);
+}
         return o;
     }).sort((a, b) => b._dt - a._dt); // Descending (newest first)
 }
