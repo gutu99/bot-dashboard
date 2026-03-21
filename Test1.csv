@@ -1,3 +1,4 @@
 date,time,side,amount,entry_prob,exit_prob,exit_type,pnl_gross,fee,pnl_net,balance,result,zone,momentum,avg_velocity,volatility,dist,time_left,required_speed,best_prob
 2026-03-21,16:10:51,UP,15.0,0.665,0.725,TARGET,1.3534,0.0271,1.3263,101.33,WIN,EARLY,23.55,7.85,23.55,13.15,249,0.0528,0.835
 2026-03-21,16:20:51,DOWN,15.0,0.7,0.72,TARGET,0.4286,0.0086,0.42,101.75,WIN,EARLY,-8.67,-2.89,8.67,-31.3,249,0.1257,0.775
+2026-03-21,16:51:25,DOWN,3.0,0.575,0.785,TARGET,1.0957,0.0219,1.0738,102.82,WIN,SPIKE,-42.73,-14.24,42.74,-5.57,215,0.0259,0.84
