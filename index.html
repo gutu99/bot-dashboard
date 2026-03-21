@@ -494,6 +494,15 @@ function renderBotCards(dfs) {
         const fee = r2(arr.reduce((s, r) => s + (r.fee || 0), 0));
         const wc = wr >= 60 ? "green" : (wr >= 50 ? "gold" : "red");
 
+        // TODAY (de la 00:00 ora locală)
+        const midnight = new Date(); midnight.setHours(0, 0, 0, 0);
+        const todayRows = RAW_DATA[name].filter(r => r._dt && r._dt.getTime() >= midnight.getTime());
+        const pnlToday = r2(todayRows.reduce((s, r) => s + (r.pnl || 0), 0));
+        const tradesToday = todayRows.length;
+        const colorToday = pnlToday >= 0 ? "#4ade80" : "#f87171";
+        const bgToday = pnlToday >= 0 ? "rgba(74,222,128,0.07)" : "rgba(248,113,113,0.07)";
+        const borderToday = pnlToday >= 0 ? "rgba(74,222,128,0.25)" : "rgba(248,113,113,0.25)";
+
         html += `
             <div class="bot-card ${cls}">
                 <div class="bot-name" style="color:${c}">${i} ${name}</div>
@@ -511,6 +520,16 @@ function renderBotCards(dfs) {
                     <div class="stat-box"><div class="stat-lbl">Net</div><div class="stat-val ${cgreen(pnl)}">${ps(pnl)}${pnl}$</div></div>
                 </div>
                 <div class="wr-bar-bg"><div class="wr-bar-fill ${cls}" style="width:${wr}%"></div></div>
+
+<div style="margin-top:12px; background:${bgToday}; border:1px solid ${borderToday}; border-radius:10px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span style="font-size:0.7rem">📅</span>
+                        <span style="font-family:'DM Mono',monospace; font-size:0.55rem; color:#64748b; letter-spacing:0.12em;">TODAY</span>
+                        <span style="font-family:'DM Mono',monospace; font-size:0.55rem; color:#475569;">${tradesToday} trades</span>
+                    </div>
+                    <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.1rem; color:${colorToday}; letter-spacing:-0.02em;">${ps(pnlToday)}${pnlToday}$</div>
+                </div>
+                
             </div>
         `;
     }
