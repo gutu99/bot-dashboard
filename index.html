@@ -298,6 +298,12 @@ let detailsBuilt=false;
 let isUpdating=false;
 
 /* ── CSV ── */
+  function parseDt(r){
+  if(r.date && r.time){
+    return new Date(`${r.date}T${r.time}`);
+  }
+  return null;
+}
 function parseCsv(txt){
   const lines=txt.trim().split(/\r?\n/);
   if(lines.length<2)return[];
@@ -321,24 +327,16 @@ const pc=v=>v>=0?"pos":"neg";
 const pct=(w,t)=>t?(w/t*100).toFixed(1):"0.0";
 const r2=v=>Math.round(v*100)/100;
 const r3=v=>Math.round(v*1000)/1000;
-function parseDt(r){
-  if(r.date && r.time){
-    return new Date(`${r.date}T${r.time}`);
-  }
-  return null;
-}
 function p24(rows){
-  const now = new Date();
+  const cutoff = Date.now() - 86400000;
 
   return r2(
-    rows.reduce((sum, r)=>{
-      const d = new Date(
-        new Date(`${r.date}T${r.time}`).getTime()
-        + (now.getTimezoneOffset() - (-180)) * 60000
-      );
-
-      return (now - d <= 86400000) ? sum + (r.pnl || 0) : sum;
-    }, 0)
+    rows.reduce((sum,r)=>{
+      const d=parseDt(r);
+      return (d && d.getTime()>=cutoff)
+        ? sum+(r.pnl_net ?? r.pnl ?? 0)
+        : sum;
+    },0)
   );
 }
 function avgCol(df,k){const v=df.map(r=>r[k]).filter(v=>typeof v==="number");return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}
