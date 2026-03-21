@@ -323,7 +323,7 @@ const r2=v=>Math.round(v*100)/100;
 const r3=v=>Math.round(v*1000)/1000;
 function parseDt(r){
   if(r.date && r.time){
-    return new Date(`${r.date} ${r.time}`);
+    return new Date(`${r.date}T${r.time}`);
   }
   return null;
 }
