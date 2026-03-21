@@ -328,12 +328,17 @@ function parseDt(r){
   return null;
 }
 function p24(rows){
-  const cutoff = Date.now() - 86400000;
+  const now = new Date();
+
   return r2(
-    rows.reduce((s,r)=>{
-      const d=parseDt(r);
-      return (d && d.getTime()>=cutoff) ? s+(r.pnl||0) : s;
-    },0)
+    rows.reduce((sum, r)=>{
+      const d = new Date(
+        new Date(`${r.date}T${r.time}`).getTime()
+        + (now.getTimezoneOffset() - (-180)) * 60000
+      );
+
+      return (now - d <= 86400000) ? sum + (r.pnl || 0) : sum;
+    }, 0)
   );
 }
 function avgCol(df,k){const v=df.map(r=>r[k]).filter(v=>typeof v==="number");return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}
