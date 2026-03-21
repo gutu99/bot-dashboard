@@ -328,13 +328,11 @@ function parseDt(r){
   return null;
 }
 function p24(rows){
-  const now = new Date();
-  const cutoff = new Date(now.getTime() - 86400000);
-
+  const cutoff = Date.now() - 86400000;
   return r2(
     rows.reduce((s,r)=>{
       const d=parseDt(r);
-      return (d && d>=cutoff) ? s+(r.pnl||0) : s;
+      return (d && d.getTime()>=cutoff) ? s+(r.pnl||0) : s;
     },0)
   );
 }
