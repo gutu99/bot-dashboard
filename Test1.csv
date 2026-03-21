@@ -1,2 +1,3 @@
 date,time,side,amount,entry_prob,exit_prob,exit_type,pnl_gross,fee,pnl_net,balance,result,zone,momentum,avg_velocity,volatility,dist,time_left,required_speed,best_prob
 
+2026-03-21,20:33:15,UP,30.0,68.399143,0.432,0.42,STOPLOSS,-1.2724,0.4262,-1.6985,127.37,LOSS,SPIKE,21.63,7.21,21.64,3.21,105,0.0306,0.432,DRY-BUY-1774117995148,DRY-SELL-1774117995648,matched,matched,1
