@@ -328,7 +328,14 @@ const pct=(w,t)=>t?(w/t*100).toFixed(1):"0.0";
 const r2=v=>Math.round(v*100)/100;
 const r3=v=>Math.round(v*1000)/1000;
 function p24(rows){
-  const cutoff = Date.now() - 86400000;
+  if (!rows || rows.length === 0) return 0;
+  
+  // rows este deja sortat descrescător în parseCsv, deci rows[0] este cea mai recentă tranzacție
+  const lastTradeDate = parseDt(rows[0]); 
+  
+  // Folosim ora ultimei tranzacții ca referință. Dacă nu există, folosim ora curentă (Date.now())
+  const referenceTime = lastTradeDate ? lastTradeDate.getTime() : Date.now();
+  const cutoff = referenceTime - 86400000;
 
   return r2(
     rows.reduce((sum,r)=>{
