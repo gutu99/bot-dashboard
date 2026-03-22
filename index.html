@@ -96,12 +96,10 @@ body { background: #060a12; color: #e2e8f0; font-family: 'Plus Jakarta Sans', sa
 .bots-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
 .bot-card { border-radius: 18px; border: 1px solid #1e293b; padding: 20px; position: relative; overflow: hidden; }
 .bot-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 18px 18px 0 0; }
-.bot-card.test   { background: linear-gradient(160deg, #0f172a, #130d00); }
+.bot-card.test15 { background: linear-gradient(160deg, #0f172a, #130d00); }
 .bot-card.test1  { background: linear-gradient(160deg, #0f172a, #001318); }
-.bot-card.test99 { background: linear-gradient(160deg, #0f172a, #110014); }
-.bot-card.test::before   { background: #f59e0b; }
+.bot-card.test15::before { background: #f59e0b; }
 .bot-card.test1::before  { background: #06b6d4; }
-.bot-card.test99::before { background: #a855f7; }
 
 .bot-name { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: #475569; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 7px; text-align: center; }
 .bot-balance { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2rem; letter-spacing: -0.04em; color: #f1f5f9; line-height: 1; text-align: center; margin-bottom: 6px; }
@@ -115,9 +113,8 @@ body { background: #060a12; color: #e2e8f0; font-family: 'Plus Jakarta Sans', sa
 .stat-val.green { color: #4ade80; } .stat-val.red { color: #f87171; } .stat-val.gold { color: #f59e0b; }
 .wr-bar-bg { background: #1e293b; border-radius: 4px; height: 3px; overflow: hidden; }
 .wr-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
-.wr-bar-fill.test   { background: linear-gradient(90deg, #f59e0b, #fde68a); }
+.wr-bar-fill.test15 { background: linear-gradient(90deg, #f59e0b, #fde68a); }
 .wr-bar-fill.test1  { background: linear-gradient(90deg, #06b6d4, #a5f3fc); }
-.wr-bar-fill.test99 { background: linear-gradient(90deg, #a855f7, #d8b4fe); }
 
 .recent-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 28px; }
 .pill { border: 1px solid #1e293b; border-radius: 12px; padding: 10px 6px; text-align: center; background: #0a0f1c; }
@@ -138,14 +135,12 @@ canvas { width: 100% !important; height: 100% !important; }
 
 .detail-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; padding-bottom: 40px; }
 .detail-card { border-radius: 18px; border: 1px solid #1e293b; overflow: hidden; display: flex; flex-direction: column; }
-.detail-card.test   { background: linear-gradient(170deg, #0c1020, #120d00); }
+.detail-card.test15 { background: linear-gradient(170deg, #0c1020, #120d00); }
 .detail-card.test1  { background: linear-gradient(170deg, #0c1020, #001218); }
-.detail-card.test99 { background: linear-gradient(170deg, #0c1020, #100012); }
 .detail-header { padding: 16px; border-bottom: 1px solid #1e293b; position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center;}
 .detail-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; animation: shimmer 3s linear infinite; background-size: 200% 100%; }
-.detail-card.test   .detail-header::before { background: linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b); }
+.detail-card.test15 .detail-header::before { background: linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b); }
 .detail-card.test1  .detail-header::before { background: linear-gradient(90deg, #06b6d4, #a5f3fc, #06b6d4); }
-.detail-card.test99 .detail-header::before { background: linear-gradient(90deg, #a855f7, #d8b4fe, #a855f7); }
 .detail-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; color: #f1f5f9; }
 .detail-sub { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: #64748b; margin-top: 2px;}
 .dh-rhs { text-align: right; }
@@ -156,7 +151,7 @@ canvas { width: 100% !important; height: 100% !important; }
 .kpi { background: rgba(255,255,255,0.02); border: 1px solid #1e293b; border-radius: 8px; padding: 8px; display: flex; justify-content: space-between; align-items: center;}
 .kpi-lbl { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
 .kpi-val { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: #cbd5e1; }
-.kpi-val.g { color: #4ade80; } .kpi-val.r { color: #f87171; } .kpi-val.y { color: #fbbf24; } .kpi-val.b { color: #60a5fa; } .kpi-val.t { color: #f59e0b; } .kpi-val.c { color: #06b6d4; } .kpi-val.v { color: #a855f7; }
+.kpi-val.g { color: #4ade80; } .kpi-val.r { color: #f87171; } .kpi-val.y { color: #fbbf24; } .kpi-val.b { color: #60a5fa; } .kpi-val.t { color: #f59e0b; } .kpi-val.c { color: #06b6d4; }
 
 /* Table styling */
 .tbl-wrap { overflow-x: auto; max-height: 280px; overflow-y: auto; }
@@ -181,9 +176,9 @@ tbody td { font-size: 9px; font-family: 'DM Mono', monospace; color: #64748b; pa
     .gb-div { width: 1px; height: 44px; }
     .gb-group { flex-direction: column; justify-content: center; align-items: center; width: auto; }
     .gb-wr-wrap { flex: 1; min-width: 180px; margin-top: 0;}
-    .bots-grid { grid-template-columns: repeat(3, 1fr); }
+    .bots-grid { grid-template-columns: repeat(2, 1fr); }
     .recent-grid { grid-template-columns: repeat(5, 1fr); }
-    .detail-grid { grid-template-columns: repeat(3, 1fr); }
+    .detail-grid { grid-template-columns: repeat(2, 1fr); }
     .kpi-grid { grid-template-columns: repeat(4, 1fr); padding: 16px 14px;}
     .kpi { flex-direction: column; text-align: center; justify-content: center; }
     .ch-wrap { height: 280px; }
@@ -204,7 +199,7 @@ tbody td { font-size: 9px; font-family: 'DM Mono', monospace; color: #64748b; pa
         <h1>Bot Lab Dashboard</h1>
         <div class="header-sub">
             <span class="live-dot"></span>
-            LIVE · TEST · TEST1 · TEST99
+            LIVE · TEST1 · TEST15
         </div>
         <div class="time-filter-container">
             <label class="time-filter-label"><input type="radio" name="tf" value="ALL" class="time-filter-input" checked><span>⏱️ ALL TIME</span></label>
@@ -241,15 +236,14 @@ tbody td { font-size: 9px; font-family: 'DM Mono', monospace; color: #64748b; pa
 // CONFIG & CONSTANTS
 // ═══════════════════════════════════════
 const FILES = {
-    Test:   "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv",
     Test1:  "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test1.csv",
-    Test99: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test99.csv"
+    Test15: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv"
 };
-const COL = { Test: "#f59e0b", Test1: "#06b6d4", Test99: "#a855f7" };
-const ICO = { Test: "🔬", Test1: "⚗️", Test99: "🧬" };
+const COL = { Test1: "#06b6d4", Test15: "#f59e0b" };
+const ICO = { Test1: "⚗️", Test15: "🔬" };
 
 let currentFilter = "ALL";
-let RAW_DATA = { Test: [], Test1: [], Test99: [] };
+let RAW_DATA = { Test1: [], Test15: [] };
 let CHARTS = {};
 let fetchInterval;
 
@@ -276,26 +270,25 @@ function parseCSV(text) {
                 o[k] = isNaN(n) ? raw : n;
             }
         });
-        
-        // PnL normalization
+
         o.pnl = typeof o.pnl_net === "number" ? o.pnl_net : (typeof o.pnl_gross === "number" ? o.pnl_gross : (o.pnl || 0));
-        
+
         if (o.date && o.time) {
-    o._dt = new Date(`${o.date}T${o.time}`);
-    o._date_fmt = o.date.split("-").reverse().join("/");
-    o._time_fmt = o.time.slice(0, 5);
-} else {
-    o._dt = new Date(0);
-}
+            o._dt = new Date(`${o.date}T${o.time}`);
+            o._date_fmt = o.date.split("-").reverse().join("/");
+            o._time_fmt = o.time.slice(0, 5);
+        } else {
+            o._dt = new Date(0);
+        }
         return o;
-    }).sort((a, b) => b._dt - a._dt); // Descending (newest first)
+    }).sort((a, b) => b._dt - a._dt);
 }
 
 function filterData(dfs, tf) {
     const res = {};
     const now = new Date();
     let cutoff = 0;
-    
+
     if (tf === "24H") {
         cutoff = now.getTime() - 86400000;
     } else if (tf === "TODAY") {
@@ -343,36 +336,34 @@ function currentStreak(arr) {
 // ═══════════════════════════════════════
 
 function renderDailyBanner() {
-    // Timer logic
     const now = new Date();
     const tomorrow = new Date(now);
     tomorrow.setDate(tomorrow.getDate() + 1);
     tomorrow.setHours(0, 0, 0, 0);
     const msLeft = tomorrow - now;
-    
+
     const h = Math.floor((msLeft / (1000 * 60 * 60)) % 24).toString().padStart(2, "0");
     const m = Math.floor((msLeft / 1000 / 60) % 60).toString().padStart(2, "0");
     const s = Math.floor((msLeft / 1000) % 60).toString().padStart(2, "0");
-    
+
     const totalSec = 86400;
     const secPassed = totalSec - Math.floor(msLeft / 1000);
     const pct = ((secPassed / totalSec) * 100).toFixed(1);
 
-    // Filter Today manually from RAW_DATA
     const c = new Date(); c.setHours(0, 0, 0, 0);
     const cutoff = c.getTime();
     let tPnl = 0, tTrades = 0, tWins = 0;
-    
+
     for (const arr of Object.values(RAW_DATA)) {
         const todayRows = arr.filter(r => r._dt && r._dt.getTime() >= cutoff);
         tTrades += todayRows.length;
         tWins += todayRows.filter(r => String(r.result).toUpperCase() === "WIN").length;
         tPnl += todayRows.reduce((sum, r) => sum + (r.pnl || 0), 0);
     }
-    
+
     const val = r2(tPnl);
     const css = val >= 0 ? "text-green" : "text-red";
-    
+
     document.getElementById("daily_banner").innerHTML = `
         <div class="daily-card">
             <div class="daily-header">
@@ -407,10 +398,10 @@ function renderBestBot(dfs) {
             maxPnl = r2(pnl); best = name; bWr = ((w / arr.length) * 100).toFixed(1); bTrades = arr.length;
         }
     }
-    
+
     const el = document.getElementById("best_banner");
     if (!best || maxPnl === -Infinity) { el.innerHTML = ""; return; }
-    
+
     const c = COL[best], i = ICO[best];
     el.innerHTML = `
         <div class="best-bot-wrap" style="background: linear-gradient(90deg, ${c}15, transparent); border: 1px solid ${c}55; box-shadow: 0 0 25px ${c}11;">
@@ -434,10 +425,10 @@ function renderGlobal(dfs) {
         document.getElementById("global_banner").innerHTML = `<div class="global-banner" style="justify-content:center"><div class="gb-label">No data available</div></div>`;
         return;
     }
-    
+
     let bal = 0;
-    for(const [n, arr] of Object.entries(dfs)) { if(arr.length) bal += (arr[0].balance || 0); }
-    
+    for (const [n, arr] of Object.entries(dfs)) { if (arr.length) bal += (arr[0].balance || 0); }
+
     const pnl = r2(all.reduce((s, r) => s + (r.pnl || 0), 0));
     const n = all.length;
     const w = all.filter(r => String(r.result).toUpperCase() === "WIN").length;
@@ -446,7 +437,7 @@ function renderGlobal(dfs) {
     const prof = r2(all.filter(r => (r.pnl || 0) > 0).reduce((s, r) => s + r.pnl, 0));
     const loss = r2(all.filter(r => (r.pnl || 0) < 0).reduce((s, r) => s + r.pnl, 0));
     const fee = r2(all.reduce((s, r) => s + (r.fee || 0), 0));
-    
+
     document.getElementById("global_banner").innerHTML = `
         <div class="global-banner">
             <div>
@@ -494,7 +485,6 @@ function renderBotCards(dfs) {
         const fee = r2(arr.reduce((s, r) => s + (r.fee || 0), 0));
         const wc = wr >= 60 ? "green" : (wr >= 50 ? "gold" : "red");
 
-        // TODAY (de la 00:00 ora locală)
         const midnight = new Date(); midnight.setHours(0, 0, 0, 0);
         const todayRows = RAW_DATA[name].filter(r => r._dt && r._dt.getTime() >= midnight.getTime());
         const pnlToday = r2(todayRows.reduce((s, r) => s + (r.pnl || 0), 0));
@@ -521,7 +511,7 @@ function renderBotCards(dfs) {
                 </div>
                 <div class="wr-bar-bg"><div class="wr-bar-fill ${cls}" style="width:${wr}%"></div></div>
 
-<div style="margin-top:12px; background:${bgToday}; border:1px solid ${borderToday}; border-radius:10px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="margin-top:12px; background:${bgToday}; border:1px solid ${borderToday}; border-radius:10px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
                     <div style="display:flex; align-items:center; gap:6px;">
                         <span style="font-size:0.7rem">📅</span>
                         <span style="font-family:'DM Mono',monospace; font-size:0.55rem; color:#64748b; letter-spacing:0.12em;">TODAY</span>
@@ -529,7 +519,6 @@ function renderBotCards(dfs) {
                     </div>
                     <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.1rem; color:${colorToday}; letter-spacing:-0.02em;">${ps(pnlToday)}${pnlToday}$</div>
                 </div>
-                
             </div>
         `;
     }
@@ -539,16 +528,16 @@ function renderBotCards(dfs) {
 function renderRecent(dfs) {
     let all = [];
     for (const [name, arr] of Object.entries(dfs)) {
-        arr.forEach(r => all.push({...r, _b: name}));
+        arr.forEach(r => all.push({ ...r, _b: name }));
     }
     all.sort((a, b) => b._dt - a._dt);
     const top = all.slice(0, 10);
-    
+
     if (!top.length) {
         document.getElementById("recent_row").innerHTML = `<div style="text-align:center;color:#64748b;font-size:0.8rem;padding:10px 0">No recent activity</div>`;
         return;
     }
-    
+
     let html = `<div class="recent-grid">`;
     for (const r of top) {
         const res = String(r.result || "?").toUpperCase();
@@ -574,16 +563,15 @@ function drawCharts(dfs) {
     Chart.defaults.font.family = "'DM Mono', monospace";
     Chart.defaults.font.size = 10;
     const gridOpts = { color: '#0f172a' };
-    
+
     const names = Object.keys(dfs).filter(n => dfs[n].length > 0);
-    
-    // 1. Balance Line
+
     const bCtx = document.getElementById('c_bal');
-    if(CHARTS.bal) CHARTS.bal.destroy();
-    
-    let maxLen = Math.max(...names.map(n => dfs[n].length));
-    let lbls = Array.from({length: maxLen}, (_, i) => i+1);
-    
+    if (CHARTS.bal) CHARTS.bal.destroy();
+
+    let maxLen = names.length ? Math.max(...names.map(n => dfs[n].length)) : 0;
+    let lbls = Array.from({ length: maxLen }, (_, i) => i + 1);
+
     let bData = { labels: lbls, datasets: [] };
     names.forEach(n => {
         let asc = [...dfs[n]].reverse();
@@ -591,29 +579,28 @@ function drawCharts(dfs) {
         bData.datasets.push({
             label: n,
             data: [...Array(pad).fill(null), ...asc.map(r => r.balance)],
-            borderColor: COL[n], backgroundColor: COL[n]+"22", borderWidth: 2, pointRadius: 2, fill: true, tension: 0.1
+            borderColor: COL[n], backgroundColor: COL[n] + "22", borderWidth: 2, pointRadius: 2, fill: true, tension: 0.1
         });
     });
-    
+
     CHARTS.bal = new Chart(bCtx, {
         type: 'line', data: bData,
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { labels: { usePointStyle: true, boxWidth: 6 } }, title: {display:true, text:"Balance Curves", color:"#cbd5e1", font:{family:"Outfit", size:13}} },
+            plugins: { legend: { labels: { usePointStyle: true, boxWidth: 6 } }, title: { display: true, text: "Balance Curves", color: "#cbd5e1", font: { family: "Outfit", size: 13 } } },
             scales: { x: { grid: gridOpts }, y: { grid: gridOpts } }
         }
     });
 
-    // 2. PNL Bar
     const pCtx = document.getElementById('c_pnl');
-    if(CHARTS.pnl) CHARTS.pnl.destroy();
-    
+    if (CHARTS.pnl) CHARTS.pnl.destroy();
+
     let pProf = [], pLoss = [];
     names.forEach(n => {
-        pProf.push(r2(dfs[n].filter(r => (r.pnl||0)>0).reduce((s,r)=>s+r.pnl,0)));
-        pLoss.push(r2(dfs[n].filter(r => (r.pnl||0)<0).reduce((s,r)=>s+r.pnl,0)));
+        pProf.push(r2(dfs[n].filter(r => (r.pnl || 0) > 0).reduce((s, r) => s + r.pnl, 0)));
+        pLoss.push(r2(dfs[n].filter(r => (r.pnl || 0) < 0).reduce((s, r) => s + r.pnl, 0)));
     });
-    
+
     CHARTS.pnl = new Chart(pCtx, {
         type: 'bar',
         data: { labels: names, datasets: [
@@ -622,26 +609,25 @@ function drawCharts(dfs) {
         ]},
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { title: {display:true, text:"Profit vs Loss", color:"#cbd5e1", font:{family:"Outfit", size:13}} },
+            plugins: { title: { display: true, text: "Profit vs Loss", color: "#cbd5e1", font: { family: "Outfit", size: 13 } } },
             scales: { x: { grid: gridOpts }, y: { grid: gridOpts } }
         }
     });
 
-    // 3. WR Bar
     const wCtx = document.getElementById('c_wr');
-    if(CHARTS.wr) CHARTS.wr.destroy();
-    
+    if (CHARTS.wr) CHARTS.wr.destroy();
+
     let wData = names.map(n => {
-        let w = dfs[n].filter(r=>String(r.result).toUpperCase()==='WIN').length;
+        let w = dfs[n].filter(r => String(r.result).toUpperCase() === 'WIN').length;
         return (w / dfs[n].length * 100).toFixed(1);
     });
-    
+
     CHARTS.wr = new Chart(wCtx, {
         type: 'bar',
-        data: { labels: names, datasets: [{ label: 'WinRate', data: wData, backgroundColor: names.map(n=>COL[n]) }] },
+        data: { labels: names, datasets: [{ label: 'WinRate', data: wData, backgroundColor: names.map(n => COL[n]) }] },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: {display:false}, title: {display:true, text:"Win Rate %", color:"#cbd5e1", font:{family:"Outfit", size:13}} },
+            plugins: { legend: { display: false }, title: { display: true, text: "Win Rate %", color: "#cbd5e1", font: { family: "Outfit", size: 13 } } },
             scales: { x: { grid: gridOpts }, y: { grid: gridOpts, min: 0, max: 100 } }
         }
     });
@@ -651,7 +637,7 @@ function renderDetails(dfs) {
     let html = "";
     for (const [name, arr] of Object.entries(dfs)) {
         const c = COL[name], i = ICO[name], cls = name.toLowerCase();
-        
+
         if (!arr.length) {
             html += `<div class="detail-card ${cls}"><div class="detail-header"><div class="detail-title" style="color:${c}">${i} ${name}</div></div><div style="padding:30px;text-align:center;color:#64748b;font-size:0.8rem;">No data based on filter</div></div>`;
             continue;
@@ -661,30 +647,30 @@ function renderDetails(dfs) {
         const pnl = r2(arr.reduce((s, r) => s + (r.pnl || 0), 0));
         const init = bal - pnl;
         const roi = init > 0 ? ((pnl / init) * 100).toFixed(1) : 0;
-        
+
         const n = arr.length;
         const w = arr.filter(r => String(r.result).toUpperCase() === "WIN").length;
         const l = arr.filter(r => String(r.result).toUpperCase() === "LOSS").length;
         const wr = ((w / n) * 100).toFixed(1);
-        
-        const wins = arr.filter(r => (r.pnl||0) > 0);
-        const losses = arr.filter(r => (r.pnl||0) < 0);
+
+        const wins = arr.filter(r => (r.pnl || 0) > 0);
+        const losses = arr.filter(r => (r.pnl || 0) < 0);
         const prof = r2(wins.reduce((s, r) => s + r.pnl, 0));
         const loss = r2(losses.reduce((s, r) => s + r.pnl, 0));
-        
+
         const aw = wins.length ? r3(prof / wins.length) : 0;
         const al = losses.length ? r3(loss / losses.length) : 0;
         const best = r3(Math.max(...arr.map(r => r.pnl || 0)));
         const worst = r3(Math.min(...arr.map(r => r.pnl || 0)));
         const fee = r3(arr.reduce((s, r) => s + (r.fee || 0), 0));
-        
-        const avg = k => { let f=arr.filter(r=>typeof r[k]==='number'); return f.length ? r3(f.reduce((s,r)=>s+r[k],0)/f.length) : "—"; };
+
+        const avg = k => { let f = arr.filter(r => typeof r[k] === 'number'); return f.length ? r3(f.reduce((s, r) => s + r[k], 0) / f.length) : "—"; };
         const ep = avg("entry_prob"), xp = avg("exit_prob"), bp = avg("best_prob");
         const mom = avg("momentum"), vel = avg("avg_velocity"), vlt = avg("volatility");
-        
+
         const mdd = maxDrawdown(arr);
         const strk = currentStreak(arr);
-        const kc = cls === "test" ? "t" : (cls === "test1" ? "c" : "v");
+        const kc = cls === "test15" ? "t" : "c";
         const wrc = wr >= 60 ? "g" : (wr >= 50 ? "y" : "r");
 
         html += `
@@ -697,37 +683,37 @@ function renderDetails(dfs) {
                     <div class="dh-rhs">
                         <div class="dh-lbl">Balance</div>
                         <div class="dh-bal">$${r2(bal)}</div>
-                        <div class="dh-pnl" style="color:${pnl>=0?'#4ade80':'#f87171'}">${ps(pnl)}${pnl}$</div>
+                        <div class="dh-pnl" style="color:${pnl >= 0 ? '#4ade80' : '#f87171'}">${ps(pnl)}${pnl}$</div>
                     </div>
                 </div>
-                
+
                 <div class="kpi-grid">
                     <div class="kpi"><div class="kpi-lbl">Trades</div><div class="kpi-val ${kc}">${n}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Win%</div><div class="kpi-val ${wrc}">${wr}%</div></div>
                     <div class="kpi"><div class="kpi-lbl">W/L</div><div class="kpi-val">${w}/${l}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Streak</div><div class="kpi-val">${strk}</div></div>
-                    
+
                     <div class="kpi"><div class="kpi-lbl">Avg W</div><div class="kpi-val g">+&dollar;${aw}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Avg L</div><div class="kpi-val r">&dollar;${al}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Best</div><div class="kpi-val g">+&dollar;${best}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Worst</div><div class="kpi-val r">&dollar;${worst}</div></div>
-                    
+
                     <div class="kpi"><div class="kpi-lbl">Profit</div><div class="kpi-val g">+&dollar;${prof}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Loss</div><div class="kpi-val r">&dollar;${loss}</div></div>
-                    <div class="kpi"><div class="kpi-lbl">Net</div><div class="kpi-val ${pnl>=0?'g':'r'}">${ps(pnl)}${pnl}$</div></div>
+                    <div class="kpi"><div class="kpi-lbl">Net</div><div class="kpi-val ${pnl >= 0 ? 'g' : 'r'}">${ps(pnl)}${pnl}$</div></div>
                     <div class="kpi"><div class="kpi-lbl">Max DD</div><div class="kpi-val r">&dollar;${mdd}</div></div>
-                    
+
                     <div class="kpi"><div class="kpi-lbl">Fee</div><div class="kpi-val y">&dollar;${fee}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Entry</div><div class="kpi-val y">${ep}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Exit</div><div class="kpi-val">${xp}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Best P</div><div class="kpi-val g">${bp}</div></div>
-                    
+
                     <div class="kpi"><div class="kpi-lbl">Mom</div><div class="kpi-val b">${mom}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Vel</div><div class="kpi-val b">${vel}</div></div>
                     <div class="kpi"><div class="kpi-lbl">Volat</div><div class="kpi-val b">${vlt}</div></div>
-                    <div class="kpi"><div class="kpi-lbl">ROI</div><div class="kpi-val ${roi>=0?'g':'r'}">${ps(roi)}${roi}%</div></div>
+                    <div class="kpi"><div class="kpi-lbl">ROI</div><div class="kpi-val ${roi >= 0 ? 'g' : 'r'}">${ps(roi)}${roi}%</div></div>
                 </div>
-                
+
                 <div class="tbl-wrap">
                     <table>
                         <thead>
@@ -738,20 +724,20 @@ function renderDetails(dfs) {
                         <tbody>
                             ${arr.slice(0, 50).map(r => {
                                 const res = String(r.result).toUpperCase();
-                                const rC = res==='WIN'?'t-win':(res==='LOSS'?'t-loss':'');
-                                const ext = String(r.exit_type||'').toUpperCase();
-                                const eC = ext.includes('TARGET')?'t-targ':ext.includes('TRAIL')?'t-trail':ext.includes('STOP')?'t-stop':ext.includes('REVERS')?'t-rev':'';
-                                const pv = r.pnl||0;
-                                const pC = pv>0?'t-pos-bold':pv<0?'t-neg-bold':'';
+                                const rC = res === 'WIN' ? 't-win' : (res === 'LOSS' ? 't-loss' : '');
+                                const ext = String(r.exit_type || '').toUpperCase();
+                                const eC = ext.includes('TARGET') ? 't-targ' : ext.includes('TRAIL') ? 't-trail' : ext.includes('STOP') ? 't-stop' : ext.includes('REVERS') ? 't-rev' : '';
+                                const pv = r.pnl || 0;
+                                const pC = pv > 0 ? 't-pos-bold' : pv < 0 ? 't-neg-bold' : '';
                                 return `<tr class="${rC}">
-                                    <td>${r._date_fmt||'—'}</td>
-                                    <td>${r._time_fmt||'—'}</td>
-                                    <td>${r.side||'—'}</td>
+                                    <td>${r._date_fmt || '—'}</td>
+                                    <td>${r._time_fmt || '—'}</td>
+                                    <td>${r.side || '—'}</td>
                                     <td>${res}</td>
-                                    <td>${r.bet_zone||r.zone||'—'}</td>
-                                    <td class="${eC}">${r.exit_type||'—'}</td>
+                                    <td>${r.bet_zone || r.zone || '—'}</td>
+                                    <td class="${eC}">${r.exit_type || '—'}</td>
                                     <td class="${pC}">${ps(pv)}${pv.toFixed(2)}$</td>
-                                    <td>${(r.balance||0).toFixed(2)}$</td>
+                                    <td>${(r.balance || 0).toFixed(2)}$</td>
                                 </tr>`;
                             }).join("")}
                         </tbody>
@@ -771,17 +757,17 @@ async function fetchAll() {
     try {
         await Promise.all(Object.entries(FILES).map(async ([name, url]) => {
             try {
-                const req = await fetch(url + "?t=" + Date.now(), {cache: "no-store"});
+                const req = await fetch(url + "?t=" + Date.now(), { cache: "no-store" });
                 if (req.ok) RAW_DATA[name] = parseCSV(await req.text());
             } catch (e) { console.error("Error fetching", name); }
         }));
         updateUI();
-    } catch(e) { console.error("Global fetch error"); }
+    } catch (e) { console.error("Global fetch error"); }
 }
 
 function updateUI() {
     const filtered = filterData(RAW_DATA, currentFilter);
-    renderDailyBanner(); // Daily banner always looks at raw today
+    renderDailyBanner();
     renderBestBot(filtered);
     renderGlobal(filtered);
     renderBotCards(filtered);
@@ -790,7 +776,6 @@ function updateUI() {
     renderDetails(filtered);
 }
 
-// Listeners
 document.querySelectorAll('.time-filter-input').forEach(rad => {
     rad.addEventListener('change', (e) => {
         currentFilter = e.target.value;
@@ -798,13 +783,12 @@ document.querySelectorAll('.time-filter-input').forEach(rad => {
     });
 });
 
-// Timers
 setInterval(() => {
-    renderDailyBanner(); // Update tick per second for timer
+    renderDailyBanner();
 }, 1000);
 
 fetchAll();
-setInterval(fetchAll, 15000); // refresh date la 15 secunde
+setInterval(fetchAll, 15000);
 </script>
 </body>
 </html>
