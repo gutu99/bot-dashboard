@@ -1,2 +1,1 @@
-date,time,side,amount,entry_prob,exit_prob,exit_type,pnl_gross,fee,pnl_net,balance,result,zone,momentum,avg_velocity,volatility,dist,time_left,required_speed,best_prob
-2026-03-21,14:02:09,UP,5.0,0.67,0.85,TARGET,1.3433,0.0269,1.3164,101.32,WIN,SPIKE_MED,-18.01,-6.0,18.02,27.46,171,0.1606,0.85
+date,time,side,amount,entry_prob,exit_prob,exit_type,pnl_gross,fee,pnl_net,balance,result,zone,momentum,avg_velocity,volatility,dist,time_left,required_speed,start_price,best_prob
