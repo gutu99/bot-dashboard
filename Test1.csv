@@ -1,2 +1,4 @@
 date,time,side,amount,shares,entry_prob,exit_prob,exit_type,pnl_gross,fee,pnl_net,balance,result,zone,momentum,avg_velocity,volatility,dist,time_left,required_speed,best_prob,entry_order_id,exit_order_id,entry_status,exit_status,dry_run
 2026-03-22,14:53:30,UP,3.0,5.357143,0.56,0.99,ENDROUND,2.3571,0.0471,2.31,102.31,WIN,SPIKE,21.47,7.16,21.47,1.84,90,0.0204,0.99,DRY-BUY-1774184010109,DRY-SELL-1774184100187,matched,matched,1
+2026-03-22,15:05:41,DOWN,3.0,4.545455,0.66,0.47,STOPLOSS,-0.8636,0.0,-0.8636,99.14,LOSS,EARLY,-9.4,-3.13,9.4,-40.43,259,0.1561,0.69,DRY-BUY-1774184741803,DRY-SELL-1774184873914,matched,matched,1
+2026-03-22,15:05:42,DOWN,3.0,4.545455,0.66,0.46,STOPLOSS,-0.9091,0.0,-0.9091,101.4,LOSS,EARLY,-9.17,-3.06,9.17,-43.05,258,0.1668,0.69,DRY-BUY-1774184742739,DRY-SELL-1774184874848,matched,matched,1
