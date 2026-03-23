@@ -4,8 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Bot Lab Dashboard</title>
+<meta name="theme-color" content="#060a12">
+<meta name="description" content="Bot Lab Dashboard - monitorizare live pentru boți de piață crypto">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
@@ -40,6 +48,42 @@ body { background: #060a12; color: #e2e8f0; font-family: 'Plus Jakarta Sans', sa
 .time-filter-label:hover span { color: #cbd5e1; background: rgba(255,255,255,0.03); }
 .time-filter-input { display: none; }
 .time-filter-input:checked + span { color: #f1f5f9; background: #1e293b; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: 600; }
+
+/* ── INSTALL APP ── */
+.install-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.install-btn {
+    display: none;
+    border: 1px solid rgba(6,182,212,0.35);
+    background: linear-gradient(135deg, rgba(6,182,212,0.18), rgba(168,85,247,0.14));
+    color: #f8fafc;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transition: all 0.2s ease;
+}
+.install-btn:hover {
+    transform: translateY(-1px);
+    border-color: rgba(6,182,212,0.6);
+}
+.install-note {
+    width: 100%;
+    text-align: center;
+    margin-top: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: #64748b;
+    letter-spacing: 0.04em;
+}
 
 /* ── DAILY SUPER BANNER ── */
 .daily-card {
@@ -201,6 +245,12 @@ tbody td { font-size: 9px; font-family: 'DM Mono', monospace; color: #64748b; pa
             <span class="live-dot"></span>
             LIVE · TEST1 · TEST15
         </div>
+
+        <div class="install-wrap">
+            <button id="installBtn" class="install-btn">📲 INSTALEAZĂ APLICAȚIA</button>
+            <div id="installNote" class="install-note"></div>
+        </div>
+
         <div class="time-filter-container">
             <label class="time-filter-label"><input type="radio" name="tf" value="ALL" class="time-filter-input" checked><span>⏱️ ALL TIME</span></label>
             <label class="time-filter-label"><input type="radio" name="tf" value="24H" class="time-filter-input"><span>🔥 LAST 24H</span></label>
@@ -233,6 +283,64 @@ tbody td { font-size: 9px; font-family: 'DM Mono', monospace; color: #64748b; pa
 
 <script>
 // ═══════════════════════════════════════
+// PWA INSTALL
+// ═══════════════════════════════════════
+let deferredPrompt = null;
+const installBtn = document.getElementById("installBtn");
+const installNote = document.getElementById("installNote");
+
+function isStandaloneMode() {
+    return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", async () => {
+        try {
+            await navigator.serviceWorker.register("service-worker.js");
+            console.log("Service Worker registered");
+        } catch (err) {
+            console.error("Service Worker registration failed:", err);
+        }
+    });
+}
+
+window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = "inline-block";
+    installNote.textContent = "Aplicația poate fi instalată pe ecranul principal.";
+});
+
+installBtn.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+
+    if (choiceResult.outcome === "accepted") {
+        installNote.textContent = "Instalarea a fost acceptată.";
+    } else {
+        installNote.textContent = "Instalarea a fost anulată.";
+    }
+
+    deferredPrompt = null;
+    installBtn.style.display = "none";
+});
+
+window.addEventListener("appinstalled", () => {
+    installBtn.style.display = "none";
+    installNote.textContent = "Aplicația a fost instalată cu succes.";
+});
+
+window.addEventListener("load", () => {
+    if (isStandaloneMode()) {
+        installBtn.style.display = "none";
+        installNote.textContent = "Aplicația rulează deja în modul instalat.";
+    } else {
+        installNote.textContent = "Pe Android/Chrome va apărea opțiunea de instalare când site-ul este pregătit.";
+    }
+});
+
+// ═══════════════════════════════════════
 // CONFIG & CONSTANTS
 // ═══════════════════════════════════════
 const FILES = {
@@ -245,7 +353,6 @@ const ICO = { Test1: "⚗️", Test15: "🔬" };
 let currentFilter = "ALL";
 let RAW_DATA = { Test1: [], Test15: [] };
 let CHARTS = {};
-let fetchInterval;
 
 // ═══════════════════════════════════════
 // UTILS
@@ -350,7 +457,8 @@ function renderDailyBanner() {
     const secPassed = totalSec - Math.floor(msLeft / 1000);
     const pct = ((secPassed / totalSec) * 100).toFixed(1);
 
-    const c = new Date(); c.setHours(0, 0, 0, 0);
+    const c = new Date(); 
+    c.setHours(0, 0, 0, 0);
     const cutoff = c.getTime();
     let tPnl = 0, tTrades = 0, tWins = 0;
 
@@ -395,7 +503,10 @@ function renderBestBot(dfs) {
         const pnl = arr.reduce((s, r) => s + (r.pnl || 0), 0);
         const w = arr.filter(r => String(r.result).toUpperCase() === "WIN").length;
         if (pnl > maxPnl) {
-            maxPnl = r2(pnl); best = name; bWr = ((w / arr.length) * 100).toFixed(1); bTrades = arr.length;
+            maxPnl = r2(pnl);
+            best = name;
+            bWr = ((w / arr.length) * 100).toFixed(1);
+            bTrades = arr.length;
         }
     }
 
@@ -427,7 +538,9 @@ function renderGlobal(dfs) {
     }
 
     let bal = 0;
-    for (const [n, arr] of Object.entries(dfs)) { if (arr.length) bal += (arr[0].balance || 0); }
+    for (const [n, arr] of Object.entries(dfs)) {
+        if (arr.length) bal += (arr[0].balance || 0);
+    }
 
     const pnl = r2(all.reduce((s, r) => s + (r.pnl || 0), 0));
     const n = all.length;
@@ -485,7 +598,8 @@ function renderBotCards(dfs) {
         const fee = r2(arr.reduce((s, r) => s + (r.fee || 0), 0));
         const wc = wr >= 60 ? "green" : (wr >= 50 ? "gold" : "red");
 
-        const midnight = new Date(); midnight.setHours(0, 0, 0, 0);
+        const midnight = new Date();
+        midnight.setHours(0, 0, 0, 0);
         const todayRows = RAW_DATA[name].filter(r => r._dt && r._dt.getTime() >= midnight.getTime());
         const pnlToday = r2(todayRows.reduce((s, r) => s + (r.pnl || 0), 0));
         const tradesToday = todayRows.length;
@@ -579,15 +693,25 @@ function drawCharts(dfs) {
         bData.datasets.push({
             label: n,
             data: [...Array(pad).fill(null), ...asc.map(r => r.balance)],
-            borderColor: COL[n], backgroundColor: COL[n] + "22", borderWidth: 2, pointRadius: 2, fill: true, tension: 0.1
+            borderColor: COL[n],
+            backgroundColor: COL[n] + "22",
+            borderWidth: 2,
+            pointRadius: 2,
+            fill: true,
+            tension: 0.1
         });
     });
 
     CHARTS.bal = new Chart(bCtx, {
-        type: 'line', data: bData,
+        type: 'line',
+        data: bData,
         options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { labels: { usePointStyle: true, boxWidth: 6 } }, title: { display: true, text: "Balance Curves", color: "#cbd5e1", font: { family: "Outfit", size: 13 } } },
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { usePointStyle: true, boxWidth: 6 } },
+                title: { display: true, text: "Balance Curves", color: "#cbd5e1", font: { family: "Outfit", size: 13 } }
+            },
             scales: { x: { grid: gridOpts }, y: { grid: gridOpts } }
         }
     });
@@ -603,13 +727,19 @@ function drawCharts(dfs) {
 
     CHARTS.pnl = new Chart(pCtx, {
         type: 'bar',
-        data: { labels: names, datasets: [
-            { label: 'Profit', data: pProf, backgroundColor: '#4ade80' },
-            { label: 'Loss', data: pLoss, backgroundColor: '#f87171' }
-        ]},
+        data: {
+            labels: names,
+            datasets: [
+                { label: 'Profit', data: pProf, backgroundColor: '#4ade80' },
+                { label: 'Loss', data: pLoss, backgroundColor: '#f87171' }
+            ]
+        },
         options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { title: { display: true, text: "Profit vs Loss", color: "#cbd5e1", font: { family: "Outfit", size: 13 } } },
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: "Profit vs Loss", color: "#cbd5e1", font: { family: "Outfit", size: 13 } }
+            },
             scales: { x: { grid: gridOpts }, y: { grid: gridOpts } }
         }
     });
@@ -624,10 +754,17 @@ function drawCharts(dfs) {
 
     CHARTS.wr = new Chart(wCtx, {
         type: 'bar',
-        data: { labels: names, datasets: [{ label: 'WinRate', data: wData, backgroundColor: names.map(n => COL[n]) }] },
+        data: {
+            labels: names,
+            datasets: [{ label: 'WinRate', data: wData, backgroundColor: names.map(n => COL[n]) }]
+        },
         options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false }, title: { display: true, text: "Win Rate %", color: "#cbd5e1", font: { family: "Outfit", size: 13 } } },
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: "Win Rate %", color: "#cbd5e1", font: { family: "Outfit", size: 13 } }
+            },
             scales: { x: { grid: gridOpts }, y: { grid: gridOpts, min: 0, max: 100 } }
         }
     });
@@ -664,7 +801,11 @@ function renderDetails(dfs) {
         const worst = r3(Math.min(...arr.map(r => r.pnl || 0)));
         const fee = r3(arr.reduce((s, r) => s + (r.fee || 0), 0));
 
-        const avg = k => { let f = arr.filter(r => typeof r[k] === 'number'); return f.length ? r3(f.reduce((s, r) => s + r[k], 0) / f.length) : "—"; };
+        const avg = k => {
+            let f = arr.filter(r => typeof r[k] === 'number');
+            return f.length ? r3(f.reduce((s, r) => s + r[k], 0) / f.length) : "—";
+        };
+
         const ep = avg("entry_prob"), xp = avg("exit_prob"), bp = avg("best_prob");
         const mom = avg("momentum"), vel = avg("avg_velocity"), vlt = avg("volatility");
 
@@ -759,10 +900,14 @@ async function fetchAll() {
             try {
                 const req = await fetch(url + "?t=" + Date.now(), { cache: "no-store" });
                 if (req.ok) RAW_DATA[name] = parseCSV(await req.text());
-            } catch (e) { console.error("Error fetching", name); }
+            } catch (e) {
+                console.error("Error fetching", name, e);
+            }
         }));
         updateUI();
-    } catch (e) { console.error("Global fetch error"); }
+    } catch (e) {
+        console.error("Global fetch error", e);
+    }
 }
 
 function updateUI() {
