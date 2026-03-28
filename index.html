@@ -344,11 +344,23 @@ window.addEventListener("load", () => {
 // CONFIG & CONSTANTS
 // ═══════════════════════════════════════
 const FILES = {
-    Test1:  "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test1.csv",
-    Test15: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv"
+    Test:    "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test.csv",
+    Test1:   "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test1.csv",
+    TestNew: "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/TestNew.csv",
+    Test99:  "https://raw.githubusercontent.com/gutu99/bot-dashboard/main/Test99.csv"
 };
-const COL = { Test1: "#06b6d4", Test15: "#f59e0b" };
-const ICO = { Test1: "⚗️", Test15: "🔬" };
+const COL = {
+    Test: "#22c55e",
+    Test1: "#06b6d4",
+    TestNew: "#a855f7",
+    Test99: "#f59e0b"
+};
+const ICO = {
+    Test: "🧪",
+    Test1: "⚗️",
+    TestNew: "🧠",
+    Test99: "🚀"
+};
 
 let currentFilter = "ALL";
 let RAW_DATA = { Test1: [], Test15: [] };
