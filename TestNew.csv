@@ -1,1 +1,2 @@
 date,time,token_id,side,amount,entry_prob,exit_prob,exit_type,pnl_gross,fee,pnl_net,result,exit_order_id,status
+2026-03-30,10:27:08,106157438955142861229960679051988071326657223805761992914584311772701621116302,DOWN,10.0,0.57,0.57,STOPLOSS,0.0,0.0,0.0,LOSS,MARKET_SELL,matched
