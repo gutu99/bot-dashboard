@@ -1,1 +1,1 @@
-2026-03-30,09:39:03,104740147230119196108272054252714183171631668964092710350579470169837267827636,UP,10.0,0.54,0.54,STOPLOSS,0.0,0.0,0.0,LOSS,MARKET_SELL,matched
+date,time,token_id,side,amount,entry_prob,exit_prob,exit_type,pnl_gross,fee,pnl_net,result,exit_order_id,status
